@@ -1,0 +1,160 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  <div class="active-body">
+    <div class="left-column">
+      <div class="refine-block">
+        <div class="sort-block w-form">
+<form id="search-refine" name="search-refine" data-name="search-refine" onkeydown="return event.key != 'Enter';" method="GET">
+    <label for="Sort-Type" class="refine-header">Sort Order</label>
+        <select id="Sort-Type" name="sort_object" data-name="sort_object" class="select-field w-select">
+            <option value="date_publication" {{checked_sort_date}}>Publish Date</option>
+            <option value="author" {{checked_sort_author}}>Author</option>
+            <option value="title" {{checked_sort_title}}>Title</option></select>
+        <select id="Sort-Order" name="sort_order" data-name="sort_order" class="select-field w-select">
+            <option value="" {{checked_sort_asc}}>Ascending </option>
+            <option value="-" {{checked_sort_dsc}}>Descending </option></select>
+      
+
+      <label for="Sort-Type-2" class="refine-header">Publication</label> 
+          <label class="radio-button-field-2 w-radio">
+              <input type="radio" data-name="publication" id="KCNA" name="publication" value="kcna" class="w-form-formradioinput w-radio-input" {{checked_kcna}}>
+                  <span for="KCNA" class="radio-button-label">KCNA</span></label>
+          <label class="radio-button-field-2 w-radio">
+              <input type="radio" data-name="publication" id="Rodong Sinmun" name="publication" value="rs" class="w-form-formradioinput w-radio-input"{{checked_rs}}>
+                  <span for="Rodong Sinmun" class="radio-button-label">Rodong Sinmun</span></label>
+          <label class="radio-button-field-2 w-radio">
+              <input type="radio" data-name="publication" id="Rodong Sinmun" name="publication" value="all" class="w-form-formradioinput w-radio-input" {{checked_all_publication}}><span for="Rodong Sinmun-2" class="radio-button-label" >All</span></label>
+    
+    <label for="Sort-Type-3" class="refine-header">Author</label><input type="text" class="select-field w-input" maxlength="256" name="field" data-name="Field" placeholder="&#x27;So Nam Il&#x27;" id="field">
+    
+    <label for="Sort-Type-3" class="refine-header">Time Period</label>
+
+        <label class="radio-button-field-2 w-radio"><input type="radio" data-name="date_select" id="{{TIME}}" name="date_select" value="one_week" class="w-form-formradioinput w-radio-input" {{checked_one_week}}><span for="{{TIME}}" class="radio-button-label">Past week</span></label>
+        <label class="radio-button-field-2 w-radio"><input type="radio" data-name="date_select" id="{{TIME}}-2" name="date_select" value="one_month" class="w-form-formradioinput w-radio-input" {{checked_one_month}}><span for="{{TIME}}-2" class="radio-button-label">Past month</span></label>
+        <label class="radio-button-field-2 w-radio" ><input type="radio" data-name="date_select" id="{{TIME}}-3" name="date_select" value="six_months" class="w-form-formradioinput w-radio-input" {{checked_six_months}}><span for="{{TIME}}-3" class="radio-button-label">Past 6 months</span></label>
+        <label class="radio-button-field-2 w-radio"><input type="radio" data-name="date_select" id="{{TIME}}-4" name="date_select" value="one_year" class="w-form-formradioinput w-radio-input"{{checked_one_year}}><span for="{{TIME}}-4" class="radio-button-label">Past year</span></label>
+        <label class="radio-button-field-2 w-radio"><input type="radio" data-name="date_select" id="{{TIME}}-5" name="date_select" value="five_years" class="w-form-formradioinput w-radio-input"{{checked_five_years}}><span for="{{TIME}}-5" class="radio-button-label">Past 5 years</span></label>
+        <label class="radio-button-field-2 w-radio"><input type="radio" data-name="date_select" id="{{TIME}}-6" name="date_select" value="all" class="w-form-formradioinput w-radio-input" {{checked_all}}><span for="{{TIME}}-7" class="radio-button-label">Since 1997</span></label>
+
+
+        {# hidden blocks make sure that refine includes search values  #}
+        <input type="hidden" class="text-field-3 w-input" maxlength="256" name="title_search_1" value={{title_search_1}} >
+        <input type="hidden" class="text-field-2 w-input" maxlength="256" name="text_search_1" value={{text_search_1}}>
+
+        
+        <input type="submit" value="Refine" data-wait="Please wait..." class="submit-button-3 w-button">
+        
+        </form>
+   
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="center-column">
+      <div class="div-block-106">
+        <div class="w-form">
+          <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="GET">
+            <div class="div-block-107">
+
+              <div class="div-block-109"><label for="name" class="search-field-header">Title</label>
+              <input type="text" class="text-field-3 w-input" maxlength="256" name="title_search_1" value={{title_search_1}} ></div>
+
+              <div class="div-block-108"><label for="name-2" class="search-field-header">Article Text</label>
+              <input type="text" class="text-field-2 w-input" maxlength="256" name="text_search_1" value={{text_search_1}}></div>
+              <input type="submit" value="Search" data-wait="Please wait..." class="submit-button-2 w-button"></div>
+
+          </form>
+        </div>
+      </div>
+      <div class="list-container">
+{#         search_article_object = [search_pk, search_link, search_title, search_date, search_author, search_text] #}
+{% if blank_search == False %}
+
+{% for article in article_list %}
+
+        <div class="list-content-block">
+          <div class="list-content-subblock">
+            <h1 class="heading">{{article.2}}<br></h1>
+          </div>
+          <div class="list-content-subblock">
+            <h1 class="author"><em class="italic-text-2">{{article.4}}</em><br></h1>
+            <div class="div-block-105"></div>
+            <h1 class="author"><em class="italic-text-2">{{article.3}}</em><br></h1>
+          </div>
+          <div class="list-content-subblock">
+              <div class="w-richtext">
+                <p>{{article.5 | safe }} </p>
+              </div>
+          </div>
+          <div class="list-content-subblock">
+            {# <div data-w-id="efb7783a-b09d-71d7-52a8-b12821600dd3" class="list-content-action">save</div> --This is currently not implemented pending rewrite of 'favorite' function to support mutiple favorite instances without excessive database requests #}
+            <div data-w-id="b71c9be7-eeca-b514-b9c9-f0ec06856c74" class="list-content-action"> <a href="{{ article.1 }}">View</a></div>
+            {# <div data-w-id="b71c9be7-eeca-b514-b9c9-f0ec06856c74" class="list-content-action">preview</div>w --Also pending until 'readmore' templatetag can be reworked to have a readless feature OR preview as post to open window is added #}
+          </div>
+        </div>
+
+
+{% endfor %}
+
+{% endif %}
+      </div>
+    </div>
+    <div class="right-column">
+      <div class="user-block">
+        <div class="sub-header">Stay Updated!</div>
+        {% if return_variable_check == True %}
+         <div class="text-block-2">{{return_variable}}</div>
+         <br>
+        {% else %}
+        <div class="text-block-2">Receive a daily newsletter of North Korea&#x27;s latest state media posts.</div>
+        <div class="form-block w-form">
+          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="form">
+    {% csrf_token %}
+            <input type="email" class="select-field w-input"maxlength="256" name="sub_email" data-name="sub_email" placeholder="&#x27;example@kdhi.org&#x27;" id="sub_email" required=""><input type="submit" value="&#10003" 2713 data-wait="Please wait..." class="submit-button-2 w-button"></form>
+        </div>
+          {% endif %}
+      </div>
+      <div class="user-block">
+      {% if user.is_authenticated %}
+        <div class="user-header">Hi {{ user.username }}</div>
+        <div class="user-operation-block">
+          <a href="{% url 'profile' %}" class="link-2">Profile Page</a>
+          {# <a href="{% url 'profile' %}"class="link-2">Saved Articles</a> #}
+          {#<a href="{% url 'profile' %}" class="link-2">Saved Searches</a> #}
+          <a href="{% url 'logout' %}" class="link-2">Logout</a>
+        </div>
+    </div>
+
+
+      {% else %}
+        
+        <div class="user-header">You are not logged in
+            </div>        <div class="user-operation-block"></div>
+       
+            <div class="sort-block w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3"  action="{% url 'login' %} " method="POST">
+            {% csrf_token %}
+              <input type="text" class="select-field w-input"  maxlength="256" name="username" placeholder='username'>
+              <input type="password" class="select-field w-input" maxlength="256" name="password" placeholder='password'>
+              
+              <div class="login-block">
+              <input type="submit" value="Login" data-wait="Please wait..." class="login-button">
+
+              <a href= "{% url 'signup' %}"class="login-button">Create an account</a>
+            </div>
+            </div>
+            </div>
+
+          </form>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

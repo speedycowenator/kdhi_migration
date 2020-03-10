@@ -1,0 +1,33 @@
+
+{% extends "mainsite_base.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="biographic-name">{{institution_name}}</h1>
+        <h1 class="biographic-details-detail-header">{{institution_korean}}
+        <h1 class="biographic-biography-header">Function</h1>
+        <div class="biographic-details-subblock">
+          <div class="biographics-details-biography-content w-richtext">{{institution_function}}</div>
+        </div>
+      </div>
+      <div class="biographic-sources-block">
+        <h1 class="biographic-sources-header"></h1>
+        <div class="biographics-sources-content w-richtext">{{institution_add}}</div>
+      </div>
+
+{% for institution_member in institution_members %}
+          <div class="biographics-details-biography-content w-richtext">{{institution_member.1}}</div>
+          <a href="{{institution_member.2}}" class="biographic-position-institution">{{institution_member.0}}</a>
+{% endfor %}     
+      
+      
+      
+      
+    </div>
+    <div class="right-section"></div>
+  </div>
+{% endblock %}
