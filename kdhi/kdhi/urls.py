@@ -20,5 +20,6 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('state-media-archive/', include('news_archive.urls')),
-    path('index/', include('main_site.urls'))
+    path('index/', include('main_site.urls')),
+    path('trackers/', include('trackers.urls')),
 ]

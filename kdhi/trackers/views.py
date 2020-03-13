@@ -16,8 +16,7 @@ import re
 
 
 def tracker_detail(request, pk):
-    
-    
+    tracker_item = overseas_tracker.objects.get(pk=pk)
     
     
     context = {

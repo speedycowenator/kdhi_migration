@@ -9,3 +9,4 @@ from trackers import views as core_views
 urlpatterns = [
     #url('', views.search_redirect, name='redirect'),
 	path('overseas_tracker/<int:pk>', views.tracker_detail, name='tracker-detail'),
+]
