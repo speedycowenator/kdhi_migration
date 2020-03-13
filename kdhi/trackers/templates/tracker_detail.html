@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar 13 15:56:09 2020
+
+@author: Sam
+"""
+
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<div class="active-body">
+    <div class="article-sidebar">
+    <form><input type="button" value="<Return to Search" onclick="history.back()"class="article-return-button w-button"></form>
+	</div>
+    <div class="article-column">
+    	<div class="metadata-block">
+		<h1 class="title top">{{ article.title }}</h1>
+		<h2 class="author detail">{{ article.date_publication }}</h2>
+		<h2 class="author detail">{{ article.author }}</h2></div>
+		<p class="paragraph">{{ article.summary }}</p>
+
+<form>
+{% if user.is_authenticated %}
+
+{% if show_button == 'subscribe' %}
+<input type="hidden" name="_" value = '+' />
+<input type="submit" value="Favorite">
+</form>
+{% else %}
+{% if show_button == 'unsubscribe' %}
+<form action ='' method="get">
+<input type="hidden" name="_" value = '-' />
+<input type="submit" value="Unfavorite">
+</form>
+{% endif %}
+{% endif %}
+
+{% else %}
+You are not logged in so you favorite articles!
+</form>
+{% endif %}
+	</div>
+
+     <div class="right-column">
+      <div class="user-block">
+        <div class="sub-header">Stay Updated!</div>
+        {% if return_variable_check == True %}
+         <div class="text-block-2">{{return_variable}}</div>
+         <br>
+        {% else %}
+        <div class="text-block-2">Receive a daily newsletter of North Korea&#x27;s latest state media posts.</div>
+        <div class="form-block w-form">
+          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="form">
+    {% csrf_token %}
+            <input type="email" class="select-field w-input"maxlength="256" name="sub_email" data-name="sub_email" placeholder="&#x27;example@kdhi.org&#x27;" id="sub_email" required=""><input type="submit" value="Submit" data-wait="Please wait..." class="submit-button-2 w-button"></form>
+        </div>
+          {% endif %}
+      </div>
+      <div class="user-block">
+      {% if user.is_authenticated %}
+        <div class="user-header">Hi {{ user.username }}</div>
+        <div class="user-operation-block">
+          <a href="{% url 'profile' %}" class="link-2">Profile Page</a>
+          {# <a href="{% url 'profile' %}"class="link-2">Saved Articles</a> #}
+          {#<a href="{% url 'profile' %}" class="link-2">Saved Searches</a> #}
+          <a href="{% url 'logout' %}" class="link-2">Logout</a>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
+

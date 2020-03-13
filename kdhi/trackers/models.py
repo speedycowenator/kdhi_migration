@@ -10,33 +10,25 @@ from django.dispatch import receiver
 
 class overseas_tracker(models.Model):
     #need to change function and additional information to TextField
-    participant_one     =
-    participant_two     =
-    participant_three   =
-    participant_four    =
+    participant_one     = models.ForeignKey(individual, on_delete=models.CASCADE)
     country_choices = (
             
          
             )
     event_description   = models.TextField(max_length=20000)
-            
-            
-            f
-            }
-    
-    name                        =  models.CharField(max_length=200)
-    name_korean                 =  models.CharField(max_length=200)
-    tag_one                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    tag_two                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    tag_three                   =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    function                    =  models.TextField(max_length=20000)
-    additional_information      =  models.TextField(max_length=20000, blank=True)
+    event_title         = models.CharField(max_length=200)
+    event_date          = models.DateField(null=True, blank=True)
+    event_photo         = models.URLField(max_length=200, blank=True)
+    event_photo_add_1   = models.URLField(max_length=200, blank=True)
+    event_photo_add_2   = models.URLField(max_length=200, blank=True)
+    event_photo_add_3   = models.URLField(max_length=200, blank=True)
+  
     
     def __str__(self):
-        return self.name
+        return self.title
 
     def get_absolute_url(self):
-        return (reverse('institution_detail', args=[str(self.name)]))
+        return (reverse('tracker_detail', args=[str(self.title)]))
     
 
 

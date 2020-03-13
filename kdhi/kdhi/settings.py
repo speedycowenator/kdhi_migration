@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'news_archive',
     'video_archive',
     'main_site',
+    'trackers',
 ]
 
 MIDDLEWARE = [
