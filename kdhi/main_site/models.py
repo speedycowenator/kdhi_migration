@@ -5,15 +5,16 @@ from django.urls import reverse
 from django.http import Http404, HttpResponseRedirect
 
 from django.dispatch import receiver
+
 class institution(models.Model):
-    
+    #need to change function and additional information to TextField
     name                        =  models.CharField(max_length=200)
     name_korean                 =  models.CharField(max_length=200)
     tag_one                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_two                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_three                   =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    function                    =  models.CharField(max_length=2000)
-    additional_information      =  models.CharField(max_length=2000, blank=True)
+    function                    =  models.TextField(max_length=20000)
+    additional_information      =  models.TextField(max_length=20000, blank=True)
     
     def __str__(self):
         return self.name
@@ -31,8 +32,8 @@ class individual(models.Model):
     birthday                = models.DateField(null=True, blank=True)
     hometown                = models.CharField(max_length=200, blank=True)
     education               = models.CharField(max_length=200, blank=True)
-    bio                     = models.CharField(max_length=2000, blank=True)
-    sources                 = models.CharField(max_length=500, blank=True)
+    bio                     = models.TextField(max_length=20000)
+    sources                 = models.TextField(max_length=500)
     video_source            = models.URLField(max_length=200, blank=True)
     video_caption           = models.CharField(max_length=200, blank=True)
     video_2_source          = models.URLField(max_length=200, blank=True)

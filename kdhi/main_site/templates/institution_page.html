@@ -7,27 +7,39 @@
     <div class="left-section"></div>
     <div class="center-section">
       <div class="biographic-block">
-        <h1 class="biographic-name">{{institution_name}}</h1>
-        <h1 class="biographic-details-detail-header">{{institution_korean}}
+        <h1 class="institution-name">{{institution_name}}</h1>
+        <h1 class="institution-korean">{{institution_korean}}</h1>
+        <div class="institution-function-div">
         <h1 class="biographic-biography-header">Function</h1>
-        <div class="biographic-details-subblock">
-          <div class="biographics-details-biography-content w-richtext">{{institution_function}}</div>
-        </div>
-      </div>
-      <div class="biographic-sources-block">
-        <h1 class="biographic-sources-header"></h1>
-        <div class="biographics-sources-content w-richtext">{{institution_add}}</div>
-      </div>
+        <p class="institutions-function-paragraph">{{institution_function}} </p></div>
+        
+        
+        
+        <h1 class="institution-members-header">Members</h1>        
+        {% for position in inst_member_dic %}
+        <h1 class="institution-members-title">{{position.0}}</h1>        
+            <div class="grid-container">
+            {% for individual in position.1 %}
+            <div class="grid-item">
+            <img src="{{individual.2}}" alt="" class="institution-member-photo">           
+            <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
+            </div>
+            {% endfor %}
+            </div>
+            {% endfor %}
 
-{% for institution_member in institution_members %}
-          <div class="biographics-details-biography-content w-richtext">{{institution_member.1}}</div>
-          <a href="{{institution_member.2}}" class="biographic-position-institution">{{institution_member.0}}</a>
-{% endfor %}     
+
+</div>
+    
+
       
-      
-      
-      
+       <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Additional Information</h1>
+        <p class="institutions-function-paragraph">{{institution_add}} </p></div></div>
+   
     </div>
     <div class="right-section"></div>
   </div>
+  
+  
 {% endblock %}
