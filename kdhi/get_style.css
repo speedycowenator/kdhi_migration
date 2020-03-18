@@ -1,0 +1,33 @@
+from bs4 import BeautifulSoup, NavigableString
+from bs4 import UnicodeDammit
+import glob
+import re
+import bs4
+import urllib.request
+import datetime
+import csv
+import os.path
+from datetime import date
+import os
+from random import seed
+from random import randint
+import time
+import requests
+from django.utils.html import strip_tags
+import os
+
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kdhi_hub.settings")
+from django.conf import settings
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+
+from kdhi_hub_server.models import Article
+import csv
+url = 'https://kdhi-archive-code-builder.webflow.io/event'
+
+webpage=str(urllib.request.urlopen(url).read())
+soup_dirty = bs4.BeautifulSoup(webpage, features = "lxml")
+mass_text = soup.prettify()
+print(mass_text)

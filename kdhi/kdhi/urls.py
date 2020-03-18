@@ -22,4 +22,7 @@ urlpatterns = [
     path('state-media-archive/', include('news_archive.urls')),
     path('index/', include('main_site.urls')),
     path('trackers/', include('trackers.urls')),
+    path('documents/', include('documents.urls')),
+    path('djrichtextfield/', include('djrichtextfield.urls')),
+
 ]

@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import Http404, HttpResponseRedirect
 
 from django.dispatch import receiver
+from djrichtextfield.models import RichTextField
 
 class institution(models.Model):
     #need to change function and additional information to TextField
@@ -77,12 +78,16 @@ class rok_institution(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return (reverse('institution_detail', args=[str(self.name)]))
+        return (reverse('rok_institution_detail', args=[str(self.name)]))
+
+
 
     
 class rok_individual(models.Model):
     name                    = models.CharField(max_length=200)
-    name_korean             = models.CharField(max_length=200)
+    name_true               = models.CharField(max_length=200)
+
+    name_korean             = models.CharField(max_length=200, blank=True)
     icon                    = models.URLField(max_length=200, blank=True)
     full_resolution_photo   = models.URLField(max_length=200, blank=True)
     photo_credit            = models.CharField(max_length=200, blank=True)
@@ -99,6 +104,7 @@ class rok_individual(models.Model):
     video_caption           = models.CharField(max_length=200, blank=True)
     video_2_source          = models.URLField(max_length=200, blank=True)
     video_2_caption         = models.CharField(max_length=200, blank=True)
+
     class Meta:
         ordering = ('name',)
   
@@ -108,12 +114,14 @@ class rok_individual(models.Model):
     def get_absolute_url(self):
         return (reverse('individual_detail', args=[str(self.name)]))
     
-
+class article(models.Model):
+    content = RichTextField()
+    
 
     
 class rok_position(models.Model):   
-    person              = models.ForeignKey(rok_individual, on_delete=models.CASCADE)
-    institution         = models.ForeignKey(rok_institution, on_delete=models.CASCADE)
+    person              = models.ForeignKey(rok_individual,  on_delete=models.SET_NULL, null=True)
+    institution         = models.ForeignKey(rok_institution, on_delete=models.SET_NULL, null=True)
     title               = models.CharField(max_length=200)   
     appointment_date    = models.DateField(null=True, blank=True)
     confirmation_date   = models.DateField(null=True, blank=True)

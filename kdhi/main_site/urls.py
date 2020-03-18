@@ -10,4 +10,7 @@ urlpatterns = [
     #url('', views.search_redirect, name='redirect'),
 	path('biographic/<str:name>', views.individual_detail, name='individual_detail'),
 	path('institution/<str:name>', views.institution_detail, name='institution_detail'),	
+	path('rok-biographic/<str:name>', views.rok_individual_detail, name='rok_individual_detail'),
+	path('rok-institution/<str:name>', views.rok_institution_detail, name='rok_institution_detail'),
+
 ]

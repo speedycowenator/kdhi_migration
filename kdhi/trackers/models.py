@@ -25,7 +25,7 @@ class overseas_tracker(models.Model):
 
     
     def __str__(self):
-        return self.title
+        return self.event_title
 
     def get_absolute_url(self):
         return (reverse('tracker_detail', args=[str(self.title)]))
@@ -34,16 +34,14 @@ class overseas_tracker(models.Model):
 
 class inter_korean_tracker(models.Model):
     #need to change function and additional information to TextField
-    participant_ROK    = models.ManyToManyField(rok_individual)
-    participant_DPRK     = models.ManyToManyField(individual)
-
-    country_choices = (
-            
-         
-            )
-    event_description   = models.TextField(max_length=20000)
+    participant_ROK     = models.ManyToManyField(rok_individual)
+    participant_DPRK    = models.ManyToManyField(individual)
+    MOU_description     = models.TextField(max_length=20000)
     event_title         = models.CharField(max_length=200)
+    event_location      = models.CharField(max_length=200)
+    event_venue         = models.CharField(max_length=200)
     event_date          = models.DateField(null=True, blank=True)
+    document_link       = models.URLField(max_length=200, blank=True)
     event_photo         = models.URLField(max_length=200, blank=True)
     event_photo_add_1   = models.URLField(max_length=200, blank=True)
     event_photo_add_2   = models.URLField(max_length=200, blank=True)
@@ -51,7 +49,7 @@ class inter_korean_tracker(models.Model):
 
     
     def __str__(self):
-        return self.title
+        return self.event_title
 
     def get_absolute_url(self):
         return (reverse('tracker_detail', args=[str(self.title)]))
