@@ -114,11 +114,6 @@ class rok_individual(models.Model):
     def get_absolute_url(self):
         return (reverse('individual_detail', args=[str(self.name)]))
     
-class article(models.Model):
-    content = RichTextField()
-    
-
-    
 class rok_position(models.Model):   
     person              = models.ForeignKey(rok_individual,  on_delete=models.SET_NULL, null=True)
     institution         = models.ForeignKey(rok_institution, on_delete=models.SET_NULL, null=True)
@@ -130,5 +125,17 @@ class rok_position(models.Model):
     
     def __str__(self):
         return self.title
+
+class article(models.Model):
+    title       = models.CharField(max_length=200)
+    slug        = models.CharField(max_length=200)
+    icon_image  = models.CharField(max_length=200)
+    bluff       = models.TextField(max_length=5000)
+    content     = RichTextField()
+
+    def __str__(self):
+        return self.slug
+    def get_absolute_url(self):
+        return (reverse('article_'))
 
 

@@ -146,3 +146,44 @@ def rok_institution_detail(request, name):
     
     
     return render(request, 'institution_page.html', context)
+
+
+
+def article_list(request):
+
+    article_list = []
+    for e in article.objects.all():
+        article_list.append(e)
+
+    context = {
+
+        'article_list'              : article_list, 
+    }
+    
+    return render(request, 'article_list.html', context)
+
+def individual_list(request):
+    individual_list = []
+    for e in individual.objects.all():
+        individual_list.append(e)
+
+    context = {
+
+        'individual_list'              : individual_list, 
+    }
+    
+    return render(request, 'individual_list.html', context)
+
+def institution_list (request):
+    institution_list = []
+    for e in institution.objects.all():
+        institution_list.append(e)
+    context = {
+
+        'institution_list '              : institution_list , 
+    }
+    
+    return render(request, 'institution_list.html', context)
+
+
+

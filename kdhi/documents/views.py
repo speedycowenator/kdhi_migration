@@ -53,3 +53,12 @@ def collection_page(request, name):
 	}
 	return render(request, 'collection_page.html', context)
 
+def article_list(request):
+	context = {
+
+		'article_list' 				: article_list,	
+	}
+	
+	return render(request, 'article_list.html', context)
+
+
