@@ -8,4 +8,5 @@ from main_site import views as core_views
 urlpatterns = [
     #url('', views.search_redirect, name='redirect'),
 	path('document/<str:slug>', views.document_detail, name='document_detail'),
+	path('collection/<str:name>', views.collection_page, name='collection_page'),
     ]

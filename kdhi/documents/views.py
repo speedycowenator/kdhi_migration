@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from documents.models import document
+from documents.models import document, document_collection
 from datetime import date
 import datetime
 from django.db.models import Q
@@ -36,5 +36,20 @@ def document_detail(request, slug):
             }
     return render(request, 'document_detail.html', context)
 
+def collection_page(request, name):
+	collection_set = []
+	request_collection = document_collection.objects.get(name=name)
+	request_pk = request_collection.pk
+	try:
+		for e in document.objects.get(collection=request_pk):
+			collection_set.append(e)
+	except:
+		collection_set.append(document.objects.get(collection=request_pk))
+	
 
+	context = {
+			'collection_set' 		: collection_set, 
+			'style_sheet'           : link_text,
+	}
+	return render(request, 'collection_page.html', context)
 

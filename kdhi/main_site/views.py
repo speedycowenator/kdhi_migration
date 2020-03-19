@@ -146,7 +146,3 @@ def rok_institution_detail(request, name):
     
     
     return render(request, 'institution_page.html', context)
-
-def document_list(request, ):
-    
-

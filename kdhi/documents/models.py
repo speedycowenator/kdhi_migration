@@ -29,7 +29,7 @@ class document(models.Model):
   
         
     def __str__(self):
-        return self.name
-#
-#    def get_absolute_url(self):
-#        return (reverse('document_detail', args=[str(self.name)]))
+        return self.slug
+
+    def get_absolute_url(self):
+        return (reverse('document_detail', args=[str(self.slug)]))
