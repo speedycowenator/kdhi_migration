@@ -2,7 +2,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from main_site.models import individual, institution, position, rok_individual, rok_institution, rok_individual, rok_position
+from main_site.models import individual, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
+from documents.models import document_collection
 from datetime import date
 import datetime
 from django.db.models import Q
@@ -15,6 +16,34 @@ from datetime import date, timedelta
 now = date.today()
 import re
 
+import bs4
+import urllib.request
+
+url = 'https://kdhi-archive-code-builder.webflow.io/event'
+
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find('link')
+
+
+link_text = (link.get('href'))
+
+def homepage_view(request):
+
+    collection_feature = document_collection.objects.get(name="Democratization")
+    collection_feature_url  = collection_feature.get_absolute_url
+    latest_article          = article.objects.latest('update_date')
+
+
+
+    context = {
+        'style_sheet'           : link_text,
+        'collection_feature'    : collection_feature,
+        'latest_article'        : latest_article,
+
+    }
+    
+    return render(request, 'static_pages/homepage.html', context)
 
 def individual_detail(request, name):
     individual_detail = individual.objects.get(name=name)
@@ -34,6 +63,7 @@ def individual_detail(request, name):
             'individual_sources'    : individual_detail.sources,
             'individual_hometown'   : individual_detail.hometown,
             'individual_positions'  : individual_positions,
+            'style_sheet'             : link_text,
             
             }
     return render(request, 'biographic_page.html', context)
@@ -77,8 +107,8 @@ def institution_detail(request, name):
             'institution_korean'    : institution_detail.name_korean,
             'institution_function'  : institution_detail.function,
             'institution_add'       : institution_detail.additional_information,
-            'inst_member_dic'   : inst_member_dic,
-
+            'inst_member_dic'       : inst_member_dic,
+            'style_sheet'             : link_text,
             }
     
     
@@ -99,7 +129,7 @@ def rok_individual_detail(request, name):
             'individual_photo'      : individual_detail.full_resolution_photo,
             'individual_sources'    : individual_detail.sources,
             'individual_positions'  : individual_positions,
-            
+            'style_sheet'             : link_text,           
             }
     return render(request, 'biographic_page.html', context)
 def rok_institution_detail(request, name):
@@ -140,8 +170,8 @@ def rok_institution_detail(request, name):
             'institution_korean'    : institution_detail.name_korean,
             'institution_function'  : institution_detail.function,
             'institution_add'       : institution_detail.additional_information,
-            'inst_member_dic'   : inst_member_dic,
-
+            'inst_member_dic'       : inst_member_dic,
+            'style_sheet'             : link_text,
             }
     
     
@@ -158,18 +188,20 @@ def article_list(request):
     context = {
 
         'article_list'              : article_list, 
-    }
+        'style_sheet'             : link_text,
+                }
     
     return render(request, 'article_list.html', context)
 
 def individual_list(request):
     individual_list = []
-    for e in individual.objects.all():
+    for e in individual.objects.order_by('-update_date'):
         individual_list.append(e)
 
     context = {
 
-        'individual_list'              : individual_list, 
+        'individual_list'       : individual_list, 
+        'style_sheet'           : link_text,
     }
     
     return render(request, 'individual_list.html', context)
@@ -180,7 +212,9 @@ def institution_list (request):
         institution_list.append(e)
     context = {
 
-        'institution_list '              : institution_list , 
+        'institution_list '       : institution_list , 
+        'style_sheet'             : link_text,
+
     }
     
     return render(request, 'institution_list.html', context)

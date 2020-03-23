@@ -6,6 +6,11 @@ from django.http import Http404, HttpResponseRedirect
 
 from django.dispatch import receiver
 from djrichtextfield.models import RichTextField
+from datetime import date, timedelta
+now = date.today()
+
+
+
 
 class institution(models.Model):
     #need to change function and additional information to TextField
@@ -39,6 +44,9 @@ class individual(models.Model):
     video_caption           = models.CharField(max_length=200, blank=True)
     video_2_source          = models.URLField(max_length=200, blank=True)
     video_2_caption         = models.CharField(max_length=200, blank=True)
+    update_date             = models.DateField(auto_now=True)
+
+
     class Meta:
         ordering = ('name',)
   
@@ -132,6 +140,7 @@ class article(models.Model):
     icon_image  = models.CharField(max_length=200)
     bluff       = models.TextField(max_length=5000)
     content     = RichTextField()
+    update_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.slug

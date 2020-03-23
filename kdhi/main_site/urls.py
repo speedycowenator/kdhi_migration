@@ -14,5 +14,6 @@ urlpatterns = [
 	path('rok-institution/<str:name>', views.rok_institution_detail, name='rok_institution_detail'),
 	path('biographic', views.individual_list, name='individual_list'),
 	path('institution', views.institution_list, name='institution_list'),	
+	path('', views.homepage_view, name='homepage'),
 
 ]

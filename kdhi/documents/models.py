@@ -12,6 +12,9 @@ class document_collection(models.Model):
         return self.name
 
 
+    def get_absolute_url(self):
+        return (reverse('collection_page', args=[str(self.name)]))
+
 
 class document(models.Model):
     #need to change function and additional information to TextField

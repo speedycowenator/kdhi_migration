@@ -3,18 +3,17 @@
 
 {% block content %}
 
-sdfg
-<div>
-{% for institution in institution_list %}
-    <div class="div-block-203"> 
 
-<a href="{{institution.get_absolute_url}}" class="">{{institution.name}} asd</a>
+<div>
+{% for individual in individual_list %}
+    <div class="div-block-203"> 
+<a href="{{individual.get_absolute_url}}" class="">{{individual.name}}</a>
 
 
     
     </div>
 {% endfor %}
   </div>
-asdf
+
 {% endblock %}
 
