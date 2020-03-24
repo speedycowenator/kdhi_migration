@@ -46,16 +46,19 @@ def homepage_view(request):
     collection_feature      = document_collection.objects.get(name="Democratization")
     collection_feature_url  = collection_feature.get_absolute_url
     latest_article          = article.objects.latest('update_date')
-    secondary_article_list  = []
-    counter                 = 0
-    for article in article.objects.order_by('-update_date'):
 
+    secondary_article_list_full  = []
+    counter                 = 0
+    for article_temp in article.objects.all():
+        secondary_article_list_full.append(article_temp)
+    secondary_article_list = secondary_article_list_full[1:3]
 
 
     context = {
-        'style_sheet'           : link_text,
-        'collection_feature'    : collection_feature,
-        'latest_article'        : latest_article,
+        'style_sheet'               : link_text,
+        'collection_feature'        : collection_feature,
+        'latest_article'            : latest_article,
+        'secondary_article_list'    : secondary_article_list,
 
     }
     

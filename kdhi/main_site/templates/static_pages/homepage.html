@@ -46,15 +46,12 @@
           <h1 class="article-header">{{latest_article.title}}</h1></a>
       </div>
       <div class="secondary-article-holding-div">
-      {% for article in secondary_article_list %}
-        <div class="secondary-article-block"> 
-          <a href="{{article.get_absolute_url}}" class="article-box-title-block w-inline-block">
-            <h1 class="article-header">{{article.title}}</h1></a>
+      {% for article_temp in secondary_article_list %}
+        <div class="secondary-article-block" style="background-image: url('{{article_temp.icon_image}}');" > 
+          <a href="{{article_temp.get_absolute_url}}" class="article-box-title-block w-inline-block">
+            <h1 class="article-header">{{article_temp.title}}</h1></a>
         </div>
-        <div class="secondary-article-block"> 
-          <a href="{{article.get_absolute_url}}" class="article-box-title-block w-inline-block">
-            <h1 class="article-header">{{article.title}}</h1></a>
-        </div>
+       
         {% endfor %}
       </div>
     </div>
