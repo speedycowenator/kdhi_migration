@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from main_site.models import individual, glossary_item, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
+from main_site.models import glossary_item, individual, glossary_item, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
 from documents.models import document_collection
 from datetime import date
 import datetime
@@ -29,10 +29,10 @@ link = soup.find('link')
 link_text = (link.get('href'))
 
 def glossary_detail(request, slug):
-    glossary_item = glossary_item.get(slug=slug)
+    glossary = glossary_item.objects.get(slug=slug)
 
     context = {
-        'glossary_item'     : glossary_item,
+        'glossary_item'     : glossary,
         'style_sheet'       : link_text,
 
     }
@@ -59,17 +59,21 @@ def homepage_view(request):
     latest_article          = article.objects.latest('update_date')
 
     secondary_article_list_full  = []
+    secondary_glossary_list_full = []
     counter                 = 0
     for article_temp in article.objects.all():
         secondary_article_list_full.append(article_temp)
     secondary_article_list = secondary_article_list_full[1:3]
-
+    for glossary_temp in glossary_item.objects.all():
+        secondary_glossary_list_full.append(glossary_temp)
+    glossary_list = secondary_glossary_list_full[0:8]
 
     context = {
         'style_sheet'               : link_text,
         'collection_feature'        : collection_feature,
         'latest_article'            : latest_article,
         'secondary_article_list'    : secondary_article_list,
+        'glossary_list'             : glossary_list,
 
     }
     

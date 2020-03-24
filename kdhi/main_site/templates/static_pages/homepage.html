@@ -63,21 +63,21 @@
         <h1 class="home-header">North Korea glossary</h1>
         <div class="div-block-182">
           
-
-          <div class="glossary-card">
+{% for glossary_card in glossary_list %}
+          <div class="glossary-card" style="background-image: url('{{glossary_card.image_src}}');">
             <div class="glossary-card-band">
-              <a href="#" class="link-block-16 w-inline-block">
-                <h1 class="glossary-card-header">Heading</h1>
+              <a href="{{glossary_card.get_absolute_url}}" class="link-block-16 w-inline-block">
+                <h1 class="glossary-card-header">{{glossary_card.title}}</h1>
               </a>
             </div>
             <div class="card-internal-active">
-              <a href="#" class="link-block-6 w-inline-block">
-                <p class="paragraph-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+              <a href="{{glossary_card.get_absolute_url}}" class="link-block-6 w-inline-block">
+                <p class="paragraph-15">{{glossary_card.bluff_content }}</p>
               </a>
             </div>
           </div>
 
-
+{% endfor %}
 
           
         </div>
