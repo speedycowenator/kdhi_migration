@@ -28,11 +28,27 @@ link = soup.find('link')
 
 link_text = (link.get('href'))
 
+def article_detail(request, slug):
+    article_ref = article.objects.get(slug=slug)
+
+
+
+    context = {
+        'style_sheet'           : link_text,
+        'article'   : article_ref,
+        }
+        
+    return render(request, 'article_detail.html', context)
+
+
 def homepage_view(request):
 
-    collection_feature = document_collection.objects.get(name="Democratization")
+    collection_feature      = document_collection.objects.get(name="Democratization")
     collection_feature_url  = collection_feature.get_absolute_url
     latest_article          = article.objects.latest('update_date')
+    secondary_article_list  = []
+    counter                 = 0
+    for article in article.objects.order_by('-update_date'):
 
 
 

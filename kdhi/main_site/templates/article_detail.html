@@ -1,0 +1,20 @@
+
+{% extends "mainsite_base.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="institution-name">{{article.title}}</h1>
+        <h3 class="institution-korean">{{article.update_date}}</h1>
+
+        <div class="article-rtb w-richtext">
+            {{article.content|safe}}
+        </div></div></div>
+    <div class="right-section"></div>
+  </div>
+  
+  
+{% endblock %}

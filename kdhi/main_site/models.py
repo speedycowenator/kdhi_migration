@@ -145,6 +145,6 @@ class article(models.Model):
     def __str__(self):
         return self.slug
     def get_absolute_url(self):
-        return (reverse('article_'))
+        return (reverse('article_detail', args=[str(self.slug)]))
 
 
