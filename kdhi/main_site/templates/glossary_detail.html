@@ -1,0 +1,19 @@
+
+{% extends "mainsite_base.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="institution-name">{{glossary_item.title}}</h1>
+
+        <div class="article-rtb w-richtext">
+            {{glossary_item.content|safe}}
+        </div></div></div>
+    <div class="right-section"></div>
+  </div>
+  
+  
+{% endblock %}

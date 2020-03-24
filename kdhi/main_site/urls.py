@@ -16,5 +16,6 @@ urlpatterns = [
 	path('biographic', views.individual_list, name='individual_list'),
 	path('institution', views.institution_list, name='institution_list'),	
 	path('', views.homepage_view, name='homepage'),
+	path('glossary/<str:slug>', views.glossary_detail, name='glossary_detail'),
 
 ]

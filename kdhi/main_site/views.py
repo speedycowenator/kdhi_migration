@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from main_site.models import individual, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
+from main_site.models import individual, glossary_item, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
 from documents.models import document_collection
 from datetime import date
 import datetime
@@ -27,6 +27,17 @@ link = soup.find('link')
 
 
 link_text = (link.get('href'))
+
+def glossary_detail(request, slug):
+    glossary_item = glossary_item.get(slug=slug)
+
+    context = {
+        'glossary_item'     : glossary_item,
+        'style_sheet'       : link_text,
+
+    }
+    return render(request, 'glossary_detail.html', context)
+
 
 def article_detail(request, slug):
     article_ref = article.objects.get(slug=slug)

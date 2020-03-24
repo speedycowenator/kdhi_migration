@@ -11,6 +11,20 @@ now = date.today()
 
 
 
+class glossary_item(models.Model):
+    title                       = models.CharField(max_length=200)
+    slug                        = models.CharField(max_length=200)
+    image_src                   = models.CharField(max_length=200)
+    bluff_content               = models.CharField(max_length=500)
+    content                     = RichTextField()
+
+
+    def __str__(self):
+        return self.slug
+
+    def get_absolute_url(self):
+        return (reverse('glossary_detail', args=[str(self.slug)])) 
+
 
 class institution(models.Model):
     #need to change function and additional information to TextField
