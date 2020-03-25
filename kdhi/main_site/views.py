@@ -28,6 +28,27 @@ link = soup.find('link')
 
 link_text = (link.get('href'))
 
+def research_page(request):
+    research_cards = []
+    for e in article.objects.all():
+        research_cards.append(e)
+
+    context = {
+        'style_sheet'       : link_text,
+        'research_cards'    : research_cards,
+
+    }
+    return render(request, 'research.html', context)
+
+
+def about_page(request):
+    context = {
+        'style_sheet'       : link_text,
+
+    }
+    return render(request, 'static_pages/about.html', context)
+
+
 def glossary_detail(request, slug):
     glossary = glossary_item.objects.get(slug=slug)
 
