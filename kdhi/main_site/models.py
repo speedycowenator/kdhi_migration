@@ -133,7 +133,7 @@ class rok_individual(models.Model):
     def __str__(self):
         return self.name
     def get_absolute_url(self):
-        return (reverse('individual_detail', args=[str(self.name)]))
+        return (reverse('rok_individual_detail', args=[str(self.name)]))
     
 class rok_position(models.Model):   
     person              = models.ForeignKey(rok_individual,  on_delete=models.SET_NULL, null=True)

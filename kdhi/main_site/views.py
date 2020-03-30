@@ -28,6 +28,13 @@ link = soup.find('link')
 
 link_text = (link.get('href'))
 
+def inter_korean_spending_2018(request):
+    context = {
+        'style_sheet'       : link_text,
+
+    }
+    return render(request, 'static_pages/inter-korean-spending-2018.html', context)
+
 def research_page(request):
     research_cards = []
     for e in article.objects.all():

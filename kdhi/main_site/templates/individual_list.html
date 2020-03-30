@@ -3,7 +3,19 @@
 
 {% block content %}
 
+<header id="hero" class="hero-2">
+	<div class="flex-container w-container">
+		<div class="div-block-359">
+			<h1 class="heading-104">DPRK Leadership Profiles</h1>
+			<p class="paragraph-29">KDHI's profiles on North Korean leadership provide biographical information on the country's decision makers.<br>‍<br>
+			Use the search bar above to find specific individuals or scroll below to browse leaders alphabetically. Search by government affiliation in our <a href="{% url 'institution_list' %}" class="link-17">DPRK Institution Map &amp; Codex
+			</a>.</p>
+		</div>
+	</div>
+</header>
 
+<div class="member-holder">
+	<h1 class="institution-members-header"> DPRK Leadership </h1>
 <div class="bio-holding-div">
 {% for individual in individual_list %}
     <div class="individual-holder"> 
@@ -11,6 +23,7 @@
 	<a href="{{individual.get_absolute_url}}" class="figure-link-text">{{individual.name}}</a>
 	</div>
 {% endfor %}
+</div>
 </div>
 
 {% endblock %}

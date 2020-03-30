@@ -1,0 +1,49 @@
+{% extends "tracker_base.html" %}
+
+
+{% block content %}
+<div class="ik-tracker-body">
+	<h1 class=ik-coopeartion-header> Inter-Korean Coopeartion Tracker</h1> 
+	<div class="recent-content-box">
+		<img src="{{recent_event.event_photo}}" alt class="recent-content-image">
+		<a href="{{recent_event.get_absolute_url}}" class="recent-content-link w-inline-block">
+			<h1 class="recent-content-header">{{recent_event.event_title}}</h1></a>
+	</div>
+
+	<div class="ik-events-holder" >
+	{% for event_item in events_list %}
+		<div class="event-info-block">
+			<div class="event-info-sub-block">
+				<a href="{{event_item.3}}" class="event-link w-inline-block">
+					<h1 class="meeting-title">{{event_item.0}}</h1></a>
+				<div class="event-date-block">
+					<h1 class="meeting-date">{{event_item.1}}</h1>
+				</div>
+				<p class="event-paragraph">{{event_item.2|slice:":500"}}...</p> 
+				<a href="{{event_item.3}}" class="tracker-more">Details</a>
+			</div>
+			<div class="delegates-block"> 
+				<div class="delegate-holder"> 
+					<div class="institution-position-title">ROK Delegation Head</div>
+					<div class="delegate-photo-block">
+						<img src="{{event_item.4.icon}}"  alt class="delegate-head-image" >
+					</div>
+					<div class="institution-position-name">{{event_item.4.name}}</div>
+				</div>
+				<div class="delegate-holder"> 
+					<div class="institution-position-title">DPRK Delegation Head</div>
+					<div class="delegate-photo-block">
+						<img src="{{event_item.5.icon}}"  alt class="delegate-head-image" >
+					</div>
+					<div class="institution-position-name">{{event_item.5.name}}</div>
+				</div>
+
+
+			</div>	
+		</div>
+	{% endfor %}
+
+	</div>
+</div>
+{% endblock %}
+        event_item = [e_title, e_date, e_content, e_url, [e_ROK_head,  e_rok_delegate_list], [e_DPRK_head, e_dprk_delegate_list]]

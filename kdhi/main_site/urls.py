@@ -19,5 +19,6 @@ urlpatterns = [
 	path('about', views.about_page, name='about_page'),
 	path('articles/<str:slug>', views.article_detail, name='article_detail'),
 	path('articles', views.research_page, name='research_page'),
+	path('inter-korean-spending/2018', views.inter_korean_spending_2018, name='inter_korean_spending_2018'),
 
 ]
