@@ -25,7 +25,7 @@ SECRET_KEY = 'klyedtxwge&qui(n=$w-gq^cip34hy7$!e$tx73ors6pk%$(af'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.kdhi.org']
 
 
 # Application definition
