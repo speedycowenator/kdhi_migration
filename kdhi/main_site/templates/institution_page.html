@@ -12,27 +12,24 @@
         <div class="institution-function-div">
         <h1 class="biographic-biography-header">Function</h1>
         <p class="institutions-function-paragraph">{{institution_function}} </p></div>
-        
-        
-        
+
+
+        <div class = 'member-holder'>
         <h1 class="institution-members-header">Members</h1>        
         {% for position in inst_member_dic %}
         <h1 class="institution-members-title">{{position.0}}</h1>        
-            <div class="grid-container">
+            <div class="bio-holding-div">
             {% for individual in position.1 %}
-            <div class="grid-item">
-            <img src="{{individual.2}}" alt="" class="institution-member-photo">           
-            <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
+            <div class="individual-holder">
+            <img src="{{individual.2}}" alt="" class="figure-image">           
+            <a href="{{individual.1}}" class="figure-link-text">{{individual.0}}</a>
             </div>
             {% endfor %}
             </div>
             {% endfor %}
 
-
-</div>
-    
-
-      
+        </div>
+  
        <div class="institution-function-div">
         <h1 class="biographic-biography-header">Additional Information</h1>
         <p class="institutions-function-paragraph">{{institution_add}} </p></div></div>

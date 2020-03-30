@@ -4,16 +4,14 @@
 {% block content %}
 
 
-<div>
+<div class="bio-holding-div">
 {% for individual in individual_list %}
-    <div class="div-block-203"> 
-<a href="{{individual.get_absolute_url}}" class="">{{individual.name}}</a>
-
-
-    
-    </div>
+    <div class="individual-holder"> 
+	<img src="{{individual.icon}}" alt class="figure-image">
+	<a href="{{individual.get_absolute_url}}" class="figure-link-text">{{individual.name}}</a>
+	</div>
 {% endfor %}
-  </div>
+</div>
 
 {% endblock %}
 

@@ -250,7 +250,7 @@ def article_list(request):
 
 def individual_list(request):
     individual_list = []
-    for e in individual.objects.order_by('-update_date'):
+    for e in individual.objects.order_by('name'):
         individual_list.append(e)
 
     context = {
@@ -261,14 +261,15 @@ def individual_list(request):
     
     return render(request, 'individual_list.html', context)
 
-def institution_list (request):
-    institution_list = []
-    for e in institution.objects.all():
-        institution_list.append(e)
+def institution_list(request):
+    institution_set = []
+    for e in institution.objects.order_by('name'):
+        institution_set.append(e)
+    institution_test = institution.objects.get(name="Political Bureau")
     context = {
-
-        'institution_list '       : institution_list , 
-        'style_sheet'             : link_text,
+        'institution_test'      : institution_test,
+        'institution_set'       : institution_set,
+        'style_sheet'           : link_text,
 
     }
     

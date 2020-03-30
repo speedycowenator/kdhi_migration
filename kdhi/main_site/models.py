@@ -10,7 +10,6 @@ from datetime import date, timedelta
 now = date.today()
 
 
-
 class glossary_item(models.Model):
     title                       = models.CharField(max_length=200)
     slug                        = models.CharField(max_length=200)
