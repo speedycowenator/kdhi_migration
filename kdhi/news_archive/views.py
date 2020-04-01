@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar  8 16:45:35 2020
-
-@author: Sam
-"""
-
-# -*- coding: utf-8 -*-
-
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
@@ -24,6 +15,7 @@ now = date.today()
 import re
 
 from django.conf.urls.static import static
+
 
 def search_redirect(request):
     return HttpResponseRedirect("/state-media-archive/search-results")
