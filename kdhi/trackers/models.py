@@ -49,8 +49,8 @@ class inter_korean_tracker(models.Model):
     #need to change function and additional information to TextField
     ROK_head            = models.ForeignKey(rok_individual, on_delete=models.PROTECT, related_name = 'rok_head', null=True, blank=True)
     DPRK_head           = models.ForeignKey(individual, on_delete=models.PROTECT, related_name = 'dprk_head', null=True, blank=True)
-    participant_ROK     = models.ManyToManyField(rok_individual, related_name = 'rok_delegation', null=True, blank=True)
-    participant_DPRK    = models.ManyToManyField(individual, related_name = 'dprk_delegation', null=True, blank=True)
+    participant_ROK     = models.ManyToManyField(rok_individual, related_name = 'rok_delegation', blank=True, default="Kim Jong Un")
+    participant_DPRK    = models.ManyToManyField(individual, related_name = 'dprk_delegation', blank=True)
     MOU_description     = models.TextField(max_length=20000)
     event_title         = models.CharField(max_length=200)
     event_location      = models.CharField(max_length=200)

@@ -2,18 +2,45 @@
 
 
 {% block content %}
-<div>
-{% for document in collection_set %}
-    <div class="div-block-203"> 
 
-<a href="{{document.get_absolute_url}}" class="">{{document.name}}</a>
+  <div class="collection-body">
+    <h1 class="collection-source-title">{{collection.name}} Primary Sources</h1>
+      	{%for document_itteration in collection_set %}
+    <div id="documents" class="document-section page">
+      <div class="document-hold-div">
 
-
-
-    
+        <div class="document-detail-div">
+          <h1 class="document-title">{{document_itteration.name}}</h1>
+          <div class="documenta-detail-sub">
+            <div class="document-detail-sub-left">
+              <div class="document-detail">Creator:</div>
+            </div>
+            <div class="document-detail-sub-right">
+              <div class="document-detail-content">{{document_itteration.creator}}</div>
+            </div>
+          </div>
+          <div class="documenta-detail-sub">
+            <div class="document-detail-sub-left">
+              <div class="document-detail">Creation Date:</div>
+            </div>
+            <div class="document-detail-sub-right">
+              <div class="document-detail-content">{{document_itteration.date}}</div>
+            </div>
+          </div>
+          <div class="documenta-detail-sub">
+            <div class="document-detail-sub-left">
+              <div class="document-detail">Contents:</div>
+            </div>
+            <div class="document-detail-sub-right">
+              <div class="document-detail-content">{{document_itteration.summary}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="document-function-div"><a href="{{document_itteration.get_absolute_url}}" class="view-buttons w-button">Document Page</a></div>
+      </div>
     </div>
-{% endfor %}
+      {% endfor %}
   </div>
-}
+
 {% endblock %}
 

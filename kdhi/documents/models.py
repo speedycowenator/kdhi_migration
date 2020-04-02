@@ -6,7 +6,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.dispatch import receiver
 
 class document_collection(models.Model):
-    name                        =  models.CharField(max_length=200)
+    name                        = models.CharField(max_length=200)
+    directory                   = models.CharField(max_length=200)
     
     def __str__(self):
         return self.name
@@ -15,21 +16,28 @@ class document_collection(models.Model):
     def get_absolute_url(self):
         return (reverse('collection_page', args=[str(self.name)]))
 
+    class Meta:
+        ordering = ('name',)
+  
 
 class document(models.Model):
     #need to change function and additional information to TextField
     name                = models.CharField(max_length=200)
     slug                = models.CharField(max_length=200)
+    url_substring       = models.CharField(max_length=200, blank=True, default='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Documents/Democratization/1986/')
     collection          = models.ForeignKey(document_collection, on_delete=models.SET_NULL, null=True)
     date                = models.DateField(blank=True)
     summary             = models.TextField(max_length=20000)
     creator             = models.CharField(max_length=200)
     document_text       = models.TextField(max_length=20000, blank=True)
-    url_substring       = models.CharField(max_length=200)
-    country_of_origin   = models.CharField(max_length=200)
-    document_source     = models.CharField(max_length=200)
-    rights              = models.CharField(max_length=2000)
-  
+    country_of_origin   = models.CharField(max_length=200, blank=True)
+    document_source     = models.CharField(max_length=200, blank=True)
+    rights              = models.CharField(max_length=2000, blank=True)
+    index_outdated      = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ('name',)
+    
         
     def __str__(self):
         return self.slug

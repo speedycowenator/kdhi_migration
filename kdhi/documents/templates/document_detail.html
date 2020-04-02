@@ -3,7 +3,7 @@
 
 {% block content %}
   <div class="document-slider">
-    <div class="html-embed-2 w-embed w-iframe"><iframe src="https://drive.google.com/file/d/{{document_detail.url_substring}}/preview" width="100%" height="100%"></iframe></div>
+    <div class="html-embed-2 w-embed w-iframe"><iframe src="{{document_detail.url_substring}}" width="100%" height="100%"></iframe></div>
     <div class="div-block-203">
       <div class="div-block-205">
         <h1 class="documents-title foldout">{{document_detail.name}}</h1>
@@ -20,9 +20,9 @@
         <h4 class="details-header"><strong>Country of Origin</strong><br></h4>
         <div class="details-item">{{document_detail.country_of_origin}}</div>
         <h4 class="details-header"><strong>Collection</strong><br></h4>
-        <a href="" class="details-item">{{document_detail.collection.name}}</a>
+        <a href="{{document_detail.collection.get_absolute_url}}" class="details-item">{{document_detail.collection.name}}</a>
 
-      </div><a href="https://drive.google.com/u/0/uc?id={{document_detail.url_substring}}&export=download" class="button-30 w-button">PDF Download</a></div>
+      </div><a href="{{document_detail.url_substring}}" class="button-30 w-button">PDF Download</a></div>
   </div>
 {% endblock %}
 

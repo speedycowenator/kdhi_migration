@@ -41,14 +41,15 @@ def collection_page(request, name):
 	request_collection = document_collection.objects.get(name=name)
 	request_pk = request_collection.pk
 	try:
-		for e in document.objects.get(collection=request_pk):
+		for e in document.objects.filter(collection=request_pk):
 			collection_set.append(e)
 	except:
 		collection_set.append(document.objects.get(collection=request_pk))
 	
 
 	context = {
-			'collection_set' 		: collection_set, 
-			'style_sheet'           : link_text,
+			'collection'  		: request_collection,	
+			'collection_set'	: collection_set, 
+			'style_sheet'		: link_text,
 	}
 	return render(request, 'collection_page.html', context)
