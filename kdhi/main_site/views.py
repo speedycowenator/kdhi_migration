@@ -110,6 +110,14 @@ def homepage_view(request):
 def individual_detail(request, name):
     individual_detail = individual.objects.get(name=name)
     individual_positions = []
+    s3_path_full    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Full+Resolution/"
+    s3_path_icon    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/1+x+1+Icons/"
+    individual_name = individual_detail.name
+    name_url_snip   = individual_name.replace(' ', '+')
+    #name_url_snip   = name_url_snip.lower()
+    img_full_res    = s3_path_full + name_url_snip + '.jpg'
+    img_icon        = s3_path_icon + name_url_snip + '.jpg'
+
     for individual_position in position.objects.filter(person=individual_detail):
         institution_tag = individual_position.institution
         inst_url = institution_tag.get_absolute_url
@@ -118,14 +126,14 @@ def individual_detail(request, name):
     
     context = {
             'individual_name'       : individual_detail.name,
-            'individual_photo'      : individual_detail.full_resolution_photo,
+            'individual_photo'      : img_full_res,
             'individual_birthday'   : individual_detail.birthday,
             'individual_education'  : individual_detail.education,
             'individual_biography'  : individual_detail.bio,
             'individual_sources'    : individual_detail.sources,
             'individual_hometown'   : individual_detail.hometown,
             'individual_positions'  : individual_positions,
-            'style_sheet'             : link_text,
+            'style_sheet'           : link_text,
             
             }
     return render(request, 'biographic_page.html', context)
@@ -157,11 +165,14 @@ def institution_detail(request, name):
             title_holder = title_holder.person
             title_holder_name = title_holder.name
             title_holder_url = title_holder.get_absolute_url
-            title_holder_photo = title_holder.full_resolution_photo
-            grouped_members_temp.append([title_holder_name, title_holder_url, title_holder_photo])
+            s3_path_icon    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/1+x+1+Icons/"   
+            name_url_snip   = title_holder_name.replace(' ', '+')
+            img_icon        = s3_path_icon + name_url_snip + '.jpg'
+            grouped_members_temp.append([title_holder_name, title_holder_url, img_icon])
         grouped_members = [title, grouped_members_temp]
         inst_member_dic.append(grouped_members)
-    
+
+
     
     context = {
             

@@ -32,9 +32,10 @@ class institution(models.Model):
     tag_one                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_two                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_three                   =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    function                    =  models.TextField(max_length=20000)
+    function                    =  models.TextField(max_length=20000, blank=True)
     additional_information      =  models.TextField(max_length=20000, blank=True)
-    
+    class Meta:
+        ordering = ('name',)   
     def __str__(self):
         return self.name
 
@@ -51,8 +52,8 @@ class individual(models.Model):
     birthday                = models.DateField(null=True, blank=True)
     hometown                = models.CharField(max_length=200, blank=True)
     education               = models.CharField(max_length=200, blank=True)
-    bio                     = models.TextField(max_length=20000)
-    sources                 = models.TextField(max_length=500)
+    bio                     = models.TextField(max_length=20000, blank=True)
+    sources                 = models.TextField(max_length=500, blank=True)
     video_source            = models.URLField(max_length=200, blank=True)
     video_caption           = models.CharField(max_length=200, blank=True)
     video_2_source          = models.URLField(max_length=200, blank=True)
@@ -79,10 +80,14 @@ class position(models.Model):
     confirmation_date   = models.DateField(null=True, blank=True)
     confirmation_src    = models.CharField(max_length=200, default="N/A")
     replaced            = models.CharField(max_length=200, blank=True)
-    
+    created_at          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at          = models.DateTimeField(auto_now=True, null=True, blank=True)
+    position_rank       = models.IntegerField(null=False, blank=False, default=0)
     def __str__(self):
         return self.title
-    
+    class Meta:
+        ordering = ('position_rank', 'person')
+      
     
 class rok_institution(models.Model):
     #need to change function and additional information to TextField
