@@ -7,39 +7,47 @@ from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
 
-from news_archive.models import article
+from documents.models import document
 import csv
 
-with open('articles_import.csv', newline='', encoding='utf-8') as csvfile:
-	article_reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+unslugable_characters = ['.', ',', '/', '?', ';', ':', '"', "'", '|', '/', '\\', '#', '@', '$', '%', '^', '&', '*', '(', ')', '~', '`', ]
+
+
+
+
+
+def slugify(raw_text):
+	raw_text =  raw_text.lower()
+	raw_text_temp = ''
+	#for character in unslugable_characters:
+	#	raw_text.replace(character, '')
+	for character in raw_text:
+		if character.isalpha() == True or character == ' ':
+			raw_text_temp += character
+	raw_text = raw_text_temp
+	raw_text = raw_text.replace(' ', '-')
+	return(raw_text)
+
+
+
+with open('1987_documents.csv', newline='', encoding='utf-8') as csvfile:
+	article_reader = csv.reader(csvfile, delimiter=',', quotechar='"')
 	for row in article_reader:
+		'''
 		date_fixed = ''
-		date = row[4]
+		date = row[1]
 		for character in date:
 			if character == '/':
 				character = '-'
 			date_fixed += character
 		date_fixed_list = date_fixed.split('-')
 		date_fixed = date_fixed_list[2] + '-' + date_fixed_list[0] + '-' + date_fixed_list[1]
+		date 	= date_fixed
+		'''
+		title 	= row[0]
+		slug 	= slugify(title)
+		date  	= row[1]
+		summary = row[2]
 
-		date = date_fixed
-
-		title = row[1]
-		title= title.replace('*', ',')
-		title= title.replace('^', '"')
-		text = row[2]
-		author = row[3]
-		text= text.replace('**', ',')
-		text= text.replace('^', '"')
-
-		b = article(title=title, summary=text, date_publication=date, author=author)
+		b = document(name=title, summary=summary, date=date, slug=slug)
 		b.save()
-		print(row[0])
-		print(title)
-		print(text)
-		print(author)
-		print(date)
-		print('---------------------')
-
-
-
