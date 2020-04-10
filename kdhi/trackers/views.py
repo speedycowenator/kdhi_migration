@@ -27,6 +27,7 @@ link_text = (link.get('href'))
 
 
 
+
 def heatmap_static(request):
     context = {
             'style_sheet'           : link_text,
