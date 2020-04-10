@@ -27,6 +27,14 @@ link_text = (link.get('href'))
 
 
 
+def heatmap_static(request):
+    context = {
+            'style_sheet'           : link_text,
+            }
+    return render(request, 'heatmap_static.html', context)
+
+    
+
 def overseas_tracker_detail(request, pk):
     tracker_item = overseas_tracker.objects.get(pk=pk)
     participant_list = []

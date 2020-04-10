@@ -26,7 +26,6 @@ link = soup.find('link')
 
 link_text = (link.get('href'))
 
-
 def document_detail(request, slug):
     document_detail = document.objects.get(slug=slug)
     url = document_detail.url_substring + document_detail.collection.name + '/' + document_detail.slug +'.pdf'
