@@ -32,8 +32,12 @@ class institution(models.Model):
     tag_one                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_two                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_three                   =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    function                    =  models.TextField(max_length=20000, blank=True)
-    additional_information      =  models.TextField(max_length=20000, blank=True)
+    function                    =  RichTextField(null=True, blank=True)
+    additional_figures          =  RichTextField(null=True, blank=True)
+    organization_structure      =  RichTextField(null=True, blank=True)
+    additional_information      =  RichTextField(null=True, blank=True)
+    sources_add                 =  RichTextField(null=True, blank=True, default='''<a href="https://nkinfo.unikorea.go.kr/nkp/main/portalMain.do">[1]</a> Ministry of Unification, '2019년 북한 기관별 인명록'  2018-12-27' Party of Korea (WPK)''')
+    
     class Meta:
         ordering = ('name',)   
     def __str__(self):
@@ -77,8 +81,8 @@ class position(models.Model):
     institution         = models.ForeignKey(institution, on_delete=models.CASCADE)
     title               = models.CharField(max_length=200)   
     appointment_date    = models.DateField(null=True, blank=True)
-    confirmation_date   = models.DateField(null=True, blank=True)
-    confirmation_src    = models.CharField(max_length=200, default="N/A")
+    confirmation_date   = models.DateField(null=True, blank=True, default='2019-04-12')
+    confirmation_src    = models.CharField(max_length=200, default="First Session of 14th SPA Held")
     replaced            = models.CharField(max_length=200, blank=True)
     created_at          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at          = models.DateTimeField(auto_now=True, null=True, blank=True)

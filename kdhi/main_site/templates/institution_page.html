@@ -11,8 +11,7 @@
         <h1 class="institution-korean">{{institution_korean}}</h1>
         <div class="institution-function-div">
         <h1 class="biographic-biography-header">Function</h1>
-        <p class="institutions-function-paragraph">{{institution_function}} </p></div>
-
+        <p class="institutions-function-paragraph">{{institution_function|safe}} </p></div>
 
         <div class = 'member-holder'>
         <h1 class="institution-members-header">Members</h1>        
@@ -29,10 +28,22 @@
             {% endfor %}
 
         </div>
-  
-       <div class="institution-function-div">
+
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Additional Senior Figures</h1>
+        <p class="institutions-function-paragraph">{{institution_figs|safe}} </p></div>
+
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Organization</h1>
+        <p class="institutions-function-paragraph">{{institution_org|safe}} </p></div>
+
+        <div class="institution-function-div">
         <h1 class="biographic-biography-header">Additional Information</h1>
-        <p class="institutions-function-paragraph">{{institution_add}} </p></div></div>
+        <p class="institutions-function-paragraph">{{institution_add|safe}} </p></div>
+
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Sources</h1>
+        <p class="institutions-function-paragraph">{{institution_src|safe|linebreaks }} </p></div>
    
     </div>
     <div class="right-section"></div>

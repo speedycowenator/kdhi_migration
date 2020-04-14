@@ -165,18 +165,21 @@ def institution_detail(request, name):
             title_holder = title_holder.person
             title_holder_name = title_holder.name
             title_holder_url = title_holder.get_absolute_url
-            s3_path_icon    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/1+x+1+Icons/"   
+            s3_path_full    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Full+Resolution/"
             name_url_snip   = title_holder_name.replace(' ', '+')
-            img_icon        = s3_path_icon + name_url_snip + '.jpg'
+            img_icon        = s3_path_full + name_url_snip + '.jpg'
             grouped_members_temp.append([title_holder_name, title_holder_url, img_icon])
         grouped_members = [title, grouped_members_temp]
         inst_member_dic.append(grouped_members)
 
-
+           
     
     context = {
             
             'institution_name'      : institution_detail.name,
+            'institution_figs'      : institution_detail.additional_figures,
+            'institution_src'       : institution_detail.sources_add,
+            'institution_org'       : institution_detail.organization_structure,
             'institution_korean'    : institution_detail.name_korean,
             'institution_function'  : institution_detail.function,
             'institution_add'       : institution_detail.additional_information,
