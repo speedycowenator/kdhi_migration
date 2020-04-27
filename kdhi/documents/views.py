@@ -31,7 +31,7 @@ def document_detail(request, slug):
     collection_name = document_detail.collection.name
     if collection_name == "The June Struggle":
     	collection_name = 'Democratization'
-    url = document_detail.url_substring + collection_name + '/' + document_detail.slug +'.pdf'
+    url = 'https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Documents/' + collection_name + '/' + document_detail.slug +'.pdf'
     
     context = {
     		'url' 					: url,
