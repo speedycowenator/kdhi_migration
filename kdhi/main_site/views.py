@@ -82,7 +82,7 @@ def article_detail(request, slug):
 
 def homepage_view(request):
 
-    collection_feature      = document_collection.objects.get(name="Democratization")
+    collection_feature      = document_collection.objects.get(name="The June Struggle")
     collection_feature_url  = collection_feature.get_absolute_url
     latest_article          = article.objects.latest('update_date')
 

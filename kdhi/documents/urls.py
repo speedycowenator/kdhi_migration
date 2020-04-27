@@ -9,4 +9,6 @@ urlpatterns = [
     #url('', views.search_redirect, name='redirect'),
 	path('document/<str:slug>', views.document_detail, name='document_detail'),
 	path('collection/<str:name>', views.collection_page, name='collection_page'),
+	path('timeline/<int:init_year>-<int:end_year>', views.timeline, name='timeline'),
+	path('document-collection/<str:name>', views.document_list, name='document_list'),
     ]

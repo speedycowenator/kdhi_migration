@@ -10,9 +10,9 @@ import_objects = import_files_directory_list
 dynamodb = boto3.client('dynamodb')
 s3 = boto3.client('s3')
 rekognition = boto3.client('rekognition')
-collection  = "faces_set" 
-bucket      = "kuroko.faces"
-path = 'C:\\Users\\Sam\\rekog_imports\\to_import'
+collection  = "collection-kuroko-verified" 
+bucket      = "kuroko-verified"
+path = 'D:\\Dropbox\\Dropbox\\kdhi.org\\Assets\\Leadership Photos\\Kuroko\\verified'
 
 
 #--------Build name / location directory list---------------
@@ -62,7 +62,7 @@ for import_object in import_files_directory_list:
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         faceId = response['FaceRecords'][0]['Face']['FaceId']
         personFullName = import_object[1]
-        update_index('faces_set_index',faceId,personFullName)
+        update_index('table-kuroko-verified',faceId,personFullName)
         print(response)
 
     else:
