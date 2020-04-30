@@ -64,17 +64,29 @@ class individual(models.Model):
     video_2_caption         = models.CharField(max_length=200, blank=True)
     update_date             = models.DateField(auto_now=True)
 
-
     class Meta:
         ordering = ('name',)
   
 
     def __str__(self):
         return self.name
+   
     def get_absolute_url(self):
         return (reverse('individual_detail', args=[str(self.name)]))
-
-
+  
+    def get_image_full(self):
+        full_base   = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Full+Resolution/"
+        full_suffix = '.jpg'
+        image_name  = self.name.replace(' ', '+')
+        full_string = full_base + image_name + full_suffix
+        return full_string
+  
+    def get_image_icon(self):
+        icon_base   = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Icon/"
+        icon_suffix = '.jpg'
+        image_name  = self.name.replace(' ', '+')
+        icon_string = icon_base + image_name + icon_suffix
+        return icon_string
     
 class position(models.Model):
     person              = models.ForeignKey(individual, on_delete=models.CASCADE)
@@ -103,6 +115,7 @@ class rok_institution(models.Model):
     function                    =  models.TextField(max_length=20000, blank=True)
     history                     =  models.TextField(max_length=20000, blank=True)
     additional_information      =  models.TextField(max_length=20000, blank=True)
+    qs_slug                     =  models.TextField(max_length=250, blank=False, default='SLUG MISSING')
     
     def __str__(self):
         return self.name
@@ -115,7 +128,7 @@ class rok_institution(models.Model):
     
 class rok_individual(models.Model):
     name                    = models.CharField(max_length=200)
-    name_true               = models.CharField(max_length=200)
+    name_slug               = models.CharField(max_length=200)
 
     name_korean             = models.CharField(max_length=200, blank=True)
     icon                    = models.URLField(max_length=200, blank=True)
@@ -141,8 +154,13 @@ class rok_individual(models.Model):
 
     def __str__(self):
         return self.name
+    def get_image_icon(self):
+        icon_base   = 'https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/ROK+Government+Assets/icon/'
+        icon_suffix = '.jpg'
+        icon_string = icon_base + self.name_slug + icon_suffix
+        return icon_string
     def get_absolute_url(self):
-        return (reverse('rok_individual_detail', args=[str(self.name)]))
+        return (reverse('rok_individual_detail', args=[str(self.name_slug)]))
     
 class rok_position(models.Model):   
     person              = models.ForeignKey(rok_individual,  on_delete=models.SET_NULL, null=True)
@@ -152,9 +170,12 @@ class rok_position(models.Model):
     confirmation_date   = models.DateField(null=True, blank=True)
     confirmation_src    = models.CharField(max_length=200, default="N/A")
     replaced            = models.CharField(max_length=200, blank=True)
-    
+    position_rank       = models.IntegerField(null=False, blank=False, default=0)
+
     def __str__(self):
         return self.title
+    class Meta:
+        ordering = ('position_rank', 'person')
 
 class article(models.Model):
     title       = models.CharField(max_length=200)

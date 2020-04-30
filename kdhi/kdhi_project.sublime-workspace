@@ -1,0 +1,917 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"collectio",
+				"collection_name"
+			],
+			[
+				"time",
+				"timelime_year_items"
+			],
+			[
+				"document",
+				"document-collection"
+			],
+			[
+				"tim",
+				"timeline_items"
+			],
+			[
+				"day",
+				"day_content"
+			],
+			[
+				"date",
+				"date_long"
+			],
+			[
+				"month",
+				"month_int"
+			],
+			[
+				"d",
+				"day_1_content_2"
+			],
+			[
+				"file",
+				"file_type"
+			],
+			[
+				"kuroko",
+				"kuroko-verified"
+			],
+			[
+				"doc",
+				"document_detail"
+			],
+			[
+				"pso",
+				"position_rank"
+			],
+			[
+				"na",
+				"name_url_snip"
+			],
+			[
+				"s3",
+				"s3_path_icon"
+			],
+			[
+				"do",
+				"document_slug"
+			],
+			[
+				"slug",
+				"slug_variable"
+			],
+			[
+				"docum",
+				"document_title"
+			],
+			[
+				"over",
+				"overseas_topics"
+			],
+			[
+				"e_dprk",
+				"e_dprk_delegate_list"
+			],
+			[
+				"e_dpr",
+				"e_DPRK_head"
+			],
+			[
+				"e_rpl",
+				"e_dprk_delegate"
+			],
+			[
+				"e_rok_dele",
+				"e_rok_delegate_list"
+			],
+			[
+				"inter_korea",
+				"inter_korean_tracker"
+			],
+			[
+				"get",
+				"get_absolute_url"
+			],
+			[
+				"partici",
+				"participant_DPRK"
+			],
+			[
+				"korea",
+				"inter_korean_tracker"
+			],
+			[
+				"institution",
+				"institution_list"
+			],
+			[
+				"in",
+				"individual"
+			],
+			[
+				"seco",
+				"secondary_glossary_list_full"
+			],
+			[
+				"gloss",
+				"secondary_glossary_list_full"
+			],
+			[
+				"article",
+				"article_detail"
+			],
+			[
+				"collec",
+				"collection_feature"
+			],
+			[
+				"collection",
+				"collection_set"
+			],
+			[
+				"colect",
+				"collection_page"
+			],
+			[
+				"date_",
+				"date_fixed"
+			],
+			[
+				"filter",
+				"filter_function"
+			],
+			[
+				"su",
+				"su_emails"
+			],
+			[
+				"ret",
+				"return_variable"
+			],
+			[
+				"subsc",
+				"subscription_email"
+			],
+			[
+				"as",
+				"as_view"
+			],
+			[
+				"HTTP",
+				"HttpResponseRedirect"
+			],
+			[
+				"html",
+				"text_html_list"
+			],
+			[
+				"tex",
+				"text_html_list"
+			],
+			[
+				"text",
+				"text_html_cleaned"
+			],
+			[
+				"te",
+				"text_html_list"
+			],
+			[
+				"pad",
+				"padding-top\tproperty"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"prof",
+				"profile_favorites"
+			],
+			[
+				"pub",
+				"Pubication"
+			],
+			[
+				"public",
+				"publication_dictionary"
+			],
+			[
+				"one",
+				"one_week"
+			],
+			[
+				"checked",
+				"checked_test_2"
+			],
+			[
+				"now",
+				"now_tuple"
+			],
+			[
+				"padding",
+				"padding-left\tproperty"
+			],
+			[
+				"paddin",
+				"padding-top\tproperty"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"favorite",
+				"favorite_string_list"
+			],
+			[
+				"favorite_list",
+				"favorite_string_list"
+			],
+			[
+				"favor",
+				"favorite_string"
+			],
+			[
+				"email",
+				"email_address"
+			],
+			[
+				"emai",
+				"email_address"
+			],
+			[
+				"subscri",
+				"subscribed_users"
+			],
+			[
+				"sub",
+				"subscribed_users"
+			],
+			[
+				"profi",
+				"profile_updates"
+			],
+			[
+				"Pro",
+				"Profile"
+			],
+			[
+				"is",
+				"is_valid"
+			],
+			[
+				"Prof",
+				"ProfileUpdateForm"
+			],
+			[
+				"pro",
+				"ProfileUpdateForm"
+			],
+			[
+				"profile",
+				"profile"
+			],
+			[
+				"Prp",
+				"ProfileUpdate"
+			],
+			[
+				"ex",
+				"extra_minus_location"
+			],
+			[
+				"show",
+				"show_button"
+			],
+			[
+				"comm",
+				"favorite_command_test"
+			],
+			[
+				"command",
+				"command_toggle"
+			],
+			[
+				"artic",
+				"article_favorited"
+			],
+			[
+				"comma",
+				"command_toggle"
+			],
+			[
+				"favo",
+				"favorite_toggle"
+			],
+			[
+				"faov",
+				"favorited"
+			],
+			[
+				"favorited",
+				"favorited"
+			],
+			[
+				"favorite_te",
+				"favorited_list_test"
+			],
+			[
+				"test",
+				"favorited_test_list"
+			],
+			[
+				"favorite_",
+				"favorite_pk"
+			],
+			[
+				"fav",
+				"favorite_string"
+			],
+			[
+				"favori",
+				"favorited"
+			],
+			[
+				"us",
+				"user_profile"
+			],
+			[
+				"new",
+				"new_favorites"
+			],
+			[
+				"user",
+				"user_data"
+			],
+			[
+				"favorite_str",
+				"favorite_string_list"
+			],
+			[
+				"articl",
+				"article"
+			],
+			[
+				"art",
+				"article_pk"
+			],
+			[
+				"article_pk",
+				"article_pk_list"
+			],
+			[
+				"r",
+				"request"
+			],
+			[
+				"favorite_art",
+				"favorite_article_list"
+			],
+			[
+				"kdhi",
+				"kdhi_hub_server"
+			],
+			[
+				"search",
+				"search_results"
+			],
+			[
+				"sear",
+				"search_data"
+			],
+			[
+				"se",
+				"search_data"
+			],
+			[
+				"t",
+				"title_search_1"
+			],
+			[
+				"filter_",
+				"filter_function"
+			],
+			[
+				"tet",
+				"text_search_1"
+			],
+			[
+				"filt",
+				"filter_function"
+			],
+			[
+				"fi",
+				"filter_mechanism"
+			],
+			[
+				"fil",
+				"filter_function"
+			],
+			[
+				"order",
+				"order_mechaism"
+			],
+			[
+				"A",
+				"Article"
+			],
+			[
+				"aver",
+				"average_match_dc"
+			],
+			[
+				"path",
+				"source_path"
+			],
+			[
+				"mat",
+				"match_confidence"
+			],
+			[
+				"debug",
+				"debug_prompt"
+			],
+			[
+				"match",
+				"match_certainty_count"
+			],
+			[
+				"tru",
+				"true_match_confidence_dc"
+			],
+			[
+				"tr",
+				"true_match_confidence"
+			],
+			[
+				"alt",
+				"alternative_matches"
+			],
+			[
+				"low",
+				"low_alternative_matches"
+			],
+			[
+				"alter",
+				"alternative_matches"
+			],
+			[
+				"target",
+				"target_file"
+			],
+			[
+				"true",
+				"true_match_indexed_faces"
+			],
+			[
+				"indi",
+				"individual_name"
+			],
+			[
+				"face",
+				"face_library"
+			],
+			[
+				"ind",
+				"individual_name"
+			],
+			[
+				"tar",
+				"target_dictionary"
+			],
+			[
+				"fa",
+				"face_index_dictionary"
+			],
+			[
+				"row",
+				"row_count"
+			],
+			[
+				"cs",
+				"csv_reader"
+			],
+			[
+				"obj",
+				"objects"
+			],
+			[
+				"ob",
+				"obects_list"
+			],
+			[
+				"import",
+				"import_object"
+			],
+			[
+				"per",
+				"personFullName"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "documents/templates/document_base.html",
+			"settings":
+			{
+				"buffer_size": 6674,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "kdhi/urls.py",
+			"settings":
+			{
+				"buffer_size": 1047,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				"Syntax Check"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"menu",
+				"View: Toggle Menu"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi"
+	],
+	"file_history":
+	[
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/templates/timeline_test.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/templates/document_base.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/static_pages/homepage.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/templates/collection_page.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/urls.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/admin.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/templates/document_list.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kuroko/create_collection.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kuroko/search_face.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kuroko/index_face.py",
+		"/C/Users/Sam/Documents/Arma 3/Saved/CWR/autosave.Arma3Save",
+		"/C/Users/Sam/face_search.py",
+		"/C/Users/Sam/index_face_lambda.py",
+		"/C/Users/Sam/index_face.py",
+		"/C/Users/Sam/search_face.py",
+		"/C/Users/Sam/index_face_basic.py",
+		"/C/Users/Sam/Machine Learning/kuroko/add_face.py",
+		"/C/Users/Sam/list_faces.py",
+		"/D/Sam/kurko.faces/index_face.py",
+		"/C/Users/Sam/Machine Learning/kuroko/create_collection.py",
+		"/C/Users/Sam/Machine Learning/kuroko/trust-policy.json",
+		"/D/Dropbox/Dropbox/kdhi.org/Assets/Leadership Photos/Kuroko/search_face.py",
+		"/D/Dropbox/Dropbox/kdhi.org/Assets/Leadership Photos/Kuroko/index_face_lambda.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/article_import.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/urls.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/institution_page.html",
+		"/D/Dropbox/Dropbox/Kuroko/kurko.faces/index_face.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/Notes",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/templates/document_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/heatmap_static.html",
+		"/D/Dropbox/Dropbox/Kuroko/face_search.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/urls.py",
+		"/C/Users/Sam/Downloads/htmlheatmaptest.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/biographic_page.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/admin.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/individual_list.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/inter_korean.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/tracker_base.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/object_test.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/highlighter.py",
+		"/C/Users/Sam/Downloads/collection-source-list.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/templates/index/article_detail.html",
+		"/C/Users/Sam/django_projects/locallibrary/import_article.py",
+		"/C/Users/Sam/kcna_import.py",
+		"/C/Users/Sam/import.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/articles_import.csv",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/settings.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/urls.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/admin.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/overseas_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/overseas.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/mainsite_base.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/static_pages/inter-korean-spending-2018.html",
+		"/C/Users/Sam/Downloads/Inter-Korean Spending (2018).html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/inter_korean_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/institution_list.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/inter_korean_detail.py",
+		"/C/Users/Sam/Downloads/institution-index.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/research.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/static_pages/about.html",
+		"/C/Users/Sam/Downloads/research.html",
+		"/C/Users/Sam/Downloads/about.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/article_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/urls.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/templates/index/search_results.html",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunitionBox/Ammo_AmmunitionBox_Generic_AC2.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunition/Ammunition_AC2.json",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/get_style.css",
+		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueModuleTech/Heatsink/Gear_HeatSink_Generic_Standard.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueModuleTech/Heatsink/Gear_HeatSink_Generic_Bulk-Bank.json",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/views.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/registration/login.html",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub/settings.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/index/print_list.html",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/base_generic.html",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/index/search_results.html",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub/wsgi.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/index/article_detail.html",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/accounts/profile_page.html",
+		"/C/Users/Sam/kdhi_hub/kcna_format_fix.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/admin.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/signup.html",
+		"/C/Users/Sam/kdhi_hub/kcna_clean.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/forms.py",
+		"/C/Users/Sam/Downloads/video_test.py",
+		"/C/Users/Sam/kdhi_hub/import_articles.py",
+		"/D/Dropbox/Dropbox/kdhi/kdhi/settings.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/urls.py",
+		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueMunitions/NoBoxAmmoBox/NoBoxAmmo_AC2.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueMunitions/ammunition/Ammunition_AC2.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueMunitions/LRM/Ammo_AmmunitionBox_AugmentedThunder_LRM_half.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueMunitions/LRM/Ammo_AmmunitionBox_Generic_LRM.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/weapon/Weapon_Laser_LargeLaser_0-STOCK.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunitionBox/Ammo_AmmunitionBox_Generic_MG.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunition/Ammunition_MG.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunition/Ammunition_AC5.json",
+		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/debug/settings.json",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/registration/signup.html",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/templates/signup.html",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/static/style.css",
+		"/C/Users/Sam/kdhi_hub/email_test.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/email_test.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/email_test.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/models.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/views.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/models.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/templates/base_generic.html",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/urls.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/index.html",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/templates/index.html",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/apps.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub/settings.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/static/kdhi_hub_server/style.css",
+		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (6).zip",
+		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (6)/index.html",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/templates/index/article_detail.html",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/kdhi_hub_server/templates/index/search_results.html",
+		"/C/Users/Sam/email_test.py",
+		"/C/Users/Sam/kdhi_django_update/kdhi_hub/time_filter_build.py",
+		"/C/Users/Sam/kdhi_hub/kdhi_hub_server/templates/base_generic.py"
+	],
+	"find":
+	{
+		"height": 31.0
+	},
+	"find_in_files":
+	{
+		"height": 114.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\Users\\Sam\\Documents\\GitHub\\kdhi_migration\\kdhi"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "documents/templates/document_base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6674,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6674,
+								6242
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1518.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "kdhi/urls.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1047,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1047,
+								628
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 36.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 321.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+	}
+}

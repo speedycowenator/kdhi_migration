@@ -15,6 +15,7 @@ import time
 from datetime import date, timedelta
 now = date.today()
 import re
+from django.utils.html import strip_tags
 
 import bs4
 import urllib.request
@@ -191,8 +192,8 @@ def institution_detail(request, name):
     return render(request, 'institution_page.html', context)
 
 
-def rok_individual_detail(request, name):
-    individual_detail = rok_individual.objects.get(name=name)
+def rok_individual_detail(request, name_slug):
+    individual_detail = rok_individual.objects.get(name_slug=name_slug)
     individual_positions = []
     for individual_position in rok_position.objects.filter(person=individual_detail):
         institution_tag = individual_position.institution
@@ -202,7 +203,7 @@ def rok_individual_detail(request, name):
     
     context = {
             'individual_name'       : individual_detail.name,
-            'individual_photo'      : individual_detail.full_resolution_photo,
+            'individual_photo'      : individual_detail.get_image_icon,
             'individual_sources'    : individual_detail.sources,
             'individual_positions'  : individual_positions,
             'style_sheet'             : link_text,           
@@ -234,7 +235,7 @@ def rok_institution_detail(request, name):
             title_holder = title_holder.person
             title_holder_name = title_holder.name
             title_holder_url = title_holder.get_absolute_url
-            title_holder_photo = title_holder.full_resolution_photo
+            title_holder_photo = title_holder.get_image_icon
             grouped_members_temp.append([title_holder_name, title_holder_url, title_holder_photo])
         grouped_members = [title, grouped_members_temp]
         inst_member_dic.append(grouped_members)
@@ -282,19 +283,81 @@ def individual_list(request):
     
     return render(request, 'individual_list.html', context)
 
-def institution_list(request):
-    institution_set = []
-    for e in institution.objects.order_by('name'):
-        institution_set.append(e)
-    institution_test = institution.objects.get(name="Political Bureau")
-    context = {
-        'institution_test'      : institution_test,
-        'institution_set'       : institution_set,
-        'style_sheet'           : link_text,
+def dprk_institution_landing(request):
+    if request.method == 'GET':
+        qs_complex_list = []
+        quicksearch_toggle = 'off'
 
+    elif request.method == 'POST':
+        search = request.POST.get("search")
+        if search == '':
+            qs_complex_list = []
+            quicksearch_toggle = 'off'
+        else:
+            quicksearch_inst_list   = institution.objects.filter(name__icontains=search)
+            qs_complex_list         = []
+            if len(quicksearch_inst_list) == 0:
+                quicksearch_toggle = 'off'
+                pass
+            else:
+                quicksearch_toggle = 'on'
+                for quicksearch_inst in quicksearch_inst_list:
+                    chief_position      = position.objects.filter(institution=quicksearch_inst, position_rank=0).first()
+                    try: 
+                        chief_official      = chief_position.person
+                        qs_complex_list.append([quicksearch_inst,chief_official])
+                    except:
+                        qs_complex_list.append([quicksearch_inst])      
+
+
+    context = {
+        'quicksearch_toggle'    : quicksearch_toggle,
+        'style_sheet'           : link_text,
+        'quicksearch_inst_list' : qs_complex_list,
     }
     
-    return render(request, 'institution_list.html', context)
+    return render(request, 'dprk_institution_landing.html', context)
+
+def rok_institution_landing(request): 
+    if request.method == 'GET':
+        qs_complex_list = []
+        quicksearch_toggle = 'off'
+
+    elif request.method == 'POST':
+        search = request.POST.get("search")
+        if search == '':
+            qs_complex_list = []
+            quicksearch_toggle = 'off'
+        else:
+            quicksearch_inst_list   = rok_institution.objects.filter(name__icontains=search)
+            qs_complex_list         = []
+            if len(quicksearch_inst_list) == 0:
+                quicksearch_toggle = 'off'
+                pass
+            else:
+                quicksearch_toggle = 'on'
+                for quicksearch_inst in quicksearch_inst_list:
+                    chief_position      = rok_position.objects.get(institution=quicksearch_inst, position_rank=0)
+                    try: 
+                        chief_official      = chief_position.person
+                        qs_complex_list.append([quicksearch_inst,chief_official])
+                    except:
+                        qs_complex_list.append([quicksearch_inst]) 
+
+    context = {
+        'quicksearch_toggle'    : quicksearch_toggle,
+        'style_sheet'           : link_text,
+        'quicksearch_inst_list' : qs_complex_list,
+    }
+    
+    return render(request, 'rok_institution_landing.html', context)
 
 
 
+'''
+
+        pass    
+
+    elif request.method == 'POST':
+        pass
+'''
