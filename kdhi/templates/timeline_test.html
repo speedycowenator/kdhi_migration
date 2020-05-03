@@ -1,0 +1,45 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+
+<body>
+  <div class="active-body">
+    <div class="timeline-block">
+
+<h1 class="collection-source-tile"> {{collection_header}}</h1>
+    	{% for year in timeline_years %} 
+    	{{year}}
+    	{%endfor%}
+    	{% for timeline_item in timeline_items_cleaned%}
+      <div class="timeline-item-block">
+
+
+        <div class="timeline-content-block">
+          <h1 class="timeline-block-header">{{timeline_item.1}}, {{timeline_item.0}}</h1>
+
+          {% for day in timeline_item.4 %}
+
+          <h1 class="timeline-date-header">{{day.0}}</h1>
+          <div class="timeline-subblock">
+            <p class="time-content">{{day.1 |safe }}</p>
+          </div>
+          {%endfor%}
+
+
+        </div>
+        <div class="timeline-media-block"><img src="{{timeline_item.2}}" alt="{{timeline_item.3}}" class="timeline-media-item">
+          <div class="timeline-media-caption">{{timeline_item.3}}<br></div>
+        </div>
+      </div>
+{%endfor%}
+    </div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5d759e9efc69ff440ee09800" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+</body>
+
+{{timeline_item.year}} 
+{% endblock %}
+

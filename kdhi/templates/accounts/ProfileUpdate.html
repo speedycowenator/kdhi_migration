@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+<div class="active-body">
+    <div class="left-column-alternate" bac>
+      
+      
+    </div>
+    <div class="center-column">
+      
+    
+<div class="title"> Update Profile Information </div><br>
+  <form method="post">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form.as_p }}</td>
+
+      </tr>
+      <tr>
+      </tr>
+    </table>
+    <input type="submit" value="Update" />
+  </form>
+  
+    </div>
+  <div class="left-column-alternate" bac></div>
+ </div>
+{% endblock %}

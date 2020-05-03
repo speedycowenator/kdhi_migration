@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from documents.models import document, document_collection, collection_timeline_item
+from documents.models import document, document_collection, collection_timeline_item, critical_oral_history
 from datetime import date
 import datetime
 from django.db.models import Q
@@ -23,15 +23,18 @@ webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
 link = soup.find('link')
 
-
+democratization_proxy = "1987 Democratization Movement"
 link_text = (link.get('href'))
 
 def document_detail(request, slug):
     document_detail = document.objects.get(slug=slug)
-    collection_name = document_detail.collection.name
-    if collection_name == "The June Struggle":
+    collection_inst = document_detail.collection
+    collection_inst_name = collection_inst.name
+    collection_inst_dir = collection_inst.directory
+
+    if collection_inst_name == democratization_proxy:
     	collection_name = 'Democratization'
-    url = 'https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Documents/' + collection_name + '/' + document_detail.slug +'.pdf'
+    url = collection_inst_dir  + document_detail.slug +'.pdf'
     
     context = {
     		'url' 					: url,
@@ -58,7 +61,7 @@ def collection_page(request, name):
 	}
 	return render(request, 'collection_page.html', context)
 
-def timeline(request, init_year, end_year):
+def timeline_chrono(request, init_year, end_year):
 	timeline_years = []
 	timeline_items = []
 	timeline_items_cleaned = []
@@ -170,6 +173,8 @@ def timeline(request, init_year, end_year):
 	
 def document_list(request, name):
 	collection_set = []
+	#if name == democratization_proxy:
+	#	name = 'Democratization'
 	request_collection = document_collection.objects.get(name=name)
 	request_pk = request_collection.pk
 	try:
@@ -186,3 +191,209 @@ def document_list(request, name):
 			'style_sheet'		: link_text,
 	}
 	return render(request, 'document_list.html', context)
+
+def korean_democratization_project_landing(request):
+    
+    #
+    #
+    #
+
+    context = {
+        'style_sheet'           : link_text,
+
+    }
+
+    return render(request, 'korean_democratization_page.html', context)
+
+
+def documents_landing(request):
+    collection_cards 	= document_collection.objects.all()
+    collection_card_set = []
+    card_counter 		= 0 
+    for collection_card in collection_cards:
+    	if card_counter == 0:
+    		featured_card = collection_card
+    	elif card_counter <=4:
+    		collection_card_set.append(collection_card)
+    	else:
+    		pass
+    	card_counter += 1
+
+    context = {
+        'style_sheet'           : link_text,
+        'featured_card' 		: featured_card,
+        'collection_card_set' 	: collection_card_set
+
+    }
+
+    return render(request, 'document_collection_landing.html', context)
+
+
+def timelines_landing(request):
+    collection_cards 	= document_collection.objects.all()
+    collection_card_set = []
+    card_counter 		= 0 
+    for collection_card in collection_cards:
+    	if card_counter == 0:
+    		featured_card = collection_card
+    	elif card_counter <=4:
+    		collection_card_set.append(collection_card)
+    	else:
+    		pass
+    	card_counter += 1
+
+    context = {
+        'style_sheet'           : link_text,
+        'featured_card' 		: featured_card,
+        'collection_card_set' 	: collection_card_set
+
+    }
+
+    return render(request, 'timeline_collection_landing.html', context)
+
+
+
+
+def collection_timeline(request, name):
+		#need to add in a way to recognize other timeline items, ideally by fixing the 'models not loaded' bug or transitioning to foreign key
+	timeline_items_cleaned = []
+	if name == democratization_proxy:
+		name = 'democratization'
+		timeline_set = collection_timeline_item.objects.filter(section_title__icontains=name).all()
+		collection_header = democratization_proxy
+	else:
+		timeline_set = collection_timeline_item.objects.filter(collection__name=name).all()
+		collection_header = name
+	for timeline_item in timeline_set:
+		day_content = []
+		try:
+			if len(timeline_item.day_1_content) != 0:
+				day_content.append([timeline_item.day_1, timeline_item.day_1_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_2_content) != 0:
+				day_content.append([timeline_item.day_2, timeline_item.day_2_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_3_content) != 0:
+				day_content.append([timeline_item.day_3, timeline_item.day_3_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_4_content) != 0:
+				day_content.append([timeline_item.day_4, timeline_item.day_4_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_5_content) != 0:
+				day_content.append([timeline_item.day_5, timeline_item.day_5_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_6_content) != 0:
+				day_content.append([timeline_item.day_6, timeline_item.day_6_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_7_content) != 0:
+				day_content.append([timeline_item.day_7, timeline_item.day_7_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_8_content) != 0:
+				day_content.append([timeline_item.day_8, timeline_item.day_8_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_9_content) != 0:
+				day_content.append([timeline_item.day_9, timeline_item.day_9_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_10_content) != 0:
+				day_content.append([timeline_item.day_10, timeline_item.day_10_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_11_content) != 0:
+				day_content.append([timeline_item.day_11, timeline_item.day_11_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_12_content) != 0:
+				day_content.append([timeline_item.day_12, timeline_item.day_12_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_13_content) != 0:
+				day_content.append([timeline_item.day_13, timeline_item.day_13_content])
+		except:
+			pass
+
+		try:
+			if len(timeline_item.day_8_content) != 0:
+				day_content.append([timeline_item.day_8, timeline_item.day_1_content])
+		except:
+			pass
+		timeline_items_cleaned.append([timeline_item.year, timeline_item.month, timeline_item.media_src, timeline_item.media_text, day_content])
+
+
+	context = {
+			'timeline_items_cleaned'	: timeline_items_cleaned,
+			'style_sheet'				: link_text,
+			'collection_header' 		: collection_header,
+	}
+	return render(request, 'timeline_test.html', context)
+
+
+def critical_oral_history_detail(request, session):
+	coh_item = critical_oral_history.objects.get(session=session)
+
+	
+	context = {
+			'coh_item'		: coh_item,
+			'style_sheet'	: link_text,
+	}
+	return render(request, 'critical_oral_history_detail.html', context)
+
+
+
+def critical_oral_history_landing(request):
+    collection_cards 	= critical_oral_history.objects.all()
+    collection_card_set = []
+    card_counter 		= 0 
+    for collection_card in collection_cards:
+    	if card_counter == 0:
+    		featured_card = collection_card
+    	elif card_counter <=4:
+    		collection_card_set.append(collection_card)
+    	else:
+    		pass
+    	card_counter += 1
+
+    context = {
+        'style_sheet'           : link_text,
+        'featured_card' 		: featured_card,
+        'collection_card_set' 	: collection_card_set
+
+    }
+
+    return render(request, 'critical_oral_history_landing.html', context)
+
+
+
+

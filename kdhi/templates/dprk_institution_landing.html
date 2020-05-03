@@ -1,5 +1,5 @@
 
-{% extends "mainsite_base.html" %}
+{% extends "base_generic.html" %}
 {% block content %}
 
 <div class="institution-page-body-divider"></div>
@@ -15,7 +15,7 @@
     <h1 class="quicksearch-institution">Looking for something specific?</h1>
       <form id="email-form" name="email-form" data-name="Email Form" class="form-2" method="POST">{% csrf_token %}
 
-        <input type="text" class="text-field-4 w-input" maxlength="256" name="search" data-name="search" placeholder="e.g. &#x27;Ministry of Foreign Affairs&#x27; or &#x27;foreign&#x27;" id="search">
+        <input type="text" class="text-field-4 w-input" maxlength="256" name="search" data-name="search" placeholder="{{search_text}}" id="search">
         <input type="submit" value="Search" data-wait="Please wait..." class="submit-button-5 w-button"></form>
     </div>
       
@@ -25,7 +25,7 @@
         <div class="quicksearch-result-block">
         <div class="quicksearch-mainblock"><a href="{{institution.0.get_absolute_url}}" class="quicksearch-resultheader">{{institution.0.name}}</a>
 
-          <p class="quicksearch-result-slug"> {{institution.0.function|striptags|truncatechars:250   }}</p>
+          <p class="quicksearch-result-slug"> {{institution.0.function|striptags|truncatechars:250}}</p>
 
         </div>
         <a href="{{institution.1.get_absolute_url}}" class="quicksearch-secondaryblock w-inline-block">

@@ -1,0 +1,54 @@
+
+{% extends "one_frame_base.html" %}
+{% block content %}
+
+
+  <div class="single-frame-body">
+
+    <header id="hero" class="democratization-sub-hero">
+
+      <div class="flex-container w-container">
+
+        <div class="democrtization-sub-hero-info-div">
+
+          <h1 class="democrtization-sub-hero-info-header">Primary Source<br>Document Collections</h1>
+
+          <p class="democrtization-sub-hero-info-text">Explore historical documents curated by KDHI Director James Person as a part of our Korea Democratization Project series. <br>‍‍‍<br>Through the lens of firsthand accounts, each collection tells the story of major flash points in South Korea&#x27;s history that led to the country&#x27;s eventual democratization in 1987.</p>
+
+        </div>
+
+        <div class="democrtization-sub-hero-info-mask"><img src='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Site+Items/democratization-landing-doc.png' alt="" class="democrtization-sub-hero-info-hero"></div>
+
+      </div>
+
+    </header>
+
+    <div class="collection-selection-div">
+{# featured item #}
+      <a href="{% url 'document_list' name=featured_card.name %}" class="collection-card-featured w-inline-block" style="background-image: url('{{featured_card.hero}}');">
+
+        <div class="collection-card-band">
+
+          <h1 class="collection-card-band-header">{{featured_card.name}}</h1>
+
+        </div>
+
+      </a>
+
+      <div class="collection-selection-grid">
+
+{% for card in collection_card_set %}
+
+        <a href="{% url 'document_list' name=card.name %}" class="collection-card w-inline-block" style="background-image: url('{{card.hero}}');">
+          <div class="collection-card-band">
+            <h1 class="glossary-card-header">{{card.name}}</h1>
+          </div>
+        </a>
+{%endfor%}
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

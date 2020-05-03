@@ -8,12 +8,12 @@ from main_site import views as core_views
 
 urlpatterns = [
     #url('', views.search_redirect, name='redirect'),
-	path('biographic/<str:name>', views.individual_detail, name='individual_detail'),
+	path('dpkr-biographic/<str:name>', views.individual_detail, name='individual_detail'),
 	path('institution/<str:name>', views.institution_detail, name='institution_detail'),	
 	path('rok-biographic/<str:name_slug>', views.rok_individual_detail, name='rok_individual_detail'),
-	path('rok-institution/<str:name>', views.rok_institution_detail, name='rok_institution_detail'),
+	path('rok-institution/<str:slug>', views.rok_institution_detail, name='rok_institution_detail'),
 	path('rok-institution', views.rok_institution_landing, name='rok_institution_landing'),
-	path('biographic', views.individual_list, name='individual_list'),
+	path('dpkr-biographic', views.individual_list, name='dprk_individual_list'),
 	path('dprk-institution', views.dprk_institution_landing, name='dprk_institution_landing'),	
 	path('', views.homepage_view, name='homepage'),
 	path('glossary/<str:slug>', views.glossary_detail, name='glossary_detail'),

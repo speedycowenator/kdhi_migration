@@ -8,6 +8,9 @@ from django.dispatch import receiver
 from djrichtextfield.models import RichTextField
 from datetime import date, timedelta
 now = date.today()
+import bs4
+import urllib.request
+
 
 
 class glossary_item(models.Model):
@@ -50,8 +53,8 @@ class institution(models.Model):
 class individual(models.Model):
     name                    = models.CharField(max_length=200)
     name_korean             = models.CharField(max_length=200)
-    icon                    = models.URLField(max_length=200, blank=True)
-    full_resolution_photo   = models.URLField(max_length=200, blank=True)
+    icon                    = models.URLField(max_length=200, default="1_Outline_Blank")
+    full_resolution_photo   = models.URLField(max_length=200, default="1_Outline_Blank")
     photo_credit            = models.CharField(max_length=200, blank=True)
     birthday                = models.DateField(null=True, blank=True)
     hometown                = models.CharField(max_length=200, blank=True)
@@ -79,14 +82,36 @@ class individual(models.Model):
         full_suffix = '.jpg'
         image_name  = self.name.replace(' ', '+')
         full_string = full_base + image_name + full_suffix
+        try: 
+            webpage=str(urllib.request.urlopen(full_string).read())
+            soup = bs4.BeautifulSoup(webpage, features = "lxml")
+        except:
+            full_string = full_base + "1_Outline_Blank" + full_suffix
         return full_string
   
     def get_image_icon(self):
-        icon_base   = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Icon/"
+        icon_base   = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/1+x+1+Icons/"
         icon_suffix = '.jpg'
         image_name  = self.name.replace(' ', '+')
-        icon_string = icon_base + image_name + icon_suffix
+        icon_string = icon_base + image_name + icon_suffix       
+        try:
+            webpage=str(urllib.request.urlopen(icon_string).read())
+            soup = bs4.BeautifulSoup(webpage, features = "lxml")
+        except:
+            icon_string = icon_base + "1_Outline_Blank" + icon_suffix
         return icon_string
+
+    def bs4_image_test(self):
+        full_base   = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Full+Resolution/"
+        full_suffix = '.jpg'
+        image_name  = self.name.replace(' ', '+')
+        full_string = full_base + image_name + full_suffix
+        try: 
+            webpage=str(urllib.request.urlopen(full_string).read())
+            soup = bs4.BeautifulSoup(webpage, features = "lxml")
+        except:
+            full_string = full_base + "1_Outline_Blank" + full_suffix
+        return full_string
     
 class position(models.Model):
     person              = models.ForeignKey(individual, on_delete=models.CASCADE)
@@ -108,20 +133,26 @@ class position(models.Model):
 class rok_institution(models.Model):
     #need to change function and additional information to TextField
     name                        =  models.CharField(max_length=200)
+    slug                        =  models.CharField(max_length=200)
+    official_webpage            =  models.URLField(max_length=300, blank=True)
     name_korean                 =  models.CharField(max_length=200)
     tag_one                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_two                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     tag_three                   =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     function                    =  models.TextField(max_length=20000, blank=True)
     history                     =  models.TextField(max_length=20000, blank=True)
-    additional_information      =  models.TextField(max_length=20000, blank=True)
     qs_slug                     =  models.TextField(max_length=250, blank=False, default='SLUG MISSING')
-    
+    sources_add                 =  models.TextField(max_length=20000, blank=True, default='[*] Official Ministry Website')
+
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)
+      
+
     def get_absolute_url(self):
-        return (reverse('rok_institution_detail', args=[str(self.name)]))
+        return (reverse('rok_institution_detail', args=[str(self.slug)]))
 
 
 
@@ -142,7 +173,7 @@ class rok_individual(models.Model):
     career_timeline         = models.TextField(max_length=20000, blank=True)
     awards_items            = models.TextField(max_length=20000, blank=True)
     awards_timeline         = models.TextField(max_length=20000, blank=True)
-    sources                 = models.TextField(max_length=500)
+    sources                 = models.TextField(max_length=500, default='[*] Official Ministry Website')
     video_source            = models.URLField(max_length=200, blank=True)
     video_caption           = models.CharField(max_length=200, blank=True)
     video_2_source          = models.URLField(max_length=200, blank=True)
@@ -158,9 +189,18 @@ class rok_individual(models.Model):
         icon_base   = 'https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/ROK+Government+Assets/icon/'
         icon_suffix = '.jpg'
         icon_string = icon_base + self.name_slug + icon_suffix
+        try:
+            webpage=str(urllib.request.urlopen(icon_string).read())
+            soup = bs4.BeautifulSoup(webpage, features = "lxml")
+        except:
+            icon_string = icon_base + "1_Outline_Blank" + icon_suffix
         return icon_string
+        
     def get_absolute_url(self):
         return (reverse('rok_individual_detail', args=[str(self.name_slug)]))
+
+
+
     
 class rok_position(models.Model):   
     person              = models.ForeignKey(rok_individual,  on_delete=models.SET_NULL, null=True)

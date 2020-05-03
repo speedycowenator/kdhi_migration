@@ -8,6 +8,12 @@ from django.dispatch import receiver
 class document_collection(models.Model):
     name                        = models.CharField(max_length=200)
     directory                   = models.CharField(max_length=200)
+    hero                        = models.CharField(max_length=300,blank=True)
+    weight                      = models.IntegerField(blank=True)
+    bluff                       = models.TextField(max_length=20000,blank=True)
+    doc_bluf                    = models.TextField(max_length=20000,blank=True)
+    oral_bluf                   = models.TextField(max_length=20000,blank=True)
+    timeline_bluf               = models.TextField(max_length=20000,blank=True)
     
     def __str__(self):
         return self.name
@@ -17,7 +23,7 @@ class document_collection(models.Model):
         return (reverse('collection_page', args=[str(self.name)]))
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('weight', 'name',)
   
 
 class document(models.Model):
@@ -47,6 +53,7 @@ class document(models.Model):
 
 class collection_timeline_item(models.Model):
     section_title   = models.CharField(max_length=500, blank=False)
+    collection      = models.ForeignKey(document_collection, on_delete=models.SET_NULL, null=True, blank=True)
     year            = models.IntegerField(blank=False)
     month_int       = models.FloatField(blank=False)
     month           = models.CharField(max_length=20, blank=False)
@@ -94,6 +101,21 @@ class collection_timeline_item(models.Model):
 
 
     class Meta:
-        ordering = ('month_int',)
+        ordering = ('year', 'month_int',)
     def __str__(self):
         return self.section_title
+
+class critical_oral_history(models.Model):
+    session         = models.CharField(max_length=300)
+    collection      = models.ForeignKey(document_collection, on_delete=models.SET_NULL, null=True)
+    pdf_location    = models.CharField(max_length=300, blank=True)
+    ses_location    = models.CharField(max_length=300, blank=True)
+    ses_date        = models.DateField(blank=True)
+    ses_host        = models.CharField(max_length=300, blank=True)
+    ses_desc        = models.TextField(max_length=1000, blank=True)
+
+    def __str__(self):
+        return self.session
+
+    def get_absolute_url(self):
+        return (reverse('critical_oral_history', args=[str(self.session)]))

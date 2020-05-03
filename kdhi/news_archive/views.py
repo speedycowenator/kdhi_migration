@@ -17,6 +17,18 @@ import re
 from django.conf.urls.static import static
 
 
+
+import bs4
+import urllib.request
+
+url = 'https://kdhi-archive-code-builder.webflow.io/event'
+
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find('link')
+
+democratization_proxy = "1987 Democratization Movement"
+link_text = (link.get('href'))
 def search_redirect(request):
     return HttpResponseRedirect("/state-media-archive/search-results")
 
@@ -174,6 +186,8 @@ def no_account_subscribe(request):
         'filter_date' : filter_date,
         'return_variable' : return_variable,
         'return_variable_check' : return_variable_check,
+            'style_sheet'           : link_text,
+
     }
 
     return render(request, 'index/search_results.html', context)
@@ -391,6 +405,8 @@ def search_results(request):
         'return_variable' : return_variable,
         'return_variable_check' : return_variable_check,
         'blank_search'  : blank_search,
+        'style_sheet'           : link_text,
+
     }
 
 
@@ -479,7 +495,9 @@ def ArticleDetailView(request, pk):
     'article'           : article,
     'command_toggle'    : command_toggle,
     'favorite_status'   : article_favorited,
-    'show_button'       : show_button
+    'show_button'       : show_button,
+            'style_sheet'           : link_text,
+
     }
     return render(request, 'index/article_detail.html', context)
 
@@ -507,6 +525,8 @@ def print_list(request):
         'checked_sort_author'     : checked_sort_author,
         'checked_sort_date'       : checked_sort_date,
         'checked_sort_title'      : checked_sort_title,
+            'style_sheet'           : link_text,
+
 
     }
     return render(request, "index/print_list.html", context)
@@ -528,7 +548,9 @@ def ProfileUpdate(request):
 
 
     context = {
-    'form' : form
+    'form' : form,
+            'style_sheet'           : link_text,
+
     }
     return render(request, "accounts/ProfileUpdate.html", context)
 
@@ -594,6 +616,8 @@ def profile_page(request):
         'checked_sort_author'     : checked_sort_author,
         'checked_sort_date'       : checked_sort_date,
         'checked_sort_title'      : checked_sort_title,
+            'style_sheet'           : link_text,
+
 
     }
     return render (request, 'accounts/profile_page.html', context=context)

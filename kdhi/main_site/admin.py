@@ -7,12 +7,17 @@ from .models import individual, institution, position, rok_position, rok_institu
 class positionAdmin(admin.ModelAdmin):
 	list_display = ('person', 'institution', 'title')
 	list_filter  = ('created_at', 'updated_at', 'institution', 'title')
+
+
+class ROKpositionAdmin(admin.ModelAdmin):
+	list_display = ('person', 'institution', 'title')
+
 admin.site.register(individual) 
 admin.site.register(institution)
 admin.site.register(position, positionAdmin)
 admin.site.register(rok_individual)
 admin.site.register(rok_institution)
-admin.site.register(rok_position)
+admin.site.register(rok_position, ROKpositionAdmin)
 admin.site.register(article)
 admin.site.register(glossary_item)
 

@@ -1,0 +1,29 @@
+
+{% extends "one_frame_base.html" %}
+{% block content %}
+
+
+<div class="single-frame-body">
+  <header id="hero-overlay" class="collection-section hero-overlay">
+    <div class="centered-container w-container">
+      <h1 class="flashpoint-landing-header">Korean Democratization Project</h1>
+      <p class="flashpoint-landing-text"><strong class="flashpoint-bold">The Korean Democratization Project uses primary sources to document flash points in South Korea&#x27;s long development towards democracy. Search curated collections of diplomatic cables and government memos, read firsthand accounts presented through a critical oral history, or learn about major events in our timeline.</strong></p>
+    </div>
+  </header>
+  <div class="flashpoint-landing-block-holder">
+    <a href="{% url 'documents_landing' %}" class="flashpoint-landing-link-block w-inline-block" style="background-image: url('https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Site+Items/democratization-landing-doc.png');">
+      <div class="link-box-subdiv"></div>
+      <div class="link-box-header">Primary Sources</div>
+    </a>
+    <a href="{% url 'timelines_landing' %}" class="flashpoint-landing-link-block w-inline-block" style="background-image: url('https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Site+Items/pak-inspecting-troops.jpg');">
+      <div class="link-box-subdiv"></div>
+      <div class="link-box-header">Timelines</div>
+    </a>
+    <a href="#" class="flashpoint-landing-link-block w-inline-block" style="background-image: url('https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Site+Items/democratization-flag-photo.jpg');">
+      <div class="link-box-subdiv"></div>
+      <div class="link-box-header">Critical Oral Histories</div>
+    </a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+
+{% extends "one_frame_base.html" %}
+{% block content %}
+
+
+  <div class="single-frame-body">
+
+    <header id="hero" class="democratization-sub-hero">
+
+      <div class="flex-container w-container">
+
+        <div class="democrtization-sub-hero-info-div">
+
+          <h1 class="democrtization-sub-hero-info-header">Historical Timelines</h1>
+
+          <p class="democrtization-sub-hero-info-text">Explore timelines detailing major flash points in South Korea's history in KDHI's Korean Democratization Project series.</p>
+
+        </div>
+
+        <div class="democrtization-sub-hero-info-mask"><img src='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Misc+Assets/pak-mean-mugging.jpg' alt="" class="democrtization-sub-hero-info-hero"></div>
+
+      </div>
+
+    </header>
+
+    <div class="collection-selection-div">
+{# featured item #}
+      <a href="{% url 'collection_timeline' name=featured_card.name %}" class="collection-card-featured w-inline-block" style="background-image: url('{{featured_card.hero}}');">
+
+        <div class="collection-card-band">
+
+          <h1 class="collection-card-band-header">{{featured_card.name}}</h1>
+
+        </div>
+
+      </a>
+
+      <div class="collection-selection-grid">
+
+{% for card in collection_card_set %}
+
+        <a href="{% url 'collection_timeline' name=card.name %}" class="collection-card w-inline-block" style="background-image: url('{{card.hero}}');">
+          <div class="collection-card-band">
+            <h1 class="glossary-card-header">{{card.name}}</h1>
+          </div>
+        </a>
+{%endfor%}
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+
+
+

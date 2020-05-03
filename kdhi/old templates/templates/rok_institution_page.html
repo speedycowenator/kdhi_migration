@@ -1,0 +1,45 @@
+
+{% extends "mainsite_base.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="institution-name">{{institution_name}}</h1>
+        <h1 class="quicksearch-institution">{{institution_korean}}</h1>
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Function</h1>
+        <p class="institutions-function-paragraph">{{institution_function|safe}} </p></div>
+
+        <div class = 'member-holder'>
+        <h1 class="institution-members-header">Leadership</h1>        
+        {% for position in inst_member_dic %}
+        <h1 class="institution-members-title">{{position.0}}</h1>        
+            <div class="bio-holding-div">
+            {% for individual in position.1 %}
+            <div class="individual-holder">
+            <img src="{{individual.2}}" alt="" class="figure-image">           
+            <a href="{{individual.1}}" class="figure-link-text">{{individual.0}}</a>
+            </div>
+            {% endfor %}
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">History</h1>
+        <p class="institutions-function-paragraph">{{institution_history|safe|linebreaks }} </p></div>
+
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Sources</h1>
+        <p class="institutions-function-paragraph">{{institution_src|safe|linebreaks }} </p></div>
+   
+    </div>
+    <div class="right-section"></div>
+  </div>
+  
+  
+{% endblock %}

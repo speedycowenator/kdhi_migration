@@ -83,8 +83,6 @@ def article_detail(request, slug):
 
 def homepage_view(request):
 
-    collection_feature      = document_collection.objects.get(name="The June Struggle")
-    collection_feature_url  = collection_feature.get_absolute_url
     latest_article          = article.objects.latest('update_date')
 
     secondary_article_list_full  = []
@@ -99,7 +97,6 @@ def homepage_view(request):
 
     context = {
         'style_sheet'               : link_text,
-        'collection_feature'        : collection_feature,
         'latest_article'            : latest_article,
         'secondary_article_list'    : secondary_article_list,
         'glossary_list'             : glossary_list,
@@ -116,7 +113,7 @@ def individual_detail(request, name):
     individual_name = individual_detail.name
     name_url_snip   = individual_name.replace(' ', '+')
     #name_url_snip   = name_url_snip.lower()
-    img_full_res    = s3_path_full + name_url_snip + '.jpg'
+    img_full_res    = individual_detail.bs4_image_test
     img_icon        = s3_path_icon + name_url_snip + '.jpg'
 
     for individual_position in position.objects.filter(person=individual_detail):
@@ -126,6 +123,7 @@ def individual_detail(request, name):
         individual_positions.append(individual_position_pair)
     
     context = {
+            'individual_detail'     : individual_detail,
             'individual_name'       : individual_detail.name,
             'individual_photo'      : img_full_res,
             'individual_birthday'   : individual_detail.birthday,
@@ -200,17 +198,36 @@ def rok_individual_detail(request, name_slug):
         inst_url = institution_tag.get_absolute_url
         individual_position_pair = [individual_position.institution, individual_position.title, inst_url]
         individual_positions.append(individual_position_pair)
-    
+    if len(individual_detail.awards_items) > 10:
+        toggle_awards = ''
+    else:
+        toggle_awards = '-off'
+    if len(individual_detail.education_items) > 10:
+        toggle_education = ''
+    else:
+        toggle_education = '-off'
+    if len(individual_detail.career_items) > 10:
+        toggle_career = ''
+    else:
+        toggle_career = '-off'
+
+
+    toggle_career
     context = {
             'individual_name'       : individual_detail.name,
             'individual_photo'      : individual_detail.get_image_icon,
-            'individual_sources'    : individual_detail.sources,
             'individual_positions'  : individual_positions,
-            'style_sheet'             : link_text,           
+            'individual_detail'     : individual_detail,
+            'style_sheet'           : link_text,
+            'toggle_education'      : toggle_education,
+            'toggle_awards'         : toggle_awards, 
+            'toggle_career'         : toggle_career  
             }
-    return render(request, 'biographic_page.html', context)
-def rok_institution_detail(request, name):
-    institution_detail      = rok_institution.objects.get(name=name)
+    return render(request, 'rok_biographic_page.html', context)
+
+ 
+def rok_institution_detail(request, slug):
+    institution_detail      = rok_institution.objects.get(slug=slug)
     inst_members            = []    #get all people with positions at insitution 
     member_titles           = []    #get titles for all members (duplicates)
     unique_titles           = []    #get all unique titles 
@@ -246,13 +263,15 @@ def rok_institution_detail(request, name):
             'institution_name'      : institution_detail.name,
             'institution_korean'    : institution_detail.name_korean,
             'institution_function'  : institution_detail.function,
-            'institution_add'       : institution_detail.additional_information,
             'inst_member_dic'       : inst_member_dic,
-            'style_sheet'             : link_text,
+            'institution_history'   : institution_detail.history,
+            'institution_url'       : institution_detail.official_webpage,
+            'institution_src'       : institution_detail.sources_add,
+            'style_sheet'           : link_text,
             }
     
     
-    return render(request, 'institution_page.html', context)
+    return render(request, 'rok_institution_page.html', context)
 
 
 
@@ -287,20 +306,24 @@ def dprk_institution_landing(request):
     if request.method == 'GET':
         qs_complex_list = []
         quicksearch_toggle = 'off'
-
+        search_text = "e.g. 'Ministry of Foreign Affairs' or 'foreign'"
     elif request.method == 'POST':
         search = request.POST.get("search")
         if search == '':
             qs_complex_list = []
             quicksearch_toggle = 'off'
+            search_text = "No results. Try another keyword or navigate for an institution in the section above."
         else:
             quicksearch_inst_list   = institution.objects.filter(name__icontains=search)
             qs_complex_list         = []
             if len(quicksearch_inst_list) == 0:
                 quicksearch_toggle = 'off'
+                search_text = "No results. Try another keyword or navigate for an institution in the section above."
+
                 pass
             else:
                 quicksearch_toggle = 'on'
+                search_text = search
                 for quicksearch_inst in quicksearch_inst_list:
                     chief_position      = position.objects.filter(institution=quicksearch_inst, position_rank=0).first()
                     try: 
@@ -311,6 +334,7 @@ def dprk_institution_landing(request):
 
 
     context = {
+        'search_text'           : search_text,
         'quicksearch_toggle'    : quicksearch_toggle,
         'style_sheet'           : link_text,
         'quicksearch_inst_list' : qs_complex_list,
@@ -351,7 +375,6 @@ def rok_institution_landing(request):
     }
     
     return render(request, 'rok_institution_landing.html', context)
-
 
 
 '''
