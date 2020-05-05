@@ -32,9 +32,10 @@ class institution(models.Model):
     #need to change function and additional information to TextField
     name                        =  models.CharField(max_length=200)
     name_korean                 =  models.CharField(max_length=200)
-    tag_one                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    tag_two                     =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    tag_three                   =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
+    tripartite_tag              =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
+    sphere_tag                  =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
+    sector_tag_1                =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
+    sector_tag_2                =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
     function                    =  RichTextField(null=True, blank=True)
     additional_figures          =  RichTextField(null=True, blank=True)
     organization_structure      =  RichTextField(null=True, blank=True)

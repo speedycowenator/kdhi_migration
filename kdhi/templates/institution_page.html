@@ -46,7 +46,32 @@
         <p class="institutions-function-paragraph">{{institution_src|safe|linebreaks }} </p></div>
    
     </div>
-    <div class="right-section"></div>
+    </div>
+    <div class="right-section">
+    <h1 class="institution-korean">Related Institutions</h1>
+        <h1 class="related-institution-party">Party</h1>
+        <div class="related-institution-holding">
+        {% for inst in related_party %}
+        <a href="{{inst.get_absolute_url}}" class="basic-line-text">{{inst.name}}</a>
+        {% endfor %}
+        </div>
+
+        <h1 class="related-institution-state">State</h1>
+        <div class="related-institution-holding">
+        {% for inst in related_state %}
+        <a href="{{inst.get_absolute_url}}" class="basic-line-text">{{inst.name}}</a>
+        {% endfor %}
+        </div>
+
+        <h1 class="related-institution-military">Military</h1>
+        <div class="related-institution-holding">
+        {% for inst in related_military %}
+        <a href="{{inst.get_absolute_url}}" class="basic-line-text">{{inst.name}}</a>
+        {% endfor %}
+        </div>
+
+    </div>
+
   </div>
   
   

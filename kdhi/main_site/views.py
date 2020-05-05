@@ -121,7 +121,7 @@ def individual_detail(request, name):
         inst_url = institution_tag.get_absolute_url
         individual_position_pair = [individual_position.institution, individual_position.title, inst_url]
         individual_positions.append(individual_position_pair)
-    
+    page_title = individual_detail.name
     context = {
             'individual_detail'     : individual_detail,
             'individual_name'       : individual_detail.name,
@@ -133,6 +133,7 @@ def individual_detail(request, name):
             'individual_hometown'   : individual_detail.hometown,
             'individual_positions'  : individual_positions,
             'style_sheet'           : link_text,
+            'page_title'            : page_title,
             
             }
     return render(request, 'biographic_page.html', context)
@@ -140,6 +141,7 @@ def individual_detail(request, name):
 
 def institution_detail(request, name):
     institution_detail  = institution.objects.get(name=name)
+      
     inst_members            = []    #get all people with positions at insitution 
     member_titles           = []    #get titles for all members (duplicates)
     unique_titles           = []    #get all unique titles 
@@ -171,8 +173,38 @@ def institution_detail(request, name):
         grouped_members = [title, grouped_members_temp]
         inst_member_dic.append(grouped_members)
 
-           
-    
+    #----------------------- Related / Tag selection
+    tripartite_tag_inst = institution_detail.tripartite_tag
+    sphere_tag_inst     = institution_detail.sphere_tag
+    sector_tag_insts    = [institution_detail.sector_tag_1, institution_detail.sector_tag_2]
+    related_inst_list   = []
+    related_party       = []
+    related_state       = []
+    related_military    = []
+
+    for tag in sector_tag_insts:
+        if len(tag) > 1:
+            for i in institution.objects.filter(sector_tag_1=tag):
+                if i != institution_detail:
+                    related_inst_list.append(i)
+            for i in institution.objects.filter(sector_tag_2=tag):
+                if i != institution_detail:
+                    related_inst_list.append(i)
+    for inst in related_inst_list:
+        if inst.tripartite_tag == 'State':
+            related_state.append(inst)
+        if inst.tripartite_tag == "Party":
+            related_party.append(inst)
+        if inst.tripartite_tag == "Military":
+            related_military.append(inst)
+
+    if len(related_party) == 0:
+        related_party       = "No related institutions"
+    if len(related_state) == 0:
+        related_state       = "No related institutions"
+    if len(related_military) == 0:
+        related_military       = "No related institutions"
+    page_title = institution_detail.name
     context = {
             
             'institution_name'      : institution_detail.name,
@@ -183,7 +215,15 @@ def institution_detail(request, name):
             'institution_function'  : institution_detail.function,
             'institution_add'       : institution_detail.additional_information,
             'inst_member_dic'       : inst_member_dic,
-            'style_sheet'             : link_text,
+            'style_sheet'           : link_text,
+            'tripartite_tag_inst'   : tripartite_tag_inst,
+            'sphere_tag_inst'       : sphere_tag_inst,
+            'sector_tag_insts'      : sector_tag_insts,
+            'related_inst'          : related_inst_list,
+            'related_party'         : related_party,
+            'related_state'         : related_state,
+            'related_military'      : related_military,
+            'page_title'            : page_title,
             }
     
     
@@ -380,7 +420,20 @@ def rok_institution_landing(request):
 '''
 
         pass    
-
+ 
     elif request.method == 'POST':
         pass
 '''
+
+def rok_individual_list(request):
+    individual_list = []
+    for e in rok_individual.objects.order_by('name'):
+        individual_list.append(e)
+
+    context = {
+
+        'individual_list'       : individual_list, 
+        'style_sheet'           : link_text,
+    }
+
+    return render(request, 'individual_list.html', context)
