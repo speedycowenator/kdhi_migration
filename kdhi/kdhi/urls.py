@@ -24,5 +24,6 @@ urlpatterns = [
     path('trackers/', include('trackers.urls')),
     path('documents/', include('documents.urls')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
+    path('search/', include('kdhi_search.urls')),
 
 ]

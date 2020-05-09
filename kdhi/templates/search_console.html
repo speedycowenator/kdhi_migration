@@ -1,0 +1,56 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="active-body">
+  <div class="left-column"></div>
+  <div class="center-column">
+    <h1 class="quicksearch-institution">Search</h1>
+    <form id="main-search-form" name="main-search-form" data-name="main-search-form" method="POST">{% csrf_token %}
+      <input type="text" class="text-field-4 w-input" maxlength="256" name="search" data-name="search" placeholder="{{search_text}}" id="search">
+      <label for="Sort-Type-3">Model Selection</label>
+        <label>
+          <input type="checkbox" name="search_model_1" value="documents" class="w-form-formradioinput w-radio-input" {{search_model_1_check}}>Documents</label>
+        <label>
+          <input type="checkbox" name="search_model_2" value="articles" class="w-form-formradioinput w-radio-input"{{search_model_2_check}}>Articles</label>
+        <label>
+          <input type="checkbox" name="search_model_3" value="trackers" class="w-form-formradioinput w-radio-input" {{search_model_3_check}}>Trackers</label>
+        <label>
+          <input type="checkbox" name="search_model_4" value="biographies" class="w-form-formradioinput w-radio-input" {{search_model_4_check}}>Biopgraphies</label>
+        <label>
+          <input type="checkbox" name="search_model_5" value="institutions" class="w-form-formradioinput w-radio-input" {{search_model_5_check}}>Institutions</label>
+        <label>
+          <input type="checkbox" name="search_model_6" value="glossary" class="w-form-formradioinput w-radio-input" {{search_model_6_check}}>Glossary</label>
+        
+        <input type="submit" value="Search" data-wait="Please wait..." class="submit-button-5 w-button"></form>
+      
+
+
+      <div>SEARCH TEXT: {{search_text}} </div>
+      <div>MODELS     : {{search_model}}</div>
+  </div>
+  
+  <div class="right-column"></div>
+
+{% endblock %}
+   
+      <label for="Sort-Type" class="refine-header">Sort Order</label>
+        <select id="Sort-Type" name="sort_object" data-name="sort_object" class="select-field w-select">
+            <option value="date_publication" {{checked_sort_date}}>Publish Date</option>
+            <option value="author" {{checked_sort_author}}>Author</option>
+            <option value="title" {{checked_sort_title}}>Title</option></select>
+        <select id="Sort-Order" name="sort_order" data-name="sort_order" class="select-field w-select">
+            <option value="" {{checked_sort_asc}}>Ascending </option>
+            <option value="-" {{checked_sort_dsc}}>Descending </option></select>
+      
+
+      <label for="Sort-Type-2" class="refine-header">Publication</label> 
+          <label class="radio-button-field-2 w-radio">
+              <input type="radio" data-name="publication" id="KCNA" name="publication" value="kcna" class="w-form-formradioinput w-radio-input" {{checked_kcna}}>
+                  <span for="KCNA" class="radio-button-label">KCNA</span></label>
+          <label class="radio-button-field-2 w-radio">
+              <input type="radio" data-name="publication" id="Rodong Sinmun" name="publication" value="rs" class="w-form-formradioinput w-radio-input"{{checked_rs}}>
+                  <span for="Rodong Sinmun" class="radio-button-label">Rodong Sinmun</span></label>
+          <label class="radio-button-field-2 w-radio">
+              <input type="radio" data-name="publication" id="Rodong Sinmun" name="publication" value="all" class="w-form-formradioinput w-radio-input" {{checked_all_publication}}><span for="Rodong Sinmun-2" class="radio-button-label" >All</span></label>
+    
+    <label for="Sort-Type-3" class="refine-header">Author</label><input type="text" class="select-field w-input" maxlength="256" name="field" data-name="Field" placeholder="&#x27;So Nam Il&#x27;" id="field">

@@ -26,12 +26,23 @@ class document_collection(models.Model):
         ordering = ('weight', 'name',)
   
 
+class document_keyword(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
+   
+    class Meta:
+        ordering = ('name',) 
+        
+    def __str__(self):
+        return self.name
+
 class document(models.Model):
     #need to change function and additional information to TextField
     name                = models.CharField(max_length=200)
     slug                = models.CharField(max_length=200)
     url_substring       = models.CharField(max_length=200, blank=True, default='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Documents/')
     collection          = models.ForeignKey(document_collection, on_delete=models.SET_NULL, null=True, blank=True)
+    keywords            = models.ManyToManyField(document_keyword, blank=True)
     date                = models.DateField(blank=True)
     summary             = models.TextField(max_length=20000)
     creator             = models.CharField(max_length=200, blank=True)

@@ -17,5 +17,5 @@ urlpatterns = [
 	path('timeline-chronological/<int:init_year>-<int:end_year>', views.timeline_chrono, name='timeline_chrono'),
 	path('critical-oral-history/<str:session>', views.critical_oral_history_detail, name='critical_oral_history'),
 	path('critical-oral-history', views.critical_oral_history_landing, name='critical_oral_history_landing'),
-
+	path('document-search', views.document_search, name='document_search'),
     ]

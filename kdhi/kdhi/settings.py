@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'main_site',
     'trackers',
     'documents',
+    'kdhi_search',
 ]
 
 MIDDLEWARE = [
