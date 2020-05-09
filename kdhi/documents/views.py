@@ -401,7 +401,10 @@ def critical_oral_history_landing(request):
 
 
 def document_search(request):
-	search_models_cleaned = []
+	document_list_cleaned 	= []
+	search_models_cleaned 	= []
+	start_date				= []
+	end_date 				= []
 	search_model_1_check 	= unchecked
 	search_model_2_check 	= unchecked
 	search_model_3_check 	= unchecked
