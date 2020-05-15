@@ -43,7 +43,7 @@
 
               {# no results div #}
               <div class="no-results-div {{document_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
               {%for result in document_toggle_check_results %}
@@ -75,7 +75,7 @@
                         <div class="document-detail-content">{{result.summary}}</div>
                       </div>
                     </div>
-                  </div>
+                  </div>  
                   <div class="document-function-div"><a href="{{result.get_absolute_url}}" class="view-buttons w-button">Document Page</a></div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
 
               {# no results div #}
               <div class="no-results-div {{articles_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
               {%for result in article_toggle_check_results %}
@@ -111,7 +111,7 @@
 
               {# no results div #}
               <div class="no-results-div {{bio_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
               <div class="biography-search-grid">
@@ -145,7 +145,7 @@
 
               {# no results div #}
               <div class="no-results-div {{inter_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
           {%for result in inter_tracker_toggle_check_results %}
@@ -194,7 +194,7 @@
 
               {# no results div #}
               <div class="no-results-div {{overseas_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
           {%for result in overseas_tracker_toggle_check_results %}
@@ -235,9 +235,10 @@
           <div id="Institutions" class="model-search-block {{institution_toggle_check}}">
           <h1 class="model-section-header">Institutions</h1>
       
-              {# no results div #}
-              <div class="no-results-div {{articles_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              {# no results div #} 
+
+              <div class="no-results-div toggle">
+                <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
           {% for result in institution_toggle_check_results %}
@@ -258,7 +259,7 @@
           
               {# no results div #}
               <div class="no-results-div {{glossary_no_result_toggle}}">
-              <p clas="search-result-warning-text">No results found within this collection. </p>
+              <p class="search-result-warning-text">No results found within this collection. </p>
               </div>
 
           {% for result in glossary_item_toggle_check_results %}
