@@ -23,12 +23,13 @@ class overseas_topic(models.Model):
 
 class overseas_tracker(models.Model):
     #need to change function and additional information to TextField
+    name                = models.CharField(max_length=200)
+    DPRK_head           = models.ForeignKey(individual, on_delete=models.PROTECT, related_name = 'dprk_overseas_head', null=True, blank=True)
     participant_DPRK    = models.ManyToManyField(individual)
     country_choices     = models.ForeignKey(country_list, on_delete=models.PROTECT, null=True, blank=True)
     overseas_topics     = models.ForeignKey(overseas_topic, on_delete=models.PROTECT, null=True, blank=True)
     event_document      = models.URLField(max_length=200, blank=True)
     event_description   = models.TextField(max_length=20000)
-    event_title         = models.CharField(max_length=200)
     event_date          = models.DateField(null=True, blank=True)
     event_photo         = models.URLField(max_length=200, blank=True)
     event_photo_add_1   = models.URLField(max_length=200, blank=True)
@@ -38,7 +39,7 @@ class overseas_tracker(models.Model):
 
     
     def __str__(self):
-        return self.event_title
+        return self.name
 
     def get_absolute_url(self):
         return (reverse('overseas_tracker_detail', args=[int(self.pk)]))
@@ -47,12 +48,12 @@ class overseas_tracker(models.Model):
 
 class inter_korean_tracker(models.Model):
     #need to change function and additional information to TextField
+    name                = models.CharField(max_length=200)
     ROK_head            = models.ForeignKey(rok_individual, on_delete=models.PROTECT, related_name = 'rok_head', null=True, blank=True)
     DPRK_head           = models.ForeignKey(individual, on_delete=models.PROTECT, related_name = 'dprk_head', null=True, blank=True)
     participant_ROK     = models.ManyToManyField(rok_individual, related_name = 'rok_delegation', blank=True, default="Kim Jong Un")
     participant_DPRK    = models.ManyToManyField(individual, related_name = 'dprk_delegation', blank=True)
     MOU_description     = models.TextField(max_length=20000)
-    event_title         = models.CharField(max_length=200)
     event_location      = models.CharField(max_length=200)
     event_venue         = models.CharField(max_length=200)
     event_date          = models.DateField(null=True, blank=True)
@@ -65,7 +66,7 @@ class inter_korean_tracker(models.Model):
 
     
     def __str__(self):
-        return self.event_title
+        return self.name
 
     def get_absolute_url(self):
         return (reverse('inter_korean_tracker_detail', args=[int(self.pk)]))

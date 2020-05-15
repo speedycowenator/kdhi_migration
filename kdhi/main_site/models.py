@@ -14,7 +14,7 @@ import urllib.request
 
 
 class glossary_item(models.Model):
-    title                       = models.CharField(max_length=200)
+    name                       = models.CharField(max_length=200)
     slug                        = models.CharField(max_length=200)
     image_src                   = models.CharField(max_length=200)
     bluff_content               = models.CharField(max_length=500)
@@ -219,7 +219,7 @@ class rok_position(models.Model):
         ordering = ('position_rank', 'person')
 
 class article(models.Model):
-    title       = models.CharField(max_length=200)
+    name        = models.CharField(max_length=200)
     slug        = models.CharField(max_length=200)
     icon_image  = models.CharField(max_length=200)
     bluff       = models.TextField(max_length=5000)
