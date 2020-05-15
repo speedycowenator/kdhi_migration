@@ -54,8 +54,6 @@ class institution(models.Model):
 class individual(models.Model):
     name                    = models.CharField(max_length=200)
     name_korean             = models.CharField(max_length=200)
-    icon                    = models.URLField(max_length=200, default="1_Outline_Blank")
-    full_resolution_photo   = models.URLField(max_length=200, default="1_Outline_Blank")
     photo_credit            = models.CharField(max_length=200, blank=True)
     birthday                = models.DateField(null=True, blank=True)
     hometown                = models.CharField(max_length=200, blank=True)
@@ -121,7 +119,7 @@ class position(models.Model):
     appointment_date    = models.DateField(null=True, blank=True)
     confirmation_date   = models.DateField(null=True, blank=True, default='2019-04-12')
     confirmation_src    = models.CharField(max_length=200, default="First Session of 14th SPA Held")
-    replaced            = models.CharField(max_length=200, blank=True)
+    replaced            = models.BooleanField(default=False)
     created_at          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at          = models.DateTimeField(auto_now=True, null=True, blank=True)
     position_rank       = models.IntegerField(null=False, blank=False, default=0)

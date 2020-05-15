@@ -122,6 +122,24 @@ def individual_detail(request, name):
         individual_position_pair = [individual_position.institution, individual_position.title, inst_url]
         individual_positions.append(individual_position_pair)
     page_title = individual_detail.name
+
+
+ #need to add 'toggle' as a 'hide' class #}
+    try: 
+        if len(individual_detail.bio) > 0:
+            bio_toggle = ''
+        else: 
+            bio_toggle = 'toggle'
+    except: 
+        bio_toggle = 'toggle'
+
+    try: 
+        if len(individual_detail.sources) > 0:
+            source_toggle = ''
+        else: 
+            source_toggle = 'toggle'
+    except: 
+        source_toggle = 'toggle'
     context = {
             'individual_detail'     : individual_detail,
             'individual_name'       : individual_detail.name,
@@ -134,6 +152,8 @@ def individual_detail(request, name):
             'individual_positions'  : individual_positions,
             'style_sheet'           : link_text,
             'page_title'            : page_title,
+            'bio_toggle'            : bio_toggle,
+            'source_toggle'         : source_toggle,
             
             }
     return render(request, 'biographic_page.html', context)
@@ -168,7 +188,7 @@ def institution_detail(request, name):
             title_holder_url = title_holder.get_absolute_url
             s3_path_full    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Full+Resolution/"
             name_url_snip   = title_holder_name.replace(' ', '+')
-            img_icon        = s3_path_full + name_url_snip + '.jpg'
+            img_icon        = title_holder.get_image_icon
             grouped_members_temp.append([title_holder_name, title_holder_url, img_icon])
         grouped_members = [title, grouped_members_temp]
         inst_member_dic.append(grouped_members)
@@ -204,6 +224,39 @@ def institution_detail(request, name):
         related_state       = "No related institutions"
     if len(related_military) == 0:
         related_military       = "No related institutions"
+
+    try: 
+        if len(institution_detail.additional_figures) > 0:
+            add_fig_toggle = ''
+        else: 
+            add_fig_toggle = 'toggle'
+    except: 
+        add_fig_toggle = 'toggle'
+
+    try: 
+        if len(institution_detail.organization_structure) > 0:
+            org_toggle = ''
+        else: 
+            org_toggle = 'toggle'
+    except: 
+        org_toggle = 'toggle'
+
+    try: 
+        if len(institution_detail.additional_information) > 0:
+            add_in_toggle = ''
+        else: 
+            add_in_toggle = 'toggle'
+    except: 
+        add_in_toggle = 'toggle'
+
+    try: 
+        if len(institution_detail.sources_add) > 0:
+            source_toggle = ''
+        else: 
+            source_toggle = 'toggle'
+    except: 
+        source_toggle = 'toggle'
+
     page_title = institution_detail.name
     context = {
             
@@ -224,6 +277,11 @@ def institution_detail(request, name):
             'related_state'         : related_state,
             'related_military'      : related_military,
             'page_title'            : page_title,
+            'source_toggle'         : source_toggle,
+            'add_in_toggle'         : add_in_toggle,
+            'org_toggle'            : org_toggle, 
+            'add_fig_toggle'        : add_fig_toggle,
+
             }
     
     

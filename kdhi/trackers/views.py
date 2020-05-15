@@ -36,8 +36,8 @@ def heatmap_static(request):
 
     
 
-def overseas_tracker_detail(request, pk):
-    tracker_item = overseas_tracker.objects.get(pk=pk)
+def overseas_tracker_detail(request, slug):
+    tracker_item = overseas_tracker.objects.get(slug=slug)
     participant_list = []
     for participant in tracker_item.participant_DPRK.all():
         participant_name    = participant.name
@@ -55,8 +55,8 @@ def overseas_tracker_detail(request, pk):
             }
     return render(request, 'overseas_detail.html', context)
 
-def inter_korean_tracker_detail(request, pk):
-    tracker_item = inter_korean_tracker.objects.get(pk=pk)
+def inter_korean_tracker_detail(request, slug):
+    tracker_item = inter_korean_tracker.objects.get(slug=slug)
     participant_list_dprk = []
     participant_list_rok = []
 

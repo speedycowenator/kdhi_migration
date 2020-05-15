@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"Over",
+				"Overseas-Tracker-Block"
+			],
+			[
+				"search",
+				"search_text"
+			],
+			[
+				"over",
+				"overseas_tracker_toggle_check"
+			],
+			[
+				"site",
+				"site_model_results"
+			],
+			[
 				"key",
 				"keyword_list"
 			],
@@ -14,10 +30,6 @@
 			[
 				"document",
 				"document_keyword"
-			],
-			[
-				"search",
-				"search_model"
 			],
 			[
 				"sear",
@@ -182,10 +194,6 @@
 			[
 				"docum",
 				"document_title"
-			],
-			[
-				"over",
-				"overseas_topics"
 			],
 			[
 				"e_dprk",
@@ -506,60 +514,98 @@
 			[
 				"fil",
 				"filter_function"
-			],
-			[
-				"order",
-				"order_mechaism"
-			],
-			[
-				"A",
-				"Article"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "documents/views.py",
+			"file": "kdhi_search/views.py",
 			"settings":
 			{
-				"buffer_size": 14399,
+				"buffer_size": 7725,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/document_search.html",
+			"file": "templates/search_console.html",
 			"settings":
 			{
-				"buffer_size": 5264,
+				"buffer_size": 15299,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "documents/models.py",
+			"file": "templates/base_generic.html",
 			"settings":
 			{
-				"buffer_size": 5894,
+				"buffer_size": 21121,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "documents/admin.py",
+			"file": "templates/institution_page.html",
 			"settings":
 			{
-				"buffer_size": 578,
+				"buffer_size": 3060,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/index/search_results.html",
+			"file": "main_site/views.py",
 			"settings":
 			{
-				"buffer_size": 9352,
+				"buffer_size": 18546,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/biographic_page.html",
+			"settings":
+			{
+				"buffer_size": 2231,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/overseas_detail.html",
+			"settings":
+			{
+				"buffer_size": 2004,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "trackers/views.py",
+			"settings":
+			{
+				"buffer_size": 5614,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "trackers/admin.py",
+			"settings":
+			{
+				"buffer_size": 563,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "article_import.py",
+			"settings":
+			{
+				"buffer_size": 1142,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -619,57 +665,59 @@
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_search",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/admin",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/index",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages"
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers"
 	],
 	"file_history":
 	[
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/urls.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/homepage.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/critical_oral_history_landing.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_collection_landing.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_search.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/korean_democratization_page.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/timeline_collection_landing.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/one_frame_base.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/overseas_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/base_generic.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/glossary_detail.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_search/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_search/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/search_console.html",
+		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (22)/search-console-general.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/index/search_results.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/admin.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/models.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/rok_institution_landing.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_search.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_search/urls.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/index/search_results.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/search_console.html",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (20)/search-console.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/institution_page.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/base_generic.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/settings.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/models.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/views.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_collection_landing.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/views.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_detail.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/models.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/admin.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/one_frame_base.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/views.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/inter-korean-spending-2018.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/critical_oral_history_landing.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/timeline_collection_landing.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/templates/index/search_results.html",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (19)/democratization-pages/documents.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/collection_page.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/homepage.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/about.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_list.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/korean_democratization_page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/critical_oral_history_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/timeline_test.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/dprk_institution_landing.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/biographic_page.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/glossary_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/individual_list.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/institution_list.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/inter_korean.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/inter_korean_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/overseas.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/overseas_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/research.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/rok_biographic_page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/rok_institution_page.html",
@@ -715,7 +763,6 @@
 		"/D/Dropbox/Dropbox/kdhi.org/Assets/Leadership Photos/Kuroko/search_face.py",
 		"/D/Dropbox/Dropbox/kdhi.org/Assets/Leadership Photos/Kuroko/index_face_lambda.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/article_import.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/urls.py",
 		"/D/Dropbox/Dropbox/Kuroko/kurko.faces/index_face.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/Notes",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/views.py",
@@ -736,7 +783,6 @@
 		"/C/Users/Sam/kcna_import.py",
 		"/C/Users/Sam/import.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/articles_import.csv",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/models.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/admin.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/overseas_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/overseas.html",
@@ -753,12 +799,11 @@
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/urls.py",
 		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunitionBox/Ammo_AmmunitionBox_Generic_AC2.json",
 		"/D/Sam/M/steamapps/common/BATTLETECH/BattleTech_Data/StreamingAssets/data/ammunition/Ammunition_AC2.json",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/get_style.css",
-		"/D/Sam/M/steamapps/common/BATTLETECH/Mods/RogueModuleTech/Heatsink/Gear_HeatSink_Generic_Standard.json"
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/get_style.css"
 	],
 	"find":
 	{
-		"height": 44.0
+		"height": 45.0
 	},
 	"find_in_files":
 	{
@@ -772,6 +817,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"add_fig_toggle",
+			"<p clas=\"search-result-warning-text\">",
+			"id=",
+			"id=\"Documents\"",
+			"id=",
+			"Documents-Block",
+			"\r",
+			"overseas_tracker_toggle_check",
+			"\r",
+			"dprk_overseas_head",
+			"overseas_toggle_check",
+			"\n",
 			"\r",
 			"unche",
 			"sort_ob",
@@ -802,6 +859,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"<p class=\"search-result-warning-text\">",
+			"",
+			"documents_block",
 			""
 		],
 		"reverse": false,
@@ -819,52 +879,53 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "documents/views.py",
+					"file": "kdhi_search/views.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14399,
+						"buffer_size": 7725,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13106,
-								13106
+								6061,
+								5870
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 512.0,
-						"translation.y": 9767.0,
+						"translation.x": 0.0,
+						"translation.y": 3452.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "templates/document_search.html",
+					"file": "templates/search_console.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5264,
+						"buffer_size": 15299,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4350,
-								4350
+								1897,
+								1917
 							]
 						],
 						"settings":
@@ -874,27 +935,87 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1122.0,
+						"translation.y": 265.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "documents/models.py",
+					"file": "templates/base_generic.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5894,
+						"buffer_size": 21121,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1895,
-								1899
+								11531,
+								11531
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4129.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "templates/institution_page.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3060,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3059,
+								2137
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 920.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "main_site/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18546,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4257,
+								4257
 							]
 						],
 						"settings":
@@ -904,27 +1025,117 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 462.0,
+						"translation.y": 2711.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "documents/admin.py",
+					"buffer": 5,
+					"file": "templates/biographic_page.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 578,
+						"buffer_size": 2231,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								573,
-								573
+								1738,
+								1738
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 414.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/overseas_detail.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2004,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								2004
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "trackers/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1919,
+								1919
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 621.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "trackers/admin.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 563,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								228,
+								228
 							]
 						],
 						"settings":
@@ -935,37 +1146,36 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "templates/index/search_results.html",
+					"buffer": 9,
+					"file": "article_import.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9352,
+						"buffer_size": 1142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6624,
-								6658
+								771,
+								771
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2081.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -973,7 +1183,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 32.0
 	},
 	"input":
 	{
@@ -1004,7 +1214,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 36.0
+		"height": 37.0
 	},
 	"output.find_results":
 	{
@@ -1014,7 +1224,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 79.0
+		"height": 60.0
 	},
 	"save_all_on_build": false,
 	"select_file":

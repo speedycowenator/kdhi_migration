@@ -27,26 +27,30 @@
             </div>
             {% endfor %}
 
-        </div>
-
-        <div class="institution-function-div">
-        <h1 class="biographic-biography-header">Additional Senior Figures</h1>
+        </div>  
+        <div class="institution-function-div {{add_fig_toggle}}">
+        <h1 class="biographic-biography-header ">Additional Senior Figures</h1>
         <p class="institutions-function-paragraph">{{institution_figs|safe|linebreaks }} </p></div>
 
-        <div class="institution-function-div">
+        <div class="institution-function-div {{org_toggle}}" >
         <h1 class="biographic-biography-header">Organization</h1>
         <p class="institutions-function-paragraph">{{institution_org|safe}} </p></div>
 
-        <div class="institution-function-div">
+        <div class="institution-function-div {{add_in_toggle}}">
         <h1 class="biographic-biography-header">Additional Information</h1>
         <p class="institutions-function-paragraph">{{institution_add|safe|linebreaks }} </p></div>
 
-        <div class="institution-function-div">
+        <div class="institution-function-div {{source_toggle}}">
         <h1 class="biographic-biography-header">Sources</h1>
         <p class="institutions-function-paragraph">{{institution_src|safe|linebreaks }} </p></div>
    
     </div>
     </div>
+
+  </div>
+  
+  
+{% endblock %}
     <div class="right-section">
     <h1 class="institution-korean">Related Institutions</h1>
         <h1 class="related-institution-party">Party</h1>
@@ -71,8 +75,3 @@
         </div>
 
     </div>
-
-  </div>
-  
-  
-{% endblock %}

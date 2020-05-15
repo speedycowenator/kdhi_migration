@@ -1,20 +1,12 @@
 import os
-
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kdhi.settings")
 from django.conf import settings
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
-
-
-from documents.models import document
+from trackers.models import overseas_tracker
 import csv
 
 unslugable_characters = ['.', ',', '/', '?', ';', ':', '"', "'", '|', '/', '\\', '#', '@', '$', '%', '^', '&', '*', '(', ')', '~', '`', ]
-
-
-
-
 
 def slugify(raw_text):
 	raw_text =  raw_text.lower()
@@ -30,24 +22,14 @@ def slugify(raw_text):
 
 
 
-with open('1987_documents.csv', newline='', encoding='utf-8') as csvfile:
+with open('kdhi_overseas_tracker.csv', newline='', encoding='utf-8') as csvfile:
 	article_reader = csv.reader(csvfile, delimiter=',', quotechar='"')
 	for row in article_reader:
-		'''
-		date_fixed = ''
-		date = row[1]
-		for character in date:
-			if character == '/':
-				character = '-'
-			date_fixed += character
-		date_fixed_list = date_fixed.split('-')
-		date_fixed = date_fixed_list[2] + '-' + date_fixed_list[0] + '-' + date_fixed_list[1]
-		date 	= date_fixed
-		'''
-		title 	= row[0]
-		slug 	= slugify(title)
-		date  	= row[1]
-		summary = row[2]
+		name 				= row[0] 
+		event_description 	= row[2]
+		event_coverage 		= row[3]
+		slug  				= row[1]
 
-		b = document(name=title, summary=summary, date=date, slug=slug)
+
+		b = overseas_tracker(name=name, event_description=event_description, event_coverage=event_coverage, slug=slug)
 		b.save()

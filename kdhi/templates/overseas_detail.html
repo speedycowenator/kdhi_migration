@@ -10,7 +10,7 @@
         <h1 class="event-date">{{tracker_item.event_date}}</h1>
         <div class="institution-function-block">
             <h1 class="event-details-header">Details</h1>
-            <p class="event-details-paragraph">{{tracker_item.event_description}}</p></div>
+            <p class="event-details-paragraph">{{tracker_item.event_description | safe}}</p></div>
             <a href="{{tracker_item.event_document}}" class="document-link">Official Meeting Document</a>
 
         <h1 class="institution-members-header">Participants</h1>        

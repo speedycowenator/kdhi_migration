@@ -34,12 +34,12 @@
           <h1 class="biographic-details-detail-header">Birthday:</h1>
           <h1 class="biographic-details-detail-subheader">{{individual_birthday}}</h1>
         </div>
-        <h1 class="biographic-biography-header">Biography</h1>
+        <h1 class="biographic-biography-header {{source_toggle}}">Biography</h1>
         <div class="biographic-biography-subblock">
           <p class="institutions-function-paragraph">{{individual_biography|linebreaks  }} </p>
         </div>
       </div>
-      <div class="biographic-sources-block">
+      <div class="biographic-sources-block {{source_toggle}}">
         <h1 class="biographic-sources-header">Sources</h1>
           <p class="institutions-function-paragraph">{{individual_sources|linebreaks}} </p>
       </div>
