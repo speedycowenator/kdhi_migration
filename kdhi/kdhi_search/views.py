@@ -28,6 +28,13 @@ checked 	= 'checked'
 unchecked 	= ''
 
 def search_console(request):
+	document_no_result_toggle 				= ''
+	inst_no_result_toggle 					= ''
+	inter_no_result_toggle 					= ''
+	overseas_no_result_toggle 				= ''
+	bio_no_result_toggle 					= ''
+	articles_no_result_toggle 				= ''
+	glossary_no_result_toggle  				= ''
 	search_models_cleaned 					= []
 	overseas_tracker_toggle_check			= []
 	overseas_tracker_toggle_check_results 	= []
