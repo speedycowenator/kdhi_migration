@@ -15,7 +15,7 @@ def create_collection(collection_id):
     print('Done...')
     
 def main():
-    collection_id='collection-kuroko-verified'
+    collection_id='kuroko_django'
     create_collection(collection_id)
 
 if __name__ == "__main__":
