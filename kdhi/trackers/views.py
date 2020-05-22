@@ -42,7 +42,7 @@ def overseas_tracker_detail(request, slug):
     for participant in tracker_item.participant_DPRK.all():
         participant_name    = participant.name
         participant_link    = participant.get_absolute_url
-        participant_photo   = participant.full_resolution_photo
+        participant_photo   = participant.get_image_full
         participant_list_temp = [participant_name, participant_link, participant_photo]
         participant_list.append(participant_list_temp)
 
@@ -93,7 +93,7 @@ def inter_korean_tracker_list(request):
     recent_event    = inter_korean_tracker.objects.latest('update_date')
     events_list     = []
     for e in inter_korean_tracker.objects.order_by('update_date'):
-        e_title                 = e.event_title
+        e_title                 = e.name
         e_date                  = e.event_date
         e_content               = e.MOU_description
         e_url                   = e.get_absolute_url
@@ -141,7 +141,13 @@ def overseas_tracker_list(request):
     recent_event    = overseas_tracker.objects.latest('update_date')
     events_list     = []
     for e in overseas_tracker.objects.order_by('update_date'):
-        events_list.append(e)
+        event_item_topics       = []
+        event_item_countries     = []
+        for choice in e.overseas_topics.all():
+            event_item_topics.append(choice)
+        for choice in e.country_choices.all():
+            event_item_countries.append(choice)
+        events_list.append([e, event_item_topics, event_item_countries])
     context = {
         'recent_event'  :   recent_event,
         'style_sheet'   :   link_text,
