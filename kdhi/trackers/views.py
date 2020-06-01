@@ -138,9 +138,9 @@ def inter_korean_tracker_list(request):
     return render(request, 'inter_korean.html', context)
 
 def overseas_tracker_list(request):
-    recent_event    = overseas_tracker.objects.latest('update_date')
+    recent_event    = overseas_tracker.objects.latest('-event_date')
     events_list     = []
-    for e in overseas_tracker.objects.order_by('update_date'):
+    for e in overseas_tracker.objects.order_by('-event_date'):
         event_item_topics       = []
         event_item_countries     = []
         for choice in e.overseas_topics.all():

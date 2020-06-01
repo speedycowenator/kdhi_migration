@@ -19,7 +19,7 @@ class glossary_item(models.Model):
     image_src                   = models.CharField(max_length=200)
     bluff_content               = models.CharField(max_length=500)
     content                     = RichTextField()
-
+    update_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.slug
@@ -41,7 +41,7 @@ class institution(models.Model):
     organization_structure      =  RichTextField(null=True, blank=True)
     additional_information      =  RichTextField(null=True, blank=True)
     sources_add                 =  RichTextField(null=True, blank=True, default='''<a href="https://nkinfo.unikorea.go.kr/nkp/main/portalMain.do">[1]</a> Ministry of Unification, '2019년 북한 기관별 인명록'  2018-12-27' Party of Korea (WPK)''')
-    
+    update_date = models.DateField(auto_now=True)
     class Meta:
         ordering = ('name',)   
     def __str__(self):
@@ -117,12 +117,32 @@ class position(models.Model):
     institution         = models.ForeignKey(institution, on_delete=models.CASCADE)
     title               = models.CharField(max_length=200)   
     appointment_date    = models.DateField(null=True, blank=True)
-    confirmation_date   = models.DateField(null=True, blank=True, default='2019-04-12')
-    confirmation_src    = models.CharField(max_length=200, default="First Session of 14th SPA Held")
-    replaced            = models.BooleanField(default=False)
+    confirmation_date   = models.DateField(auto_now_add=True, null=True)
+    confirmation_src    = models.CharField(max_length=200, blank=True)
     created_at          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at          = models.DateTimeField(auto_now=True, null=True, blank=True)
     position_rank       = models.IntegerField(null=False, blank=False, default=0)
+    update_date = models.DateField(auto_now=True)
+
+    ACTIVE      = "Active"
+    UNCLEAR     = "Unclear"
+    REMOVED     = "Removed"
+
+    position_status_choices = [
+        (ACTIVE, "Active"),
+        (UNCLEAR, "Unclear"),
+        (REMOVED ,"Removed"),
+
+        ]
+
+    position_status     = models.CharField(
+        choices=position_status_choices,
+        default=ACTIVE,
+        max_length=20
+        )
+
+
+
     def __str__(self):
         return self.title
     class Meta:
@@ -142,6 +162,7 @@ class rok_institution(models.Model):
     history                     =  models.TextField(max_length=20000, blank=True)
     qs_slug                     =  models.TextField(max_length=250, blank=False, default='SLUG MISSING')
     sources_add                 =  models.TextField(max_length=20000, blank=True, default='[*] Official Ministry Website')
+    update_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -177,6 +198,7 @@ class rok_individual(models.Model):
     video_caption           = models.CharField(max_length=200, blank=True)
     video_2_source          = models.URLField(max_length=200, blank=True)
     video_2_caption         = models.CharField(max_length=200, blank=True)
+    update_date = models.DateField(auto_now=True)
 
     class Meta:
         ordering = ('name',)
@@ -210,6 +232,7 @@ class rok_position(models.Model):
     confirmation_src    = models.CharField(max_length=200, default="N/A")
     replaced            = models.CharField(max_length=200, blank=True)
     position_rank       = models.IntegerField(null=False, blank=False, default=0)
+    update_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -221,7 +244,9 @@ class article(models.Model):
     slug        = models.CharField(max_length=200)
     icon_image  = models.CharField(max_length=200)
     bluff       = models.TextField(max_length=5000)
+    author      = models.CharField(max_length=50, default="KDHI")
     content     = RichTextField()
+    create_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
 
     def __str__(self):

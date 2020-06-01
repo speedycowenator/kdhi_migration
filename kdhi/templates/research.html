@@ -6,14 +6,20 @@
     <div class="cards-grid-container">
 
 {% for research_card in research_cards %}      
+      <div class="collection-item-eg">
+        <div class="blog-image" style="background-image: url('{{research_card.icon_image}}');" ></div>
+        <div class="title-wrap-blog">
+          <h1 class="heading-blog">{{research_card.name}}</h1>
+          <p class="paragraph-31">{{research_card.bluff}}</p>
+          <div class="author-wrap">
+            <div class="details-wrap">
+              <div class="details-text-blog">{{research_card.author}}</div>
+              <div class="details-text-blog">·</div>
+              <div class="details-text-blog">{{research_card.create_date}}</div>
+            </div>
+          </div><a href="{{research_card.get_absolute_url}}" class="blog-cover w-inline-block"></a></div>
+      </div>
 
-      <a href="{{research_card.get_absolute_url}}" class="div-block-366 w-inline-block">
-        <div class="cards-image-mask"><img src="{{research_card.icon_image}}" alt="" class="cards-image">
-          <div class="div-block-367">
-            <h3 class="heading-112">{{research_card.title}}</h3>
-          </div>
-        </div>
-      </a>
 {% endfor %}
 
     </div>

@@ -353,10 +353,10 @@ html_end = """\
 </html>
 """
 body_list_kcna = []
-email_content = html
+email_content = html + "<h6> Rodong Sinmun Articles </h6>"
 
 for article in article_list:
-	article_strings = '<h5>'
+	article_strings =  '<h5>'
 	article_strings = article_strings + article[0]
 	article_strings = article_strings + '</h5>'
 	article_strings = article_strings + article[1]
@@ -403,4 +403,4 @@ server.starttls()
 server.login(msg['From'], gmail_password)
 
 for address in recipients:
-	server.sendmail(msg['From'], address, msg.as_string())
+    server.sendmail(msg['From'], address, msg.as_string())

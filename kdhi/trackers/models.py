@@ -45,7 +45,7 @@ class overseas_tracker(models.Model):
     update_date         = models.DateField(auto_now=True)
 
     class Meta:
-        ordering = ('event_date', 'name',)
+        ordering = ('-event_date', 'name',)
     
     def __str__(self):
         return self.name

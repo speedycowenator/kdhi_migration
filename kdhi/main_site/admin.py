@@ -5,8 +5,8 @@ from .models import individual, institution, position, rok_position, rok_institu
 
 
 class positionAdmin(admin.ModelAdmin):
-	list_display = ('person', 'institution', 'title')
-	list_filter  = ('created_at', 'updated_at', 'institution', 'title')
+	list_display = ('person', 'institution', 'title', 'position_status')
+	list_filter  = ('created_at', 'updated_at', 'position_status', 'title', 'institution')
 
 
 class ROKpositionAdmin(admin.ModelAdmin):

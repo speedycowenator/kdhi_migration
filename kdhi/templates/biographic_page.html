@@ -7,13 +7,14 @@
     <div class="center-section">
       <div class="biographic-block">
         <h1 class="biographic-name">{{individual_detail.name}}</h1>
+        <p class="institutions-function-paragraph">Last Updated: {{individual_detail.update_date}} </p>
         <div class="biographic-sub-horizontal"><img src="{{individual_detail.get_image_full}}" alt="" class="biographic-full-photo">
           <div class="biographic-positions-block">
             <h1 class="biographic-positions-header-full">Positions</h1>
             
             {% for position in individual_positions %}
             <div class="biographic-position-subblock"><a href="{{position.2}}" class="biographic-position-institution">{{position.0}}</a>
-              <h1 class="biographic-position-title">{{position.1}}</h1>
+              <h1 class="biographic-position-title">{{position.1}} ({{position.3}})</h1>
             </div>
             {% endfor %}
             
@@ -42,6 +43,7 @@
       <div class="biographic-sources-block {{source_toggle}}">
         <h1 class="biographic-sources-header">Sources</h1>
           <p class="institutions-function-paragraph">{{individual_sources|linebreaks}} </p>
+
       </div>
     </div>
     <div class="right-section"></div>

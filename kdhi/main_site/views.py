@@ -119,7 +119,7 @@ def individual_detail(request, name):
     for individual_position in position.objects.filter(person=individual_detail):
         institution_tag = individual_position.institution
         inst_url = institution_tag.get_absolute_url
-        individual_position_pair = [individual_position.institution, individual_position.title, inst_url]
+        individual_position_pair = [individual_position.institution, individual_position.title, inst_url, individual_position.position_status]
         individual_positions.append(individual_position_pair)
     page_title = individual_detail.name
 
@@ -182,7 +182,7 @@ def institution_detail(request, name):
                 unique_titles.append(member_title)
     for title in unique_titles:
         grouped_members_temp = []
-        for title_holder in position.objects.filter(institution=institution_detail, title=title):
+        for title_holder in position.objects.filter(institution=institution_detail, title=title, position_status="Active"):
             title_holder = title_holder.person
             title_holder_name = title_holder.name
             title_holder_url = title_holder.get_absolute_url
