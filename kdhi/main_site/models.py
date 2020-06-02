@@ -117,14 +117,14 @@ class position(models.Model):
     institution         = models.ForeignKey(institution, on_delete=models.CASCADE)
     title               = models.CharField(max_length=200)   
     appointment_date    = models.DateField(null=True, blank=True)
-    confirmation_date   = models.DateField(auto_now_add=True, null=True)
-    confirmation_src    = models.CharField(max_length=200, blank=True)
+    confirmation_date   = models.DateField(null=True, blank=True, default="2020-05-13")
+    confirmation_src    = models.CharField(max_length=200, blank=True, default="MOU Report")
     created_at          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at          = models.DateTimeField(auto_now=True, null=True, blank=True)
     position_rank       = models.IntegerField(null=False, blank=False, default=0)
     update_date = models.DateField(auto_now=True)
 
-    ACTIVE      = "Active"
+    ACTIVE      = "Active"  
     UNCLEAR     = "Unclear"
     REMOVED     = "Removed"
 

@@ -106,7 +106,7 @@ def homepage_view(request):
     return render(request, 'static_pages/homepage.html', context)
 
 def individual_detail(request, name):
-    individual_detail = individual.objects.get(name=name)
+    individual_detail = individual.objects.get(name__icontains=name)
     individual_positions = []
     s3_path_full    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/Full+Resolution/"
     s3_path_icon    = "https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Leadership+Photos/1+x+1+Icons/"
@@ -160,7 +160,7 @@ def individual_detail(request, name):
 
 
 def institution_detail(request, name):
-    institution_detail  = institution.objects.get(name=name)
+    institution_detail  = institution.objects.get(name__icontains=name)
       
     inst_members            = []    #get all people with positions at insitution 
     member_titles           = []    #get titles for all members (duplicates)
