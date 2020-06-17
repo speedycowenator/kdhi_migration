@@ -339,7 +339,7 @@ html = html + """
 	</div>
 	<br>
 	<p font-size:13><i>This daily report is brought to you by the Korea Data History Initiative (KDHI) of the Korea Studies program at the Johns Hopkins School of Advanced International Studies. <br><br>All media presented in the report is written by the Democratic People's Republic of Korea (DPRK). KDHI's DPRK State Media Report is intended solely for research purposes and not the consumption of objective news. </i></p>
-
+	<h6> Rodong Sinmun Articles </h6>
 """.format(now_subject)
 
 
@@ -353,7 +353,7 @@ html_end = """\
 </html>
 """
 body_list_kcna = []
-email_content = html + "<h6> Rodong Sinmun Articles </h6>"
+email_content = html 
 
 for article in article_list:
 	article_strings =  '<h5>'
@@ -363,6 +363,7 @@ for article in article_list:
 	body_list.append(article_strings)
 for formatted_article in body_list:
 	for item in formatted_article:
+		html = html
 		html += item
 email_content = html
 body_list_kcna = ["<h6> KCNA Articles </h6>"]
@@ -392,7 +393,7 @@ msg['Subject'] = "KDHI's DPRK State Media Report for " + now
 
 msg['From'] = gmail_user
 msg['To'] = 'kdhinews@gmail.com'
-recipients = ['crosbysn@gmail.com']
+recipients = ['crosbysn@gmail.com']#,'Rmedico33@gmail.com', 'nslavney@stimson.org', 'spitz@stimson.org', 'mkae@stimson.org', 'iragnone@stimson.org', 'jtown@stimson.org', 'jperson2@jhu.edu', 'cwork@stimson.org']
 msg.add_header('Content-Type', 'text/html')
 msg.set_payload(email_content)
 

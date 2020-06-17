@@ -1,0 +1,80 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="active-body">
+    <div class="center-column-search-bar">
+      <div class="main-search-form w-form">
+        <form id="wf-form-document-search" name="wf-form-document-search" data-name="document-search" method="post" action="#" class="search-hold-block">{% csrf_token %}
+          <label for="name-3" class="search-header">Search</label><input type="text" class="search-field-text w-input" maxlength="256" name="text-search" data-name="text-search" placeholder="Enter your search here." value="{{search_text}}" id="text-search">
+          <div class="refine-block-child">
+            <div class="document-refine-block">
+              <div class="document-refine-block-left">
+              <label for="Sort-Type" class="refine-header">Collection</label>
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="search_model_1" name="search_model_1" data-name="search_model_1" class="w-checkbox-input" value="1987 Democratization Movement"{{search_model_1_check}}><span for="search_model_1" class="checkbox-text w-form-label">1987 Democratization Movement</span></label>
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="search_model_2" name="search_model_2" data-name="search_model_2" class="w-checkbox-input" value="1948-49 Jeju Uprising" {{search_model_2_check}}><span for="search_model_2" class="checkbox-text w-form-label">1948-49 Jeju Uprising</span></label>
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="search_model_3" name="search_model_3" data-name="search_model_3" class="w-checkbox-input" value="1960 April Revolution"{{search_model_3_check}}><span for="search_model_3" class="checkbox-text w-form-label">1960 April Revolution</span></label>
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="search_model_4" name="search_model_4" data-name="search_model_4" class="w-checkbox-input" value="1979 Park Chung-hee Assassination"{{search_model_4_check}}><span for="search_model_4" class="checkbox-text w-form-label">1979 Park Chung-hee Assassination</span></label>
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="search_model_5" name="search_model_5" data-name="search_model_5" class="w-checkbox-input" value="1980 Gwangju Massacre"{{search_model_5_check}}><span for="search_model_5" class="checkbox-text w-form-label">1980 Gwangju Massacre</span></label>
+              </div></div>
+
+
+
+            <div class="document-refine-block">
+              <label for="keyword-selection" class="refine-header">Keywords</label>
+              <select id="keyword-selection" name="keyword-selection" multiple="" data-name="keyword-selection" class="keyword-selection-field w-select">
+                {% for option in keyword_selection %}
+                {{option|safe}}
+                {%endfor%}</select>
+              <div class="keyword-selection-tooltip">Hold down &quot;Control&quot;, or &quot;Command&quot; on a Mac, to select more than one.</div>
+            </div>
+            <div class="document-refine-block">
+              <div class="document-refine-subblock right">
+                <label for="Sort-Type" class="refine-header">Date</label>
+                <div class="date-field">
+                  <label for="date-search-2" class="tooltip-header">After</label>
+                   <input type="date" maxlength="256" name="date-search-start" data-name="date-search-start" id="date-search-2" class="date-search w-input" value="1950-01-01"></div>
+                <div class="date-field spacer"></div>
+                <div class="date-field">
+                  <input type="date" maxlength="256" name="date-search-end" data-name="date-search-end" id="date-searchdate-search-3" class="date-search w-input" value="1990-01-01">
+                  <label for="keyword-selection-2" class="tooltip-header">Before</label></div>
+              </div>
+            </div>
+          </div><input type="submit" value="Search" data-wait="Please wait..." class="submit-button-2 w-button"></form>
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+
+
+      <div class="list-container">
+
+{% for document in document_list %}
+        <div class="list-content-block">
+          <div class="list-content-subblock">
+            <h1 class="heading">{{document.name}}<br></h1>
+          </div>
+          <div class="list-content-subblock">
+            <h1 class="author"><em class="italic-text-2">{{document.collection.name}}</em><br></h1>
+            <div class="div-block-105"></div>
+            <h1 class="author"><em class="italic-text-2">{{document.date}}</em><br></h1>
+          </div>
+          <div class="list-content-subblock">
+            <p class="paragraph">{{document.summary | truncatechars:500}}</p>
+          </div>
+          <div class="list-content-subblock">
+            <a class="view-link" href="{{ document.get_absolute_url }}">View</a>
+          </div>
+        </div>
+{%endfor%}
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

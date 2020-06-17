@@ -17,6 +17,7 @@ urlpatterns = [
 	path('rok-institution/<str:slug>', views.rok_institution_detail, name='rok_institution_detail'),
 	path('rok-institution', views.rok_institution_landing, name='rok_institution_landing'),
 	path('', views.homepage_view, name='homepage'),
+	path('glossary', views.glossary_list, name='glossary_list'),
 	path('glossary/<str:slug>', views.glossary_detail, name='glossary_detail'),
 	path('about', views.about_page, name='about_page'),
 	path('articles/<str:slug>', views.article_detail, name='article_detail'),

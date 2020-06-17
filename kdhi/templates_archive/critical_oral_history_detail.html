@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+  <div class="document-slider">
+    <div class="html-embed-2 w-embed w-iframe"><iframe src="{{coh_item.pdf_location}}" width="100%" height="100%"></iframe></div>
+    <div class="div-block-203">
+      <div class="div-block-205">
+        <h1 class="documents-title foldout">{{coh_item.session}}</h1>
+      </div>
+      <div class="div-block-206">
+        <div class="document-details-header">Session Details</div>
+      </div>
+      <div class="div-block-207">
+        <p class="paragraph-19">{{coh_item.ses_desc}}</p>
+        <h4 class="details-header"><strong>Date</strong><br></h4>
+        <div class="details-item">{{coh_item.ses_date}}</div>
+        <h4 class="details-header"><strong>Host / Sponsor</strong><br></h4>
+        <div class="details-item">{{coh_item.ses_host}}</div>
+        <h4 class="details-header"><strong>Location</strong><br></h4>
+        <div class="details-item">{{coh_item.ses_location}}</div>
+        <h4 class="details-header"><strong>Collection</strong><br></h4>
+        <a href="{{coh_item.collection.get_absolute_url}}" class="details-item">{{coh_item.collection.name}}</a>
+
+      </div><a href="{{coh_item.get_absolute_url}}" class="button-30 w-button">PDF Download</a></div>
+  </div>
+{% endblock %}

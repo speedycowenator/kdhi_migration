@@ -1,0 +1,34 @@
+
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<header id="hero-overlay" class="hero-overlay-3">
+	<div class="centered-container w-container">
+	  <h1>North Korea Glossary</h1>
+	  <p>North Korean State Media is filled with obscure terminology specific to North Korean history. KDHI&#x27;s North Korea Glossary draws from academic research, North Korean primary sources, and South Korean publications to compress Pyongyang&#x27;s mass information into historical briefings which explain what you need to know up front.</p>
+	</div>
+	</header>
+	<div class="section-42">
+	<div class="home-header-container nkglossary">
+	  <div class="div-block-182">
+	    <div class="collection-list-wrapper-25 w-dyn-list">
+	      <div role="list" class="collection-list-25 w-dyn-items">
+	        
+	      	{% for card in glossary_list%}
+	        <div id="w-node-3d91aa8c7343-885b7491" role="listitem" class="collection-item-25 w-dyn-item">
+	          <a href="{{card.get_absolute_url}}" class="glossary-card" style="background-image:url('{{card.image_src}}')">
+	            <div class="div-block-383"></div>
+	            <h1 class="glossary-card-header">{{card.name}}</h1>
+	          </a>
+	        </div>
+	        {% endfor %}
+
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+{% endblock %}
+

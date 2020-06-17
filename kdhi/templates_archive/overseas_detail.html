@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="event-title">{{tracker_item.name}}</h1>
+        <h1 class="event-date">{{tracker_item.event_date}}</h1>
+        <div class="institution-function-block">
+            <h1 class="event-details-header">Details</h1>
+            <p class="event-details-paragraph">{{tracker_item.event_description | safe}}</p></div>
+            <a href="{{tracker_item.event_document}}" class="document-link">Official Meeting Document</a>
+
+        <h1 class="institution-members-header">Participants</h1>        
+            <div class="delegation-full-block">
+
+                <div class="delegate-grid-block">
+                    {% for participant in participant_list %}
+                    <div class="grid-delegate-block">
+                        <img src="{{participant.2}}" alt="" class="delegate-photo-block">           
+                        <a href="{{participant.1}}" class="institution-position-name">{{participant.0}}</a>
+                    </div>
+                
+                <div class="text-block-111 bold"></div>
+                <div class="div-block-317" style="background-image: url('{{result.DPRK_head.get_image_icon}}');"></div>
+                <div class="text-block-111">{{result.DPRK_head.name}}</div>
+
+
+                    {% endfor %}
+                </div>
+            </div>
+
+            </div>
+    
+    <h1 class="institution-members-header">Photos</h1>     <br>   
+    <img src="{{tracker_item.event_photo}}" alt="" class="event-photo"> <br><br><br>
+    <img src="{{tracker_item.event_photo_add_1}}" alt class="event-photo"><br>
+    <img src="{{tracker_item.event_photo_add_2}}" alt class="event-photo"><br>
+    <img src="{{tracker_item.event_photo_add_3}}" alt class="event-photo"><br>
+    
+    </div> 
+    </div>
+    <div class="right-section"></div>
+  </div>
+{% endblock %}

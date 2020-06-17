@@ -20,18 +20,21 @@ from django.utils.html import strip_tags
 import bs4
 import urllib.request
 
-url = 'https://kdhi-archive-code-builder.webflow.io/event'
+url = 'https://kdhi.webflow.io/'
 
 webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
 link = soup.find('link')
-
+webflow_page_data = "5eb9f7c0c3ca3dae2a5b7301"
 
 link_text = (link.get('href'))
 
 def inter_korean_spending_2018(request):
     context = {
         'style_sheet'       : link_text,
+        'webflow_page_data' : webflow_page_data,
+        'page_title'        : 'Inter-Korean Spending: 2018',
+
 
     }
     return render(request, 'static_pages/inter-korean-spending-2018.html', context)
@@ -40,10 +43,15 @@ def research_page(request):
     research_cards = []
     for e in article.objects.all():
         research_cards.append(e)
-
+    featured_research_card =article.objects.latest('create_date')
+    webflow_page_data = "5eb9f7c0c3ca3d253f5b738c"
     context = {
-        'style_sheet'       : link_text,
-        'research_cards'    : research_cards,
+        'webflow_page_data'         : webflow_page_data,
+        'base_site'                 : url,
+        'style_sheet'               : link_text,
+        'research_cards'            : research_cards,
+        'featured_research_card'    : featured_research_card,
+        'page_title'                : 'Research',
 
     }
     return render(request, 'research.html', context)
@@ -51,7 +59,9 @@ def research_page(request):
 
 def about_page(request):
     context = {
+        'webflow_page_data' : webflow_page_data,
         'style_sheet'       : link_text,
+        'page_title'        : 'About',
 
     }
     return render(request, 'static_pages/about.html', context)
@@ -63,6 +73,7 @@ def glossary_detail(request, slug):
     context = {
         'glossary_item'     : glossary,
         'style_sheet'       : link_text,
+        'webflow_page_data' : webflow_page_data,
 
     }
     return render(request, 'glossary_detail.html', context)
@@ -76,9 +87,21 @@ def article_detail(request, slug):
     context = {
         'style_sheet'           : link_text,
         'article'   : article_ref,
+        'webflow_page_data' : webflow_page_data,
         }
         
     return render(request, 'article_detail.html', context)
+
+def glossary_list(request):
+    glossary = glossary_item.objects.all()
+
+    context = {
+        'glossary_list'     : glossary,
+        'style_sheet'       : link_text,
+        'webflow_page_data' : webflow_page_data,
+
+    }
+    return render(request, 'glossary_list.html', context)
 
 
 def homepage_view(request):
@@ -100,6 +123,7 @@ def homepage_view(request):
         'latest_article'            : latest_article,
         'secondary_article_list'    : secondary_article_list,
         'glossary_list'             : glossary_list,
+        'webflow_page_data' : webflow_page_data,
 
     }
     
@@ -154,6 +178,7 @@ def individual_detail(request, name):
             'page_title'            : page_title,
             'bio_toggle'            : bio_toggle,
             'source_toggle'         : source_toggle,
+            'webflow_page_data' : webflow_page_data,
             
             }
     return render(request, 'biographic_page.html', context)
@@ -182,7 +207,7 @@ def institution_detail(request, name):
                 unique_titles.append(member_title)
     for title in unique_titles:
         grouped_members_temp = []
-        for title_holder in position.objects.filter(institution=institution_detail, title=title, position_status="Active"):
+        for title_holder in position.objects.filter(institution=institution_detail, title=title, position_status="Active") | position.objects.filter(institution=institution_detail, title=title, position_status="Likely"):
             title_holder = title_holder.person
             title_holder_name = title_holder.name
             title_holder_url = title_holder.get_absolute_url
@@ -281,6 +306,7 @@ def institution_detail(request, name):
             'add_in_toggle'         : add_in_toggle,
             'org_toggle'            : org_toggle, 
             'add_fig_toggle'        : add_fig_toggle,
+            'webflow_page_data' : webflow_page_data,
 
             }
     
@@ -319,7 +345,8 @@ def rok_individual_detail(request, name_slug):
             'style_sheet'           : link_text,
             'toggle_education'      : toggle_education,
             'toggle_awards'         : toggle_awards, 
-            'toggle_career'         : toggle_career  
+            'toggle_career'         : toggle_career,  
+            'webflow_page_data' : webflow_page_data,
             }
     return render(request, 'rok_biographic_page.html', context)
 
@@ -366,6 +393,7 @@ def rok_institution_detail(request, slug):
             'institution_url'       : institution_detail.official_webpage,
             'institution_src'       : institution_detail.sources_add,
             'style_sheet'           : link_text,
+            'webflow_page_data' : webflow_page_data,
             }
     
     
@@ -383,6 +411,7 @@ def article_list(request):
 
         'article_list'              : article_list, 
         'style_sheet'             : link_text,
+        'webflow_page_data' : webflow_page_data,
                 }
     
     return render(request, 'article_list.html', context)
@@ -396,6 +425,7 @@ def individual_list(request):
 
         'individual_list'       : individual_list, 
         'style_sheet'           : link_text,
+        'webflow_page_data' : webflow_page_data,
     }
     
     return render(request, 'individual_list.html', context)
@@ -436,6 +466,7 @@ def dprk_institution_landing(request):
         'quicksearch_toggle'    : quicksearch_toggle,
         'style_sheet'           : link_text,
         'quicksearch_inst_list' : qs_complex_list,
+        'webflow_page_data' : webflow_page_data,
     }
     
     return render(request, 'dprk_institution_landing.html', context)
@@ -470,6 +501,7 @@ def rok_institution_landing(request):
         'quicksearch_toggle'    : quicksearch_toggle,
         'style_sheet'           : link_text,
         'quicksearch_inst_list' : qs_complex_list,
+        'webflow_page_data' : webflow_page_data,
     }
     
     return render(request, 'rok_institution_landing.html', context)
@@ -492,6 +524,7 @@ def rok_individual_list(request):
 
         'individual_list'       : individual_list, 
         'style_sheet'           : link_text,
+        'webflow_page_data' : webflow_page_data,
     }
 
     return render(request, 'individual_list.html', context)

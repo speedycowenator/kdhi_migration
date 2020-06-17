@@ -3,45 +3,37 @@
 
 {% block content %}
  <div class="body-div">
-    <div class="left-section"></div>
-    <div class="center-section">
-      <div class="biographic-block">
-        <h1 class="event-title">{{tracker_item.name}}</h1>
-        <h1 class="event-date">{{tracker_item.event_date}}</h1>
-        <div class="institution-function-block">
-            <h1 class="event-details-header">Details</h1>
-            <p class="event-details-paragraph">{{tracker_item.event_description | safe}}</p></div>
-            <a href="{{tracker_item.event_document}}" class="document-link">Official Meeting Document</a>
-
-        <h1 class="institution-members-header">Participants</h1>        
-            <div class="delegation-full-block">
-
-                <div class="delegate-grid-block">
-                    {% for participant in participant_list %}
-                    <div class="grid-delegate-block">
-                        <img src="{{participant.2}}" alt="" class="delegate-photo-block">           
-                        <a href="{{participant.1}}" class="institution-position-name">{{participant.0}}</a>
-                    </div>
-                
-                <div class="text-block-111 bold"></div>
-                <div class="div-block-317" style="background-image: url('{{result.DPRK_head.get_image_icon}}');"></div>
-                <div class="text-block-111">{{result.DPRK_head.name}}</div>
-
-
-                    {% endfor %}
-                </div>
-            </div>
-
-            </div>
-    
-    <h1 class="institution-members-header">Photos</h1>     <br>   
-    <img src="{{tracker_item.event_photo}}" alt="" class="event-photo"> <br><br><br>
-    <img src="{{tracker_item.event_photo_add_1}}" alt class="event-photo"><br>
-    <img src="{{tracker_item.event_photo_add_2}}" alt class="event-photo"><br>
-    <img src="{{tracker_item.event_photo_add_3}}" alt class="event-photo"><br>
-    
-    </div> 
+    <div class="left-section">
+        <form><input type="button" class="back-button w-button" value="&lt; Back" onclick="history.back()"></form>
     </div>
-    <div class="right-section"></div>
-  </div>
+    <div class="center-section">
+        <h1 class="meeting-title header">{{tracker_item.name}}</h1>
+        <div class="text-block-89">{{tracker_item.event_date}}</div>
+        <p class="tracker-richtext-content">{{tracker_item.event_description | safe}}</p>
+        <a href="{{tracker_item.event_document}}" class="meeting-document-link{{document_test}}">Official Meeting Document</a>
+        <div class="institution-function-div">
+
+        </div>
+        <div class="participant-div{{participant_test}}">
+            <h1 class="institution-function-header">Participants</h1>        
+            <div class="particpant-container">
+            
+                {% for participant in participant_list %}
+                <div class="institution-members-div">
+                    <img src="{{participant.2}}" alt="" class="institution-member-photo">           
+                    <a href="{{participant.1}}" class="institution-position-name">{{participant.0}}</a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="event-image-container{{image_test}}">
+            <h1 class="event-image-header">Photos</h1>
+            <img src="{{tracker_item.event_photo}}" class="event-image">
+            <img src="{{tracker_item.event_photo_add_1}}" class="event-photo">
+            <img src="{{tracker_item.event_photo_add_2}}" class="event-photo">
+        </div>
+    </div>
+</div>
+
 {% endblock %}

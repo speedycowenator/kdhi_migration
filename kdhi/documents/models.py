@@ -29,6 +29,7 @@ class document_collection(models.Model):
 class document_keyword(models.Model):
     name = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
+    collection          = models.ForeignKey(document_collection, on_delete=models.SET_NULL, null=True, blank=True)
    
     class Meta:
         ordering = ('name',) 

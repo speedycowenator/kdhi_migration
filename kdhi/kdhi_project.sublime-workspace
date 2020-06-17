@@ -4,12 +4,36 @@
 		"selected_items":
 		[
 			[
-				"emai",
-				"email_content"
+				"web",
+				"webflow_page_data"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"auo",
+				"auto_now_add"
+			],
+			[
+				"rem",
+				"REMOVED"
+			],
+			[
+				"ac",
+				"ACTIVE"
 			],
 			[
 				"article",
-				"article_instance"
+				"article_strings"
+			],
+			[
+				"emai",
+				"email_content"
 			],
 			[
 				"utf",
@@ -490,35 +514,88 @@
 			[
 				"favori",
 				"favorited"
-			],
-			[
-				"us",
-				"user_profile"
-			],
-			[
-				"user",
-				"user_data"
-			],
-			[
-				"favorite_str",
-				"favorite_string_list"
-			],
-			[
-				"articl",
-				"article"
-			],
-			[
-				"art",
-				"article_pk"
-			],
-			[
-				"article_pk",
-				"article_pk_list"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "trackers/models.py",
+			"settings":
+			{
+				"buffer_size": 4229,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "from django.shortcuts import render\nfrom django.views.generic import TemplateView, ListView\nfrom django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect\nfrom trackers.models import overseas_tracker, inter_korean_tracker, overseas_topic, country_list\nfrom datetime import date\nimport datetime\nfrom django.db.models import Q\nfrom django.shortcuts import render, get_object_or_404\nfrom django.contrib.auth import login, authenticate\nfrom django.contrib.auth.forms import UserCreationForm\nfrom django.shortcuts import render, redirect\nimport time\nfrom datetime import date, timedelta\nnow = date.today()\nimport re\nimport bs4\nimport urllib.request\n\nurl = 'https://kdhi.webflow.io/'\n#url = 'https://kdhi-archive-code-builder.webflow.io/institution-page'\nwebpage=str(urllib.request.urlopen(url).read())\nsoup = bs4.BeautifulSoup(webpage, features = \"lxml\")\nlink = soup.find('link')\nwebflow_page_data = '5eb9f7c0c3ca3dae2a5b7301'\n\n\n\n\nlink_text = (link.get('href'))\n\n\n\n\ndef heatmap_static(request):\n    context = {\n            'style_sheet'           : link_text,\n            }\n    return render(request, 'heatmap_static.html', context)\n\n\ndocuments.objects.filter(keywords=\"Students\")\n\ndef overseas_tracker_detail(request, slug):\n    tracker_item = overseas_tracker.objects.get(slug=slug)\n    participant_list = []\n    for participant in tracker_item.participant_DPRK.all():\n        participant_name    = participant.name\n        participant_link    = participant.get_absolute_url\n        participant_photo   = participant.get_image_full\n        participant_list_temp = [participant_name, participant_link, participant_photo]\n        participant_list.append(participant_list_temp)\n    try:\n        if len(tracker_item.event_document) != 0:\n            document_test = ''\n        else:\n            document_test = ' blank'\n    except:\n        document_test = ' blank'\n    participant_test = ' blank'\n    if len(participant_list) != 0:\n        participant_test = ''\n    image_test = ' blank'\n    \n    if len(tracker_item.event_photo) != 0:\n        image_test = ''\n\n\n    webflow_page_data = '5eb9f7c0c3ca3d46c75b738a'\n    context = {\n            'webflow_page_data' : webflow_page_data,\n            'tracker_item'      : tracker_item,\n            'participant_list'  : participant_list,\n            'style_sheet'       : link_text,\n            'document_test'     : document_test,\n            'participant_test'  : participant_test,\n            'image_test'        : image_test,\n            }\n    return render(request, 'overseas_detail.html', context)\n\ndef inter_korean_tracker_detail(request, slug):\n    tracker_item = inter_korean_tracker.objects.get(slug=slug)\n    participant_list_dprk = []\n    participant_list_rok = []\n\n    for participant in tracker_item.participant_DPRK.all():\n        participant_name    = participant.name\n        participant_link    = participant.get_absolute_url\n        participant_photo   = participant.icon\n        participant_list_temp = [participant_name, participant_link, participant_photo]\n        participant_list_dprk.append(participant_list_temp)\n    for participant in tracker_item.participant_ROK.all():\n        participant_name    = participant.name\n        participant_link    = participant.get_absolute_url\n        participant_photo   = participant.icon\n        participant_list_temp = [participant_name, participant_link, participant_photo]\n        participant_list_rok.append(participant_list_temp)\n   \n    event_DPRK_head = tracker_item.DPRK_head\n    event_ROK_head  = tracker_item.ROK_head\n    \n    context = {\n        \n            'tracker_item'          : tracker_item,\n            'participant_list_dprk' : participant_list_dprk,\n            'participant_list_rok'  : participant_list_rok,\n            'style_sheet'           : link_text,\n            'event_DPRK_head'       : event_DPRK_head,\n            'event_ROK_head'        : event_ROK_head,\n\n            \n            }\n    return render(request, 'inter_korean_detail.html', context)\n\ndef inter_korean_tracker_list(request):\n    recent_event    = inter_korean_tracker.objects.latest('update_date')\n    events_list     = []\n    for e in inter_korean_tracker.objects.order_by('update_date'):\n        e_title                 = e.name\n        e_date                  = e.event_date\n        e_content               = e.MOU_description\n        e_url                   = e.get_absolute_url\n        e_rok_delegate_list     = []\n        e_dprk_delegate_list    = []\n        e_DPRK_head             = e.DPRK_head\n\n\n        try: \n            for ee in e.participant_DPRK:\n                e_dprk_delegate         = ee.participant_DPRK\n                e_dprk_delegate_name    = e_dprk_delegate.name\n                e_dprk_delegate_url     = e_dprk_delegate.get_absolute_url\n                e_dprk_delegate_icon    = e_dprk_delegate.icon\n                e_dprk_delegate         = [e_dprk_delegate_name, e_dprk_delegate_url, e_dprk_delegate_icon]\n                e_dprk_delegate_list.append(e_dprk_delegate)\n        except:\n            pass\n\n        e_ROK_head             = e.ROK_head\n\n        \n        try: \n            for ee in e.participant_DPRK:\n                e_rok_delegate          = e.participant_ROK\n                e_rok_delegate_name     = e_rok_delegate.name\n                e_rok_delegate_url      = e_rok_delegate.get_absolute_url\n                e_rok_delegate_icon     = e_rok_delegate.icon\n                e_rok_delegate          = [e_rok_delegate_name, e_rok_delegate_url, e_rok_delegate_icon]\n                e_rok_delegate_list.append(e_dprk_delegate)\n        except:\n            pass\n        event_item = [e_title, e_date, e_content, e_url, e_ROK_head, e_DPRK_head]\n\n        events_list.append(event_item)\n    context = {\n        'recent_event'  :   recent_event,\n        'style_sheet'   :   link_text,\n        'events_list'   :   events_list, \n\n    }\n    return render(request, 'inter_korean.html', context)\n\ndef overseas_tracker_list(request):\n    recent_event    = overseas_tracker.objects.latest('event_date')\n    events_list     = []\n    for e in overseas_tracker.objects.order_by('-event_date'):\n        event_item_tags       = []\n        for choice in e.overseas_topics.all():\n            if len(choice.topic) > 1:\n                event_item_tags.append(choice.topic)\n        for choice in e.country_choices.all():\n            if len(choice.country) > 1:\n                event_item_tags.append(choice.country)\n        events_list.append([e, event_item_tags])\n    context = {\n        'recent_event'  :   recent_event,\n        'style_sheet'   :   link_text,\n        'events_list'   :   events_list, \n\n    }\n    return render(request, 'overseas.html', context)\n\n",
+			"file": "trackers/views.py",
+			"file_size": 6838,
+			"file_write_time": 132367347677828006,
+			"settings":
+			{
+				"buffer_size": 6700,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "documents/models.py",
+			"settings":
+			{
+				"buffer_size": 6009,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/institution_page.html",
+			"settings":
+			{
+				"buffer_size": 3080,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/overseas_detail.html",
+			"settings":
+			{
+				"buffer_size": 1680,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/base_generic.html",
+			"settings":
+			{
+				"buffer_size": 29477,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/static_pages/about.html",
+			"settings":
+			{
+				"buffer_size": 7056,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "{% extends \"base_generic.html\" %}\n\n\n{% block content %}\n<div class=\"ik-tracker-body\">\n\t<h1 class=ik-coopeartion-header> Inter-Korean Coopeartion Tracker</h1> \n\t<div class=\"recent-content-box\">\n\t\t<img src=\"{{recent_event.event_photo}}\" alt class=\"recent-content-image\">\n\t\t<a href=\"{{recent_event.get_absolute_url}}\" class=\"recent-content-link w-inline-block\">\n\t\t\t<h1 class=\"recent-content-header\">{{recent_event.name}}</h1></a>\n\t</div>\n\n\t<div class=\"ik-events-holder\" >\n\t\t\n\t{% for event_item in events_list %}\n\t\t<div class=\"event-info-block\">\n\t\t\t<div class=\"event-info-sub-block\">\n\t\t\t\t<a href=\"{{event_item.3}}\" class=\"event-link w-inline-block\">\n\t\t\t\t\t<h1 class=\"meeting-title\">{{event_item.0}}</h1></a>\n\t\t\t\t<div class=\"event-date-block\">\n\t\t\t\t\t<h1 class=\"meeting-date\">{{event_item.1}}</h1>\n\t\t\t\t</div>\n\t\t\t\t<p class=\"event-paragraph\">{{event_item.2|slice:\":500\"}}...</p> \n\t\t\t\t<a href=\"{{event_item.3}}\" class=\"tracker-more\">Details</a>\n\t\t\t</div>\n\t\t\t<div class=\"delegates-block\"> \n\t\t\t\t<div class=\"delegate-holder\"> \n\t\t\t\t\t<div class=\"institution-position-title\">ROK Delegation Head</div>\n\t\t\t\t\t<div class=\"delegate-photo-block\">\n\t\t\t\t\t\t<img src=\"{{event_item.4.icon}}\"  alt class=\"delegate-head-image\" >\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"institution-position-name\">{{event_item.4.name}}</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"delegate-holder\"> \n\t\t\t\t\t<div class=\"institution-position-title\">DPRK Delegation Head</div>\n\t\t\t\t\t<div class=\"delegate-photo-block\">\n\t\t\t\t\t\t<img src=\"{{event_item.5.icon}}\"  alt class=\"delegate-head-image\" >\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"institution-position-name\">{{event_item.5.name}}</div>\n\t\t\t\t</div>\n\n\n\t\t\t</div>\t\n\t\t</div>\n\t{% endfor %}\n\n\t</div>\n</div>\n{% endblock %}\n        event_item = [e_title, e_date, e_content, e_url, [e_ROK_head,  e_rok_delegate_list], [e_DPRK_head, e_dprk_delegate_list]]\n",
+			"file": "templates/inter_korean.html",
+			"file_size": 1852,
+			"file_write_time": 132343221405844796,
+			"settings":
+			{
+				"buffer_size": 1806,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -574,76 +651,86 @@
 	[
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/index",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers"
 	],
 	"file_history":
 	[
+		"/C/Users/Sam/Downloads/kdhi.webflow (3)/dprk/foreign-relations-tracker.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/overseas.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/base_generic.html",
+		"/C/Users/Sam/Downloads/kdhi.webflow (3)/korean-democratization-project/document-collections.html",
+		"/C/Users/Sam/Documents/news_email.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/research.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_collection_landing.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/timeline_collection_landing.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/critical_oral_history_landing.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_list.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/biographic_page.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/institution_page.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/homepage.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/about.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/nausicaa.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/admin.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/models.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/views.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/emailer_test.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_email.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/working_base_generic.html",
+		"/C/Users/Sam/Desktop/four_elements_trainer_v.0.8.7b-pc/Four_Elements_Trainer_v.0.8.7b-pc/renpy/common/00console.rpy",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/settings.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/admin/base_site.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/admin/base.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/email_combined_test.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/html_test.html",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_email_debugger.py",
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/daily_email.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/proxy_test.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/credentials.json",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/gmail_isntall.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/emailer_test.py",
 		"/C/Users/Sam/Anaconda3/Lib/smtplib.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_email_debugger.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/search_console.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/homepage.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_email_korean.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/base_generic.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/daily_email.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_email.py",
 		"/C/Users/Sam/Downloads/credentials.json",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/inter_korean.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/inter_korean_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/overseas_detail.html",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (23)/home-migration.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/views.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/overseas.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/article_import.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/admin.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/biographic_page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_search/views.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/institution_page.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/views.py",
 		"/C/Users/Sam/Documents/Arma 3/BISProfile.json",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/models.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/models.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/critical_oral_history_landing.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_collection_landing.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_search.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/korean_democratization_page.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/timeline_collection_landing.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/one_frame_base.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/glossary_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi_search/urls.py",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (22)/search-console-general.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/index/search_results.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/admin.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/views.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/models.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/documents/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/rok_institution_landing.html",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (20)/search-console.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/urls.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/urls.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/kdhi/settings.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/views.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/inter-korean-spending-2018.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/templates/index/search_results.html",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (19)/democratization-pages/documents.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/collection_page.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/static_pages/about.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/document_list.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/critical_oral_history_detail.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/timeline_test.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/dprk_institution_landing.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/individual_list.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/institution_list.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/research.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/rok_biographic_page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/rok_institution_page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/templates/article_detail.html",
@@ -658,7 +745,6 @@
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/rok_biographic_page.html",
 		"/C/Users/Sam/Downloads/kdhi-archive-code-builder.webflow (16)/navbar-page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/static_pages/homepage.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/admin.py",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/dprk_institution_landing.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/institution_page.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/rok_institution_page.html",
@@ -699,17 +785,7 @@
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/inter_korean.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/tracker_base.html",
 		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/object_test.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/highlighter.py",
-		"/C/Users/Sam/Downloads/collection-source-list.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/news_archive/templates/index/article_detail.html",
-		"/C/Users/Sam/django_projects/locallibrary/import_article.py",
-		"/C/Users/Sam/kcna_import.py",
-		"/C/Users/Sam/import.py",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/articles_import.csv",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/overseas_detail.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/trackers/templates/overseas.html",
-		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/main_site/templates/static_pages/inter-korean-spending-2018.html",
-		"/C/Users/Sam/Downloads/Inter-Korean Spending (2018).html"
+		"/C/Users/Sam/Documents/GitHub/kdhi_migration/kdhi/highlighter.py"
 	],
 	"find":
 	{
@@ -727,6 +803,35 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"favi",
+			"search-button-14",
+			"data",
+			"alt=\"Dropdown Arrow\"",
+			"dropdown arrow",
+			"anal",
+			"resear",
+			"document",
+			"<a href",
+			"form",
+			"<a href",
+			"GLOSS",
+			"glossary",
+			"name=name",
+			"name__icontains",
+			"biograp",
+			"static",
+			"statuc",
+			"\r",
+			"split",
+			"_second",
+			"if ",
+			"if date",
+			"now",
+			"href",
+			"kcna articles",
+			"    ",
+			"        ",
+			"\t'''",
 			"email_content",
 			"msg = _f",
 			"asci",
@@ -785,6 +890,13 @@
 		"regex": false,
 		"replace_history":
 		[
+			"search-button-truncated",
+			"",
+			"\n<a href",
+			"",
+			"\t",
+			"\t\t",
+			"\t",
 			"",
 			"name",
 			"<p class=\"search-result-warning-text\">",
@@ -810,8 +922,248 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "trackers/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								598,
+								598
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 276.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "trackers/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6700,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1193,
+								1201
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 759.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "documents/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6009,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1096,
+								1096
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 204.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "templates/institution_page.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1018,
+								1018
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 69.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/overseas_detail.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1680,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								758,
+								758
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/base_generic.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 29477,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								323,
+								323
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/static_pages/about.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7056,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2436,
+								2436
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "templates/inter_korean.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1806,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								800,
+								800
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 138.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -896,7 +1248,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 221.0,
+	"side_bar_width": 315.0,
 	"status_bar_visible": false,
 	"template_settings":
 	{

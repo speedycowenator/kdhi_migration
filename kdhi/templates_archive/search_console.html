@@ -1,0 +1,293 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="active-body">
+  <div class="search-columns">
+    <div class="search-columns-main">
+    <div class="center-column-search-bar-general">
+      <div class="main-search-form w-form">
+        <form id="wf-form-document-search" name="wf-form-document-search" data-name="document-search" method="post" action="#" class="search-hold-block">{% csrf_token %}
+          <label for="name-3" class="search-header">Search</label>
+
+          <input type="text" class="search-field-text w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" value="{{search_text}}">
+
+          <div class="refine-block-child-general">
+            <label for="Sort-Type" class="refine-header-general">Collection</label>
+            <div class="collection-search-refine-block">
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="document_toggle" name="document_toggle" data-name="document_toggle" class="w-checkbox-input" {{document_toggle_check}} value="True" ><span for="document_toggle" class="checkbox-text w-form-label">Documents</span></label>
+
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="article_toggle" name="article_toggle" data-name="article_toggle" class="w-checkbox-input"{{article_toggle_check}} value="True" ><span for="article_toggle" class="checkbox-text w-form-label" >Articles</span></label>
+
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="overseas_tracker_toggle" name="overseas_tracker_toggle" data-name="checkbox" class="w-checkbox-input" {{overseas_tracker_toggle_check}} value="True" ><span for="overseas_tracker_toggle" class="checkbox-text w-form-label">Foreign Relations Tracker</span></label>
+
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="inter_tracker_toggle" name="inter_tracker_toggle" data-name="inter_tracker_toggle" class="w-checkbox-input" {{inter_tracker_toggle_check}} value="True"><span for="inter_tracker_toggle" class="checkbox-text w-form-label" >Inter-Korean Tracker</span></label>
+
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="individual_toggle" name="individual_toggle" data-name="individual_toggle" class="w-checkbox-input" {{individual_toggle_check}} value="True" ><span for="individual_toggle" class="checkbox-text w-form-label">Biographies</span></label>
+
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="institution_toggle" name="institution_toggle" data-name="institution_toggle" class="w-checkbox-input" {{institution_toggle_check}} value="True" ><span for="institution_toggle" class="checkbox-text w-form-label">Institutions</span></label>
+
+              <label class="w-checkbox checkbox-field"><input type="checkbox" id="glossary_item_toggle" name="glossary_item_toggle" data-name="glossary_item_toggle" class="w-checkbox-input" {{glossary_item_toggle_check}} value="True"><span for="glossary_item_toggle" class="checkbox-text w-form-label" >Glossary Items</span></label>
+            </div>
+          </div>
+          <p class="search-warning-text">For advanced search options, please use the collection specific search engines found on their respective landing pages. </p>
+          <input type="submit" value="Search" data-wait="Please wait..." class="submit-button-2 w-button"></form>
+      </div>
+
+
+
+      <div class="general-search-result-container">
+            
+          {# ------- DOCUMENTS ------- #}
+            <div class="model-search-block {{document_toggle_check}}" id="Documents">
+              <h1 class="model-section-header">Documents</h1>
+
+              {# no results div #}
+              <div class="no-results-div {{document_no_result_toggle}}">
+              <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+              {%for result in document_toggle_check_results %}
+              <div class="document-section page">
+                <div class="document-hold-div">
+                  <div class="document-detail-div">
+                    <h1 class="document-title">{{result.name}}</h1>
+                    <div class="documenta-detail-sub">
+                      <div class="document-detail-sub-left">
+                        <div class="document-detail">Creator:</div>
+                      </div>
+                      <div class="document-detail-sub-right">
+                        <div class="document-detail-content">{{result.creator}}</div>
+                      </div>
+                    </div>
+                    <div class="documenta-detail-sub">
+                      <div class="document-detail-sub-left">
+                        <div class="document-detail">Creation Date:</div>
+                      </div>
+                      <div class="document-detail-sub-right">
+                        <div class="document-detail-content">{{result.date}}</div>
+                      </div>
+                    </div>
+                    <div class="documenta-detail-sub">
+                      <div class="document-detail-sub-left">
+                        <div class="document-detail">Contents:</div>
+                      </div>  
+                      <div class="document-detail-sub-right">
+                        <div class="document-detail-content">{{result.summary}}</div>
+                      </div>
+                    </div>
+                  </div>  
+                  <div class="document-function-div"><a href="{{result.get_absolute_url}}" class="view-buttons w-button">Document Page</a></div>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+
+          {# ------- ARTICLES ------- #}
+
+            <div class="model-search-block {{article_toggle_check}}" id="Articles">
+              <h1 class="model-section-header">Articles</h1>
+
+              {# no results div #}
+              <div class="no-results-div {{articles_no_result_toggle}}">
+              <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+              {%for result in article_toggle_check_results %}
+              <div class="list-content-block">
+                <div class="list-content-subblock"><a href="{{result.get_absolute_url}}" class="heading">{{result.name}}</a></div>
+                <div class="list-content-subblock">
+                  <p class="paragraph">{{result.bluff}}</p>
+                </div>
+                <div class="list-content-subblock">
+                  <div class="document-function-div"><a href="{{result.get_absolute_url}}" class="view-buttons w-button">Article Page</a></div></div>
+              </div>
+              {%endfor%}
+            </div>
+
+          {# ------- BIOGRAPHIES ------- #}
+
+            <div id="Biographies" class="model-search-block {{individual_toggle_check}}">
+              <h1 class="model-section-header">Biographies</h1>
+
+              {# no results div #}
+              <div class="no-results-div {{bio_no_result_toggle}}">
+              <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+              <div class="biography-search-grid">
+              {%for result in individual_toggle_check_results %}
+    
+              <div class="list-content-block">
+                <div class="list-content-subblock"><a href="{{result.0.get_absolute_url}}" class="heading">{{result.0.name}}</a></div>
+                <div class="list-content-subblock">
+                  <div class="div-block-105"></div>
+                </div>
+                <div class="bio-block">
+                  <div class="image-block"><img src="{{result.0.get_image_icon}}" alt="" class="search-bio-image"></div>
+                  <div class="info-block">
+                    <h1 id="Articles" class="search-bio-position-header">Positions</h1>
+                    {% for position in result.1 %}
+                    <div class="bposition bpol">
+                      <div class="search-bio-institution">{{position.0}}</div>
+                      <div class="search-bio-title">{{position.1}}</div>
+                    </div>
+                    {%endfor%}
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+            </div></div>
+
+
+         {# ------- Inter-Korean Tracker ------- #}
+        <div class="model-search-block {{inter_tracker_toggle_check}}" id="Inter-Korean-Tracker">
+          <h1 class="model-section-header">Inter-Korean Tracker</h1>
+
+              {# no results div #}
+              <div class="no-results-div {{inter_no_result_toggle}}">
+              <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+          {%for result in inter_tracker_toggle_check_results %}
+          <div class="event">
+            <div class="div-block-310">
+              <a href="{{result.get_absolute_url}}" class="event-link-2 w-inline-block">
+                <div class="div-block-133">
+                  <h1 class="meeting-title-2 blank">{{result.name}}</h1>
+                </div>
+              </a>
+              <div class="div-block-135">
+                <h1 class="meeting-info">{{result.event_date}}</h1>
+
+              </div>
+              <div class="category-box">
+                {# tags haven't been implemented yet #}
+                {#<div class="event-category category-inlay">Tag</div> #}
+                {#<div class="event-category category-inlay">Tag</div> #}
+                {#<div class="event-category category-inlay">Tag</div> #}
+              </div>
+              <p class="tracker-description">{{result.MOU_description | truncatechars:500}}</p>
+            </div>
+            <div class="div-block-318">
+              <div class="div-block-315-copy">
+                <div id="ROK" class="div-block-318">
+                  <div class="text-block-111 bold">ROK Delegation Head</div>
+                  <div class="div-block-317 rok" style="background-image: url('{{result.ROK_head.get_image_icon}}');"></div>
+                  <div class="text-block-111">{{result.ROK_head.name}}</div>
+                </div>
+                <div id="DPRK" class="div-block-318">
+                  <div class="text-block-111 bold">DPRK Delegation Head</div>
+                  <div class="div-block-317" style="background-image: url('{{result.DPRK_head.get_image_full}}');"></div>
+                  <div class="text-block-111">{{result.DPRK_head.name}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+
+
+
+         {# ------- Overseas Tracker ------- #}
+        <div class="model-search-block {{overseas_tracker_toggle_check}}" id="Overseas-Tracker">
+          <h1 class="model-section-header">Foreign Relations Tracker</h1>
+
+              {# no results div #}
+              <div class="no-results-div {{overseas_no_result_toggle}}">
+              <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+          {%for result in overseas_tracker_toggle_check_results %}
+          <div class="event">
+            <div class="div-block-310">
+              <a href="{{result.get_absolute_url}}" class="event-link-2 w-inline-block">
+                <div class="div-block-133">
+                  <h1 class="meeting-title-2 blank">{{result.name}}</h1>
+                </div>
+              </a>
+              <div class="div-block-135">
+                <h1 class="meeting-info">{{result.event_date}}</h1>
+
+              </div>
+              <div class="category-box">
+                {# tags haven't been implemented yet #}
+                {#<div class="event-category category-inlay">Tag</div> #}
+                {#<div class="event-category category-inlay">Tag</div> #}
+                {#<div class="event-category category-inlay">Tag</div> #}
+              </div>
+              <p class="tracker-description">{{result.event_description | truncatechars:500}}</p>
+            </div>
+            <div class="div-block-318">
+              <div class="div-block-315-copy">
+                <div id="DPRK" class="div-block-318">
+                  <div class="text-block-111 bold">Delegation Head</div>
+                  <div class="div-block-317" style="background-image: url('{{result.DPRK_head.get_image_full}}');"></div>
+                  <div class="text-block-111">{{result.DPRK_head.name}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+
+
+         {# ------- Institution ------- #}
+          <div id="Institutions" class="model-search-block {{institution_toggle_check}}">
+          <h1 class="model-section-header">Institutions</h1>
+      
+              {# no results div #} 
+
+              <div class="no-results-div toggle">
+                <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+          {% for result in institution_toggle_check_results %}
+          <div class="list-content-block">
+            <div class="list-content-subblock"><a href="{{result.get_absolute_url}}" class="heading">{{result.name}}</a></div>
+            <div class="list-content-subblock">
+              <p id="institution-bluff" class="paragraph">{{result.function | truncatechars:500 | striptags}}</p>
+            </div>
+            <div class="list-content-subblock"></div>
+          </div>
+          {%endfor%}
+        </div>
+
+
+         {# ------- Glossary Items ------- #}
+          <div class="model-search-block {{glossary_item_toggle_check}}" id="Glossary">
+          <h1 class="model-section-header">Glossary Items</h1>
+          
+              {# no results div #}
+              <div class="no-results-div {{glossary_no_result_toggle}}">
+              <p class="search-result-warning-text">No results found within this collection. </p>
+              </div>
+
+          {% for result in glossary_item_toggle_check_results %}
+          <div class="list-content-block">
+            <div class="list-content-subblock"><a href="{{result.get_absolute_url}}" class="heading">{{result.name}}</a></div>
+            <div class="list-content-subblock">
+              <p id="institution-bluff" class="paragraph">{{result.bluff_content | truncatechars:500}} </p>
+            </div>
+            <div class="list-content-subblock"></div>
+          </div>
+          {%endfor%}
+        </div>
+
+
+  
+  </div></div>
+  <div class="search-columns-right">   
+    <div class="search-columns-right-slide">
+        <h1 class="quicknav-header">Quick-Navigation</h1>
+        <a href="#Documents" class="search-navigation-button">Documents</a>
+        <a href="#Articles" class="search-navigation-button">Articles</a>
+        <a href="#Biographies" class="search-navigation-button">Biographies</a>
+        <a href="#Institution" class="search-navigation-button">Institutions</a>
+        <a href="#Inter-Tracker" class="search-navigation-button">Inter-Korean Tracker</a>
+        <a href="#Overseas-Tracker" class="search-navigation-button">Foreign Tracker</a></div>
+        <a href="#Glossary" class="search-navigation-button">Glossary</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+   

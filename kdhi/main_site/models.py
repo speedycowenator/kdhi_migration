@@ -20,7 +20,9 @@ class glossary_item(models.Model):
     bluff_content               = models.CharField(max_length=500)
     content                     = RichTextField()
     update_date = models.DateField(auto_now=True)
-
+    class Meta:
+        ordering = ('name',)   
+ 
     def __str__(self):
         return self.slug
 
@@ -127,11 +129,13 @@ class position(models.Model):
     ACTIVE      = "Active"  
     UNCLEAR     = "Unclear"
     REMOVED     = "Removed"
+    LIKELY      = "Likely"
 
     position_status_choices = [
         (ACTIVE, "Active"),
+        (LIKELY, "Likely"),
         (UNCLEAR, "Unclear"),
-        (REMOVED ,"Removed"),
+        (REMOVED, "Removed"),
 
         ]
 

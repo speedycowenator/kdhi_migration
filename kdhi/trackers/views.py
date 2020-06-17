@@ -16,11 +16,14 @@ import re
 import bs4
 import urllib.request
 
-url = 'https://kdhi-archive-code-builder.webflow.io/event'
-
+url = 'https://kdhi.webflow.io/'
+#url = 'https://kdhi-archive-code-builder.webflow.io/institution-page'
 webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
 link = soup.find('link')
+webflow_page_data = '5eb9f7c0c3ca3dae2a5b7301'
+
+
 
 
 link_text = (link.get('href'))
@@ -45,13 +48,31 @@ def overseas_tracker_detail(request, slug):
         participant_photo   = participant.get_image_full
         participant_list_temp = [participant_name, participant_link, participant_photo]
         participant_list.append(participant_list_temp)
-
+    try:
+        if len(tracker_item.event_document) != 0:
+            document_test = ''
+        else:
+            document_test = ' blank'
+    except:
+        document_test = ' blank'
+    participant_test = ' blank'
+    if len(participant_list) != 0:
+        participant_test = ''
+    image_test = ' blank'
     
+    if len(tracker_item.event_photo) != 0:
+        image_test = ''
+
+
+    webflow_page_data = '5eb9f7c0c3ca3d46c75b738a'
     context = {
-        
-            'tracker_item' : tracker_item,
-            'participant_list' : participant_list,
-            'style_sheet' : link_text
+            'webflow_page_data' : webflow_page_data,
+            'tracker_item'      : tracker_item,
+            'participant_list'  : participant_list,
+            'style_sheet'       : link_text,
+            'document_test'     : document_test,
+            'participant_test'  : participant_test,
+            'image_test'        : image_test,
             }
     return render(request, 'overseas_detail.html', context)
 
@@ -138,16 +159,17 @@ def inter_korean_tracker_list(request):
     return render(request, 'inter_korean.html', context)
 
 def overseas_tracker_list(request):
-    recent_event    = overseas_tracker.objects.latest('-event_date')
+    recent_event    = overseas_tracker.objects.latest('event_date')
     events_list     = []
     for e in overseas_tracker.objects.order_by('-event_date'):
-        event_item_topics       = []
-        event_item_countries     = []
+        event_item_tags       = []
         for choice in e.overseas_topics.all():
-            event_item_topics.append(choice)
+            if len(choice.topic) > 1:
+                event_item_tags.append(choice.topic)
         for choice in e.country_choices.all():
-            event_item_countries.append(choice)
-        events_list.append([e, event_item_topics, event_item_countries])
+            if len(choice.country) > 1:
+                event_item_tags.append(choice.country)
+        events_list.append([e, event_item_tags])
     context = {
         'recent_event'  :   recent_event,
         'style_sheet'   :   link_text,

@@ -1,0 +1,77 @@
+
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="institution-name">{{institution_name}}</h1>
+        <h1 class="institution-korean">{{institution_korean}}</h1>
+        <div class="institution-function-div">
+        <h1 class="biographic-biography-header">Function</h1>
+        <p class="institutions-function-paragraph">{{institution_function|safe}} </p></div>
+
+        <div class = 'member-holder'>
+        <h1 class="institution-members-header">Members</h1>        
+        {% for position in inst_member_dic %}
+        <h1 class="institution-members-title">{{position.0}}</h1><p></p>        
+            <div class="bio-holding-div">
+            {% for individual in position.1 %}
+            <div class="individual-holder">
+            <img src="{{individual.2}}" alt="" class="figure-image">           
+            <a href="{{individual.1}}" class="figure-link-text">{{individual.0}}</a>
+            </div>
+            {% endfor %}
+            </div>
+            {% endfor %}
+
+        </div>  
+        <div class="institution-function-div {{add_fig_toggle}}">
+        <h1 class="biographic-biography-header ">Additional Senior Figures</h1>
+        <p class="institutions-function-paragraph">{{institution_figs|safe|linebreaks }} </p></div>
+
+        <div class="institution-function-div {{org_toggle}}" >
+        <h1 class="biographic-biography-header">Organization</h1>
+        <p class="institutions-function-paragraph">{{institution_org|safe}} </p></div>
+
+        <div class="institution-function-div {{add_in_toggle}}">
+        <h1 class="biographic-biography-header">Additional Information</h1>
+        <p class="institutions-function-paragraph">{{institution_add|safe|linebreaks }} </p></div>
+
+        <div class="institution-function-div {{source_toggle}}">
+        <h1 class="biographic-biography-header">Sources</h1>
+        <p class="institutions-function-paragraph">{{institution_src|safe|linebreaks }} </p></div>
+   
+    </div>
+    </div>
+
+  </div>
+  
+  
+{% endblock %}
+    <div class="right-section">
+    <h1 class="institution-korean">Related Institutions</h1>
+        <h1 class="related-institution-party">Party</h1>
+        <div class="related-institution-holding">
+        {% for inst in related_party %}
+        <a href="{{inst.get_absolute_url}}" class="basic-line-text">{{inst.name}}</a>
+        {% endfor %}
+        </div>
+
+        <h1 class="related-institution-state">State</h1>
+        <div class="related-institution-holding">
+        {% for inst in related_state %}
+        <a href="{{inst.get_absolute_url}}" class="basic-line-text">{{inst.name}}</a>
+        {% endfor %}
+        </div>
+
+        <h1 class="related-institution-military">Military</h1>
+        <div class="related-institution-holding">
+        {% for inst in related_military %}
+        <a href="{{inst.get_absolute_url}}" class="basic-line-text">{{inst.name}}</a>
+        {% endfor %}
+        </div>
+
+    </div>

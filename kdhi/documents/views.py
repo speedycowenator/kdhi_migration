@@ -17,7 +17,7 @@ from django.shortcuts import render, redirect
 import bs4
 import urllib.request
 
-url = 'https://kdhi-archive-code-builder.webflow.io/event'
+url = 'https://kdhi.webflow.io/'
 
 webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")

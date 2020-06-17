@@ -1,0 +1,25 @@
+
+{% extends "base_generic.html" %}
+{% block content %}
+
+<div class="active-body">
+    <div class="article-sidebar"></div>
+    <div class="article-column">
+    	<div class="metadata-block">
+		  <form method="post">
+		    {% csrf_token %}
+		    {{ form.as_p }}
+		    <button type="submit">Sign up</button>
+		  </form>
+		</div>
+		<h1 class="title top">Sign up</h1>
+		<h2 class="author detail">{{ article.date_publication }}</h2>
+		<h2 class="author detail">{{ article.author }}</h2></div>
+		<p class="paragraph">{{ article.summary }}</p>
+</div></div>
+{% endblock %}
+
+
+
+
+

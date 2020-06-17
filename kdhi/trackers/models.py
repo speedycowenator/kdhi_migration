@@ -39,10 +39,13 @@ class overseas_tracker(models.Model):
     event_date          = models.DateField(null=True, blank=True)
     event_return        = models.DateField(null=True, blank=True)
     event_photo         = models.URLField(max_length=200, blank=True)
+    event_photo_credit  = models.CharField(max_length=100, blank=False, default="MOU")
     event_photo_add_1   = models.URLField(max_length=200, blank=True)
     event_photo_add_2   = models.URLField(max_length=200, blank=True)
     event_photo_add_3   = models.URLField(max_length=200, blank=True)
     update_date         = models.DateField(auto_now=True)
+    created_date          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
 
     class Meta:
         ordering = ('-event_date', 'name',)
@@ -74,6 +77,8 @@ class inter_korean_tracker(models.Model):
     event_photo_add_2   = models.URLField(max_length=200, blank=True)
     event_photo_add_3   = models.URLField(max_length=200, blank=True)
     update_date          = models.DateField(auto_now=True)
+    created_date          = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    event_photo_credit  = models.CharField(max_length=100, blank=False, default="MOU")
 
  
     class Meta:

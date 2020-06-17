@@ -1,0 +1,159 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="featured-slider light">
+    <div data-delay="5000" data-animation="cross" data-autoplay="1" data-duration="600" data-infinite="1" class="slider-3 w-slider">
+      <div class="w-slider-mask">
+        <div class="featured-slider-one w-slide">
+          <div class="w-container">
+            <div class="featured-slider-content light">
+              <h1 class="featured-slider-header">Korean Democratization Project<br></h1>
+              <p class="featured-slider-text">Search KDHI&#x27;s growing archive of primary sources documenting South Korea&#x27;s movement towards democracy. Browse through curated collections of personal journals, diplomatic cables, and government memos or search on your own.</p><a href="{% url 'korean_democratization_project_landing' %}" class="button-27 w-button">Explore the History</a></div>
+          </div>
+        </div>
+        <div class="featured-slider-two w-slide">
+          <div class="w-container">
+            <div class="featured-slider-content light">
+              <h1 class="featured-slider-header">DPRK State Media Archive<br></h1>
+              <p class="featured-slider-text">Research visual and print media from North Korea&#x27;s government for free. Join our newsletter and receive daily reports on newly published state media articles from the Korean Central News Agency (KCNA) and the Rodong Sinmun.</p><a href="{% url 'search_results' %}" target="_blank" class="button-27 w-button">Search our database</a></div>
+          </div>
+        </div>
+        <div class="featured-slider-three w-slide">
+          <div class="w-container">
+            <div class="featured-slider-content light">
+              <h1 class="featured-slider-header">Meet North Korea&#x27;s New Government<br></h1>
+              <p class="featured-slider-text">View KDHI&#x27;s latest North Korea leadership chart accounted for changes at the December 2019 Workers&#x27; Party of Korea plenary meeting. Use our interactive map or download the poster.</p><a href="{% url 'dprk_institution_landing' %}" class="button-27 w-button">Navigate the DPRK Government Map</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow left w-slider-arrow-left">
+        <div class="icon1 w-icon-slider-left"></div>
+      </div>
+      <div class="arrow right w-slider-arrow-right">
+        <div class="icon1 w-icon-slider-right"></div>
+      </div>
+      <div class="slide-navigator w-slider-nav w-round"></div>
+    </div>
+</div>
+
+<div class="research-and-analysis">
+  <div class="home-header-container">
+    <h1 class="home-header">Research &amp; Analysis</h1>
+  </div>
+  <div class="featured-articles-block">
+    <div class="primary-article-block"> 
+      <a href="{{latest_article.get_absolute_url}}" class="article-box-title-block w-inline-block">
+        <h1 class="article-header">{{latest_article.name}}</h1></a>
+    </div>
+
+    <div class="secondary-article-holding-right">
+    {% for article_temp in secondary_article_list %}
+      <div class="secondary-article-block" style="background-image: url('{{article_temp.icon_image}}');" > 
+        <a href="{{article_temp.get_absolute_url}}" class="article-box-title-block w-inline-block">
+          <h1 class="article-header">{{article_temp.name}}</h1>
+        </a>
+      </div>
+    {% endfor %}  
+    </div>
+  </div>
+</div>
+
+<div class="tool-and-resources">
+  <div class="home-header-container"> 
+    <h1 class="home-header">Tools and Resources</h1>
+  </div>
+  <div class="featured-articles-block">
+    <div class="secondary-article-holding-left">
+      <div class="secondary-article-block" style="background-image: url('https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Timeline+Assets/KDJ+Returns+to+Korea.jpg');" > 
+        <a href="{% url 'critical_oral_history_landing' %}" class="article-box-title-block w-inline-block">
+          <h1 class="article-header">Critical Oral Histories</h1></a>
+      </div>
+      <div class="secondary-article-block" style="background-image: url('https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Misc+Assets/pak-mean-mugging.jpg');" > 
+        <a href="{% url 'timelines_landing' %}" class="article-box-title-block w-inline-block">
+          <h1 class="article-header">Historical Timelines</h1></a>
+      </div>
+    </div>
+    <div class="primary-article-block" style="background-image: url('https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Site+Items/democratization-landing-doc.png');"> 
+      <a href="{% url 'documents_landing' %}" class="article-box-title-block w-inline-block" >
+        <h1 class="article-header">Primary Document Collections</h1></a>
+    </div>
+  </div>
+</div>
+
+<div class="institution-briefings">
+  <div id="Bios" class="home-header-parent leadership">
+    <div class="home-header-container">
+      <h1 class="home-header">INSTITUTION BRIEFINGS</h1>
+    </div>
+  </div>
+  <div class="institution-and-leadership-block-holder">
+    <a href="{% url 'dprk_institution_landing' %}" class="nk-institution-briefing-pannel w-inline-block">
+      <div class="container-22 w-container">
+        <h1 class="heading-117">North Korea<br></h1>
+      </div>
+    </a>
+    <a href="{% url 'rok_institution_landing' %}" class="sk-institution-briefing-pannel w-inline-block">
+      <div class="container-22 w-container">
+        <h1 class="heading-117">South Korea<br></h1>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="leadership-profiles">
+    <div id="Institutions" class="home-header-parent _1a">
+      <div class="home-header-container">
+        <h1 class="home-header">Leadership Profiles</h1>
+      </div>
+    </div>
+    <div class="institution-and-leadership-block-holder">
+      <a href="{% url 'dprk_individual_list' %}" class="nk-institution-briefing-pannel leadpro w-inline-block">
+        <div class="container-22 w-container">
+          <h1 class="heading-117">North Korea<br></h1>
+        </div>
+      </a>
+      <a href="{% url 'rok_individual_list' %}" class="sk-institution-briefing-pannel leadpro w-inline-block">
+        <div class="container-22 w-container">
+          <h1 class="heading-117">South Korea<br></h1>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5d759e9efc69ff440ee09800" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+
+
+
+
+
+{% endblock %}
+
+<div id="tester" class="section-16">
+    <div id="Glossary" class="home-header-parent _1a">
+      <div class="home-header-container">
+        <h1 class="home-header">North Korea glossary</h1>
+        <div class="div-block-182">
+          
+{% for glossary_card in glossary_list %}
+          <div class="glossary-card" style="background-image: url('{{glossary_card.image_src}}');">
+            <div class="glossary-card-band">
+              <a href="{{glossary_card.get_absolute_url}}" class="link-block-16 w-inline-block">
+                <h1 class="glossary-card-header">{{glossary_card.title}}</h1>
+              </a>
+            </div>
+            <div class="card-internal-active">
+              <a href="{{glossary_card.get_absolute_url}}" class="link-block-6 w-inline-block">
+                <p class="paragraph-15">{{glossary_card.bluff_content }}</p>
+              </a>
+            </div>
+          </div>
+
+{% endfor %}
+
+          
+        </div>
+      </div>
+    </div>
+  </div>

@@ -26,5 +26,6 @@ urlpatterns = [
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('search/', include('kdhi_search.urls')),
     path('video/', include('video_archive.urls')),
+    path('user/', include('user.urls')),  
 
 ]

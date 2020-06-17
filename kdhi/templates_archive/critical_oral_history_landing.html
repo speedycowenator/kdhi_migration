@@ -1,0 +1,48 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+
+  <div class="single-frame-body">
+
+    <header id="hero" class="democratization-sub-hero">
+
+      <div class="flex-container w-container">
+
+        <div class="democrtization-sub-hero-info-div">
+
+          <h1 class="democrtization-sub-hero-info-header">Critical Oral History</h1>
+
+          <p class="democrtization-sub-hero-info-text">KDHI's Korean Democratization Project features collections of oral perspectives from those who witnessed, took part in, and extensively researched major events in South Korea's history that shaped the country to the present day.‍‍‍</p>
+
+        </div>
+
+        <div class="democrtization-sub-hero-info-mask"><img src='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Timeline+Assets/KDJ+Returns+to+Korea.jpg' alt="" class="democrtization-sub-hero-info-hero"></div>
+
+      </div>
+
+    </header>
+
+    <div class="collection-selection-div">
+{# featured item #}
+      <a href="{% url 'critical_oral_history' session=featured_card.session %}" class="collection-card-featured w-inline-block" style="background-image: url('{{featured_card.hero}}');">
+
+        <div class="collection-card-band">
+
+          <h1 class="collection-card-band-header">{{featured_card.session}}</h1>
+
+        </div>
+
+      </a>
+
+      <div class="collection-selection-grid">
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+
+
+

@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'trackers',
     'documents',
     'kdhi_search',
+    'user',
+    'media_archive',
 ]
 
 MIDDLEWARE = [

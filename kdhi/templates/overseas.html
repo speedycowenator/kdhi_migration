@@ -3,44 +3,59 @@
 
 {% block content %}
 
-<div class="ik-tracker-body">
-	<h1 class=ik-coopeartion-header> DPRK Foregin Relations Tracker</h1> 
-	{#<div class="recent-content-box">#}
-	{#	<img src="{{recent_event.event_photo}}" alt class="recent-content-image">#}
-	{#	<a href="{{recent_event.get_absolute_url}}" class="recent-content-link w-inline-block">#}
-	{#		<h1 class="recent-content-header">{{recent_event.name}}</h1></a>#}
-	{#</div> #}
-
-	<div class="ik-events-holder" >
-		{% for event_item in events_list %}
-			<div class="event-info-block">
-				<div class="event-info-sub-block">
-					<a href="{{event_item.0.get_absolute_url}}" class="event-link w-inline-block">
-						<h1 class="meeting-title">{{event_item.0.name}}</h1></a>
-					<div class="event-date-block">
-						<h1 class="meeting-date">{{event_item.0.event_date}}</h1>
-					</div>
-					<p class="event-paragraph">{{event_item.0.event_description|slice:":500" | striptags}}...</p> 
-					<a href="{{event_item.0.get_absolute_url}}" class="tracker-more">Details</a>
-
+<div class="tracker-hero">
+	<div class="tracker-hero-subdiv">
+		<h1 class="tracker-hero-heading">DPRK Foreign Relations Tracker</h1>
+		<div role="listitem" class="tracker-hero-content-div w-dyn-item" style="background-image: url('{{recent_event.event_photo}}');">
+			<a href="{{recent_event.get_absolute_url}}" class="tracker-hero-link-div w-inline-block">
+				<h1 class="tracker-hero-subheading">{{recent_event.name}}</h1>
+				<div class="tracker-hero-subdiv-credit">
+					<div class="tracker-hero-spacer">Photo Credit:</div>
+					<div class="tracker-hero-credit-text">{{recent_event.event_photo_credit}}</div>
 				</div>
-				<div class="tags-block"> 
-					{% for choice in event_item.2 %}
-					<div class="tag-sub-block"> 
-						<h1 class="tag">{{choice.country}}</h1>
-					</div>
-					{%endfor%}
-					{% for choice in event_item.1  %}
-					<div class="tag-sub-block"> 
-						<h1 class="tag">{{choice.topic}}</h1>
-					</div>
-					{%endfor%}
-
-				</div>
-			</div>
-		{% endfor %}
-
+			</a>
+		</div>
 	</div>
 </div>
+
+<div class="event-tracker">
+	<div class="events">
+	  <h2 class="tracker-filter-heading">Meetings</h2>
+	  <div class="collection-list-wrapper-22 w-dyn-list">
+	    <div id="filter-list" role="list" class="w-dyn-items">
+		
+		{% for event_item in events_list %}      
+	      <div role="listitem" class="tracker-item-block w-dyn-item">
+	        <div class="tracker-item-eventblock">
+	          <div class="tracker-item-block-left">
+	            <a href="{{event_item.0.get_absolute_url}}" class="event-link w-inline-block">
+	              <div class="div-block-133">
+	                <h1 class="meeting-title blank">{{event_item.0.name}}</h1>
+	              </div>
+	            </a>
+	            <div class="tracker-item-event-date-block">
+	              <h1 class="meeting-info">{{event_item.0.event_date}}</h1>
+	            </div>
+	            
+	            <div class="event-tag-grid">
+
+					{% for choice in event_item.1 %}
+		            <div class="event-category category-inlay">{{choice}}</div>
+					{%endfor%}
+
+	            </div>
+	          </div>
+	          <div class="tracker-item-block-right">
+	            <div class="tracker-item-event-imageblock" style="background-image: url('{{event_item.0.event_photo}}');">
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+		{% endfor %}
+	    </div>
+	  </div>
+	</div>
+</div>
+
 
 {% endblock %}

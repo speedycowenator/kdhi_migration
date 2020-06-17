@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+
+
+<div class="active-body">
+  <div class="left-column" >
+    <div class="refine-block">
+      <div class="sort-block w-form">
+        <form id="search-refine" name="search-refine" data-name="search-refine" onkeydown="return event.key != 'Enter';" method="GET">
+        <label for="Sort-Type" class="refine-header">Sort Order</label>
+        <select id="Sort-Type" name="sort_object" data-name="sort_object" class="select-field w-select">
+            <option value="date_publication" {{checked_sort_date}}>Publish Date</option>
+            <option value="author" {{checked_sort_author}}>Author</option>
+            <option value="title" {{checked_sort_title}}>Title</option></select>
+        <select id="Sort-Order" name="sort_order" data-name="sort_order" class="select-field w-select">
+            <option value="" {{checked_sort_asc}}>Ascending </option>
+            <option value="-" {{checked_sort_dsc}}>Descending </option></select>
+        <input type="submit" value="Refine" data-wait="Please wait..." class="submit-button-3 w-button">      
+      
+      </div>
+    </div>
+  </div>
+  <div class="center-column">
+    <div class="title-sub">Favorited Articles</div><br>
+    <div class="list-container">
+      {% for article in article_list %}
+      <div class="list-content-block">
+        <div class="list-content-subblock">
+        <h1 class="heading">{{article.title}}<br></h1>
+        </div>
+      <div class="list-content-subblock">
+        <h1 class="author"><em class="italic-text-2">{{article.author}}</em><br></h1>
+        <div class="div-block-105"></div>
+        <h1 class="author"><em class="italic-text-2">{{article.date_publication}}</em><br></h1>
+      </div>
+      <div class="list-content-subblock">
+      <p class="paragraph">{{article.summary|truncatechars:500 }}</p>
+      </div>
+      <div class="list-content-subblock">
+      {# <div data-w-id="efb7783a-b09d-71d7-52a8-b12821600dd3" class="list-content-action">save</div> --This is currently not implemented pending rewrite of 'favorite' function to support mutiple favorite instances without excessive database requests #}
+      <div data-w-id="b71c9be7-eeca-b514-b9c9-f0ec06856c74" class="list-content-action"> <a href="{{ article.get_absolute_url }}">View</a></div>
+      {# <div data-w-id="b71c9be7-eeca-b514-b9c9-f0ec06856c74" class="list-content-action">preview</div>w --Also pending until 'readmore' templatetag can be reworked to have a readless feature OR preview as post to open window is added #}
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+</div>
+  <div class="right-column">
+    <div class="user-block">
+      <div class="user-header">Hi {{ user.username }}</div>
+      <div class="user-operation-block">
+      <a href="{% url 'Update Profile' %}" class="link-2">Update your email</a>
+        <a href="{% url 'logout' %}" class="link-2">Logout</a>
+      </div>
+    </div>
+<ul>
+
+
+{% endblock %}

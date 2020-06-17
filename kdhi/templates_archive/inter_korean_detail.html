@@ -1,0 +1,75 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section"></div>
+    <div class="center-section">
+      <div class="biographic-block">
+        <h1 class="event-title">{{tracker_item.name}}</h1>
+        <h1 class="event-date">{{tracker_item.event_date}}</h1>
+        <h1 class="event-date">{{tracker_item.event_location}}</h1>
+        <h1 class="event-date">{{tracker_item.event_venue}}</h1>
+
+        <div class="institution-function-block">
+            <h1 class="event-details-header">Ministry of Unification Description</h1>
+            <p class="event-details-paragraph">{{tracker_item.MOU_description}}</p></div>
+            <a href="{{tracker_item.document_link}}" class="document-link">Official Meeting Document</a>
+
+
+
+            <h1 class="institution-members-header">DPRK Participants</h1>        
+            <div class="delegation-full-block">
+                <div class="grid-delegate-block-main"> 
+                    <div class="institution-position-title">Delegation Head</div>
+                    <div class="delegate-photo-block">
+                        <img src="{{event_DPRK_head.icon}}"  alt class="delegate-head-image" >
+                    </div>
+                    <a href="{{event_DPRK_head.get_absolute_url}}" class="institution-position-name">{{event_DPRK_head.name}}</a>
+                </div>
+                <div class="delegate-grid-block">
+                    {% for individual in participant_list_dprk %}
+                    <div class="grid-delegate-block">
+                        <img src="{{individual.2}}" alt="" class="delegate-photo-block">           
+                        <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <h1 class="institution-members-header">ROK Participants</h1>        
+            <div class="delegation-full-block">
+                <div class="grid-delegate-block-main"> 
+                    <div class="institution-position-title">Delegation Head</div>
+                    <div class="delegate-photo-block">
+                        <img src="{{event_ROK_head.icon}}"  alt class="delegate-head-image" >
+                    </div>
+                    <a href="{{event_ROK_head.get_absolute_url}}" class="institution-position-name">{{event_ROK_head.name}}</a>
+                </div>
+                <div class="grid-container">
+                    {% for individual in participant_list_rok %}
+                    <div class="grid-item">
+                        <img src="{{individual.2}}" alt="" class="institution-member-photo">           
+                        <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+    <h1 class="institution-members-header">Photos</h1><br>        
+    <img src="{{tracker_item.event_photo}}" alt class="event-photo"><br>        
+    <img src="{{tracker_item.event_photo_add_1}}" alt class="event-photo"><br>
+    <img src="{{tracker_item.event_photo_add_2}}" alt class="event-photo"><br>
+    <img src="{{tracker_item.event_photo_add_3}}" alt class="event-photo"><br>
+    
+    
+    
+    <br>
+    </div> 
+    </div>
+    <div class="right-section"></div>
+  </div>
+{% endblock %}
