@@ -18,44 +18,27 @@
 	</div>
 </div>
 
-<div class="event-tracker">
-	<div class="events">
-	  <h2 class="tracker-filter-heading">Meetings</h2>
-	  <div class="collection-list-wrapper-22 w-dyn-list">
-	    <div id="filter-list" role="list" class="w-dyn-items">
-		
-		{% for event_item in events_list %}      
-	      <div role="listitem" class="tracker-item-block w-dyn-item">
-	        <div class="tracker-item-eventblock">
-	          <div class="tracker-item-block-left">
-	            <a href="{{event_item.0.get_absolute_url}}" class="event-link w-inline-block">
-	              <div class="div-block-133">
-	                <h1 class="meeting-title blank">{{event_item.0.name}}</h1>
-	              </div>
-	            </a>
-	            <div class="tracker-item-event-date-block">
-	              <h1 class="meeting-info">{{event_item.0.event_date}}</h1>
-	            </div>
-	            
-	            <div class="event-tag-grid">
+<div class="ik-events-holder">
+	{% for event_item in events_list %}      
+	<div class="tracker-item-block">
+		<div class="tracker-item-block-left">
+			<a href="{{event_item.0.get_absolute_url}}" class="meeting-title">{{event_item.0.name}}</a>
+			<h1 class="meeting-info">{{event_item.0.event_date}}</h1>
+			<p class="event-paragraph">{{event_item.0.event_description | striptags | truncatechars:500}}</p>
+			<div class="event-tag-grid"> 
 
-					{% for choice in event_item.1 %}
-		            <div class="event-category category-inlay">{{choice}}</div>
-					{%endfor%}
+				{% for choice in event_item.1 %}
+			    <div class="event-category category-inlay">{{choice}}</div>
+				{%endfor%}
 
-	            </div>
-	          </div>
-	          <div class="tracker-item-block-right">
-	            <div class="tracker-item-event-imageblock" style="background-image: url('{{event_item.0.event_photo}}');">
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-		{% endfor %}
-	    </div>
-	  </div>
+			</div>
+		</div>
+		<div class="tracker-item-block-right">
+			<div class="tracker-item-event-imageblock" style="background-image: url('{{event_item.0.event_photo}}');">
+			</div>
+		</div>
+
 	</div>
+	{% endfor %}
 </div>
-
-
 {% endblock %}

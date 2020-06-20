@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section">
+        <form><input type="button" class="back-button w-button" value="&lt; Back" onclick="history.back()"></form>
+    </div>
+    <div class="center-section">
+        <h1 class="meeting-title header">{{article_focused.name}}</h1>
+        <div class="text-block-89">{{article_focused.date}}</div>
+        {#implement after adding a check for author (is not None? or just a try, except clause) <div class="text-block-89">{{article_focused.author}}</div> #}
+        <div class="text-block-89">{{article_focused.publication}}</div>
+
+        <p class="tracker-richtext-content">{{article_focused.text}}</p>
+        <div class="institution-function-div">
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

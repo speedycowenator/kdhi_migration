@@ -125,7 +125,7 @@
                     <div class="item-title">DPRK Leadership profiles</div>
                   </div>
                 </a>
-                <a href="https://www.kdhi.org/state-media-archive/search-results/" class="dropdown-mega-item w-inline-block">
+                <a href="https://kdhi.pythonanywhere.com/search-results/" class="dropdown-mega-item w-inline-block">
                   <div class="menu-item-wrapper">
                     <div class="item-title">dprk state media archive</div>
                   </div>
@@ -256,11 +256,33 @@
       </div>
     </div>
     <div class="search-form-wrapper">
-      <form action="/search" class="search-form w-form" autocomplete="off"><input type="search" class="search-input-12 w-input" maxlength="256" name="query" placeholder="Search…" id="search" required=""><input type="submit" value="S" class="search-button-truncated w-button"></form>
+      <form action="/search/" class="search-form w-form" autocomplete="off" method="post">{% csrf_token %}
+        <input type="search" class="search-input-12 w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" required="">
+
+        <input type="hidden" name="document_toggle" data-name="document_toggle" value="True">
+        <input type="hidden" name="article_toggle" data-name="article_toggle" value="True">
+        <input type="hidden" name="overseas_tracker_toggle" data-name="overseas_tracker_toggle" value="True">
+        <input type="hidden" name="inter_tracker_toggle" data-name="inter_tracker_toggle" value="True">
+        <input type="hidden" name="individual_toggle" data-name="individual_toggle" value="True">
+        <input type="hidden" name="glossary_item_toggle" data-name="glossary_item_toggle" value="True">
+        <input type="hidden" name="institution_toggle" data-name="institution_toggle" value="True">
+
+        <input type="submit" value="S" class="search-button-truncated w-button">
+      </form>
     </div>
     <nav role="navigation" class="nav-menu-3 w-nav-menu">
       <div class="nav-menu-pane">
-        <form action="/search" class="menu-search w-form" autocomplete="off"><input type="search" class="search-input-13 w-input" maxlength="256" name="query" title="What can we help you find?" id="search" required=""><input type="submit" value="Search" title="Search" class="search-button-16 w-button"></form>
+        <form action="/search/" class="menu-search w-form" autocomplete="off" method="post">{% csrf_token %}
+          <input type="search" class="search-input-13 w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" required="">
+        <input type="hidden" name="document_toggle" data-name="document_toggle" value="True">
+        <input type="hidden" name="article_toggle" data-name="article_toggle" value="True">
+        <input type="hidden" name="overseas_tracker_toggle" data-name="overseas_tracker_toggle" value="True">
+        <input type="hidden" name="inter_tracker_toggle" data-name="inter_tracker_toggle" value="True">
+        <input type="hidden" name="individual_toggle" data-name="individual_toggle" value="True">
+        <input type="hidden" name="glossary_item_toggle" data-name="glossary_item_toggle" value="True">
+        <input type="hidden" name="institution_toggle" data-name="institution_toggle" value="True">
+
+        <input type="submit" value="Search" title="Search" class="search-button-16 w-button"></form>
         <div data-delay="0" class="menu-dropdown w-dropdown">
           <div class="menu-dropdown-toggle w-clearfix w-dropdown-toggle"><img src="https://global-uploads.webflow.com/5ec5d166d0d5ff6b223c988a/5ec5d167b8415a0735ae6030_dropdown-icon.svg" width="8"  class="menu-dropdown-carrot">
             <div>About</div>

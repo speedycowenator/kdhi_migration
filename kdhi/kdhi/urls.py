@@ -27,5 +27,6 @@ urlpatterns = [
     path('search/', include('kdhi_search.urls')),
     path('video/', include('video_archive.urls')),
     path('user/', include('user.urls')),  
+    path('media_archive/', include('media_archive.urls')),
 
 ]

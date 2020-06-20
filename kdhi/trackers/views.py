@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from trackers.models import overseas_tracker, inter_korean_tracker, overseas_topic, country_list
 from datetime import date
 import datetime
 from django.db.models import Q
@@ -15,6 +14,8 @@ now = date.today()
 import re
 import bs4
 import urllib.request
+from trackers.models import overseas_tracker, inter_korean_tracker, overseas_topic, country_list
+from media_archive.models import state_media_article
 
 url = 'https://kdhi.webflow.io/'
 #url = 'https://kdhi-archive-code-builder.webflow.io/institution-page'
@@ -63,6 +64,17 @@ def overseas_tracker_detail(request, slug):
     if len(tracker_item.event_photo) != 0:
         image_test = ''
 
+    archive_link = ''
+    archive_toggle = ' checked'
+
+
+
+    try: 
+        archive_link_object = state_media_article.objects.get(name=tracker_item.name)
+        archive_link        = archive_link_object.get_absolute_url()
+        archive_toggle      = '' 
+    except:
+        archive_toggle      = ' checked' 
 
     webflow_page_data = '5eb9f7c0c3ca3d46c75b738a'
     context = {
@@ -73,6 +85,8 @@ def overseas_tracker_detail(request, slug):
             'document_test'     : document_test,
             'participant_test'  : participant_test,
             'image_test'        : image_test,
+            'archive_toggle'    : archive_toggle,
+            'archive_link'      : archive_link,
             }
     return render(request, 'overseas_detail.html', context)
 
@@ -118,42 +132,22 @@ def inter_korean_tracker_list(request):
         e_date                  = e.event_date
         e_content               = e.MOU_description
         e_url                   = e.get_absolute_url
-        e_rok_delegate_list     = []
-        e_dprk_delegate_list    = []
-        e_DPRK_head             = e.DPRK_head
+        e_tag                   = []
+        for ee in e.meeting_topics.all():
+            e_tag.append(ee)
 
-
-        try: 
-            for ee in e.participant_DPRK:
-                e_dprk_delegate         = ee.participant_DPRK
-                e_dprk_delegate_name    = e_dprk_delegate.name
-                e_dprk_delegate_url     = e_dprk_delegate.get_absolute_url
-                e_dprk_delegate_icon    = e_dprk_delegate.icon
-                e_dprk_delegate         = [e_dprk_delegate_name, e_dprk_delegate_url, e_dprk_delegate_icon]
-                e_dprk_delegate_list.append(e_dprk_delegate)
-        except:
-            pass
-
-        e_ROK_head             = e.ROK_head
-
-        
-        try: 
-            for ee in e.participant_DPRK:
-                e_rok_delegate          = e.participant_ROK
-                e_rok_delegate_name     = e_rok_delegate.name
-                e_rok_delegate_url      = e_rok_delegate.get_absolute_url
-                e_rok_delegate_icon     = e_rok_delegate.icon
-                e_rok_delegate          = [e_rok_delegate_name, e_rok_delegate_url, e_rok_delegate_icon]
-                e_rok_delegate_list.append(e_dprk_delegate)
-        except:
-            pass
-        event_item = [e_title, e_date, e_content, e_url, e_ROK_head, e_DPRK_head]
+        event_item = [e_title, e_date, e_content, e_url, e_tag]
 
         events_list.append(event_item)
+    event_ROK_head      = recent_event.ROK_head
+    event_DPRK_head     = recent_event.DPRK_head
+
     context = {
-        'recent_event'  :   recent_event,
-        'style_sheet'   :   link_text,
-        'events_list'   :   events_list, 
+        'recent_event'      : recent_event,
+        'style_sheet'       : link_text,
+        'events_list'       : events_list, 
+        'event_DPRK_head'   : event_DPRK_head,
+        'event_ROK_head'    : event_ROK_head,
 
     }
     return render(request, 'inter_korean.html', context)

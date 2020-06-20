@@ -52,19 +52,19 @@
       <div class="list-container">
 
 {% for document in document_list %}
-        <div class="list-content-block">
-          <div class="list-content-subblock">
-            <h1 class="heading">{{document.name}}<br></h1>
+        <div class="list-content-block-2">
+          <div class="list-content-subblock-2">
+            <h1 class="heading-136">{{document.name}}<br></h1>
           </div>
-          <div class="list-content-subblock">
-            <h1 class="author"><em class="italic-text-2">{{document.collection.name}}</em><br></h1>
+          <div class="list-content-subblock-2">
+            <h1 class="author"><em class="italic-text-6">{{document.collection.name}}</em><br></h1>
             <div class="div-block-105"></div>
-            <h1 class="author"><em class="italic-text-2">{{document.date}}</em><br></h1>
+            <h1 class="author"><em class="italic-text-6">{{document.date}}</em><br></h1>
           </div>
-          <div class="list-content-subblock">
-            <p class="paragraph">{{document.summary | truncatechars:500}}</p>
+          <div class="list-content-subblock-2">
+            <p class="paragraph-33">{{document.summary | truncatechars:500}}</p>
           </div>
-          <div class="list-content-subblock">
+          <div class="list-content-subblock-2">
             <a class="view-link" href="{{ document.get_absolute_url }}">View</a>
           </div>
         </div>

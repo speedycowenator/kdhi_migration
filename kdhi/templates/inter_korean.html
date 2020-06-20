@@ -18,39 +18,41 @@
 	</div>
 </div>
 
-<div class="ik-events-holder" >
-
-{% for event_item in events_list %}
+{{event_item.4.0}}
+<div class="ik-events-holder">
+	{% for event_item in events_list %}      
 	<div class="tracker-item-block">
-		<div class="tracker-item-block-left>">
-		<a href="{{event_item.3}}" class="meeting-title">{{event_item.0}}</a>
-		<h1 class="meeting-info">{{event_item.1}}</h1>
-		<p class="event-paragraph">{{event_item.2|slice:":500"}}...</p> 
-		<div class="category-box">
-			{# This is where the category blocks (plus the for code) will go #}
-			<div class="event-category">Category</div>
+		<div class="tracker-item-block-left">
+			<a href="{{event_item.3}}" class="meeting-title">{{event_item.0}}</a>
+			<h1 class="meeting-info">{{event_item.1}}}</h1>
+			<p class="event-paragraph">{{event_item.2|truncatechars:500}}</p> 
+			<div class="event-tag-grid"> 
+
+				{% for choice in event_item.4 %}
+			    <div class="event-category category-inlay">{{choice}}</div>
+				{%endfor%}
+
+			</div>
 		</div>
 		<div class="tracker-item-block-right">
 			<div class="delegates-block">
+				<div class="delegate-holder" >
+					<div class="delgate-title">ROK Representative</div>
+					<img class="delegate-photo" src="{{event_DPRK_head.get_image_icon}}" style="height:85%; width:auto">
+					<div class="tracker-item-participant-text">{{event_DPRK_head.name}}</div>
+				</div>
 				<div class="delegate-holder">
-					<div class="delgate-title"></div>
+					<div class="delgate-title">DPRK Representative</div>
+					<img class="delegate-photo" src="{{event_ROK_head.get_image_icon}}" style="height:85%; width:auto">
+					<div class="tracker-item-participant-text">{{event_ROK_head.name}}</div>
 				</div>
 
-
-				<div class="delegate-holder">
-
-				</div>
 			</div>
 		</div>
 	</div>
-
-		<div class="tracker-item-block-right>">
-
-		</div>
-{% endfor %}
-
-
+	{% endfor %}
 </div>
+
+
+
 {% endblock %}
-       
-        event_item = [e_title, e_date, e_content, e_url, [e_ROK_head,  e_rok_delegate_list], [e_DPRK_head, e_dprk_delegate_list]]

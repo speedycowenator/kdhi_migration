@@ -1,32 +1,43 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class="active-body">
-  <div class="search-columns">
-    <div class="search-columns-main">
-    <div class="center-column-search-bar-general">
-      <div class="main-search-form w-form">
-        <form id="wf-form-document-search" name="wf-form-document-search" data-name="document-search" method="post" action="#" class="search-hold-block">{% csrf_token %}
+<div class="center-column-search-bar-general">
+  <div class="main-search-form-2 w-form">
+        <form id="wf-form-document-search" name="wf-form-document-search" data-name="document-search" method="post" action="#" class="search-hold-block-2">{% csrf_token %}
           <label for="name-3" class="search-header">Search</label>
 
-          <input type="text" class="search-field-text w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" value="{{search_text}}">
+          <input type="text" class="search-field-text-2 w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" value="{{search_text}}">
 
           <div class="refine-block-child-general">
             <label for="Sort-Type" class="refine-header-general">Collection</label>
             <div class="collection-search-refine-block">
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="document_toggle" name="document_toggle" data-name="document_toggle" class="w-checkbox-input" {{document_toggle_check}} value="True" ><span for="document_toggle" class="checkbox-text w-form-label">Documents</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="document_toggle" name="document_toggle" data-name="document_toggle" class="w-checkbox-input" {{document_toggle_check}} value="True" >
+                <span for="document_toggle" class="checkbox-text w-form-label">Documents</span></label>
 
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="article_toggle" name="article_toggle" data-name="article_toggle" class="w-checkbox-input"{{article_toggle_check}} value="True" ><span for="article_toggle" class="checkbox-text w-form-label" >Articles</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="article_toggle" name="article_toggle" data-name="article_toggle" class="w-checkbox-input"{{article_toggle_check}} value="True" >
+                <span for="article_toggle" class="checkbox-text w-form-label" >Articles</span></label>
 
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="overseas_tracker_toggle" name="overseas_tracker_toggle" data-name="checkbox" class="w-checkbox-input" {{overseas_tracker_toggle_check}} value="True" ><span for="overseas_tracker_toggle" class="checkbox-text w-form-label">Foreign Relations Tracker</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="overseas_tracker_toggle" name="overseas_tracker_toggle" data-name="checkbox" class="w-checkbox-input" {{overseas_tracker_toggle_check}} value="True" >
+                <span for="overseas_tracker_toggle" class="checkbox-text w-form-label">Overseas Tracker</span></label>
 
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="inter_tracker_toggle" name="inter_tracker_toggle" data-name="inter_tracker_toggle" class="w-checkbox-input" {{inter_tracker_toggle_check}} value="True"><span for="inter_tracker_toggle" class="checkbox-text w-form-label" >Inter-Korean Tracker</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="inter_tracker_toggle" name="inter_tracker_toggle" data-name="inter_tracker_toggle" class="w-checkbox-input" {{inter_tracker_toggle_check}} value="True">
+                <span for="inter_tracker_toggle" class="checkbox-text w-form-label" >Inter-Korean Tracker</span></label>
 
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="individual_toggle" name="individual_toggle" data-name="individual_toggle" class="w-checkbox-input" {{individual_toggle_check}} value="True" ><span for="individual_toggle" class="checkbox-text w-form-label">Biographies</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="individual_toggle" name="individual_toggle" data-name="individual_toggle" class="w-checkbox-input" {{individual_toggle_check}} value="True" >
+                <span for="individual_toggle" class="checkbox-text w-form-label">Biographies</span></label>
 
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="institution_toggle" name="institution_toggle" data-name="institution_toggle" class="w-checkbox-input" {{institution_toggle_check}} value="True" ><span for="institution_toggle" class="checkbox-text w-form-label">Institutions</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="institution_toggle" name="institution_toggle" data-name="institution_toggle" class="w-checkbox-input" {{institution_toggle_check}} value="True" >
+                <span for="institution_toggle" class="checkbox-text w-form-label">Institutions</span></label>
 
-              <label class="w-checkbox checkbox-field"><input type="checkbox" id="glossary_item_toggle" name="glossary_item_toggle" data-name="glossary_item_toggle" class="w-checkbox-input" {{glossary_item_toggle_check}} value="True"><span for="glossary_item_toggle" class="checkbox-text w-form-label" >Glossary Items</span></label>
+              <label class="w-checkbox checkbox-field">
+                <input type="checkbox" id="glossary_item_toggle" name="glossary_item_toggle" data-name="glossary_item_toggle" class="w-checkbox-input" {{glossary_item_toggle_check}} value="True">
+                <span for="glossary_item_toggle" class="checkbox-text w-form-label" >Glossary Items</span></label>
             </div>
           </div>
           <p class="search-warning-text">For advanced search options, please use the collection specific search engines found on their respective landing pages. </p>
@@ -35,52 +46,61 @@
 
 
 
-      <div class="general-search-result-container">
-            
-          {# ------- DOCUMENTS ------- #}
-            <div class="model-search-block {{document_toggle_check}}" id="Documents">
-              <h1 class="model-section-header">Documents</h1>
+  <div class="general-search-result-container">   
+    {# ------- DOCUMENTS ------- #}
+    <div class="model-search-block {{document_toggle_check}}">
+      <h1 class="model-section-header">Documents</h1>
 
-              {# no results div #}
-              <div class="no-results-div {{document_no_result_toggle}}">
-              <p class="search-result-warning-text">No results found within this collection. </p>
-              </div>
+      <h1 class="model-section-header"></h1>
+      {# no results div #}
+      <div class="no-results-div {{document_no_result_toggle}}">
+      <p class="search-result-warning-text">No results found within this collection. </p>
+      </div>
 
-              {%for result in document_toggle_check_results %}
-              <div class="document-section page">
-                <div class="document-hold-div">
-                  <div class="document-detail-div">
-                    <h1 class="document-title">{{result.name}}</h1>
-                    <div class="documenta-detail-sub">
-                      <div class="document-detail-sub-left">
-                        <div class="document-detail">Creator:</div>
-                      </div>
-                      <div class="document-detail-sub-right">
-                        <div class="document-detail-content">{{result.creator}}</div>
-                      </div>
-                    </div>
-                    <div class="documenta-detail-sub">
-                      <div class="document-detail-sub-left">
-                        <div class="document-detail">Creation Date:</div>
-                      </div>
-                      <div class="document-detail-sub-right">
-                        <div class="document-detail-content">{{result.date}}</div>
-                      </div>
-                    </div>
-                    <div class="documenta-detail-sub">
-                      <div class="document-detail-sub-left">
-                        <div class="document-detail">Contents:</div>
-                      </div>  
-                      <div class="document-detail-sub-right">
-                        <div class="document-detail-content">{{result.summary}}</div>
-                      </div>
-                    </div>
-                  </div>  
-                  <div class="document-function-div"><a href="{{result.get_absolute_url}}" class="view-buttons w-button">Document Page</a></div>
-                </div>
+      {%for document_itteration in document_toggle_check_results %}
+      <div id="Documents" class="document-section page">
+        <div class="document-hold-div">
+          <div class="document-detail-div">
+            <h1 class="document-title">{{document_itteration.name}}</h1>
+            <div class="documenta-detail-sub">
+              <div class="document-detail-sub-left">
+                <div class="document-detail">Creator:</div>
               </div>
-              {%endfor%}
+              <div class="document-detail-sub-right">
+                <div class="document-detail-content">{{document_itteration.creator}}</div>
+              </div>
             </div>
+            <div class="documenta-detail-sub">
+              <div class="document-detail-sub-left">
+                <div class="document-detail">Creation Date:</div>
+              </div>
+              <div class="document-detail-sub-right">
+                <div class="document-detail-content">{{document_itteration.date}}</div>
+              </div>
+            </div>
+            <div class="documenta-detail-sub">
+              <div class="document-detail-sub-left">
+                <div class="document-detail">Collection:</div>
+              </div>
+              <div class="document-detail-sub-right">
+                <div class="document-detail-content">{{document_itteration.collection}}</div>
+              </div>
+            </div>
+            <div class="documenta-detail-sub">
+              <div class="document-detail-sub-left">
+                <div class="document-detail">Contents:</div>
+              </div>
+              <div class="document-detail-sub-right">
+                <div class="document-detail-content">{{document_itteration.summary}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="document-function-div"><a href="{{document_itteration.get_absolute_url}}" class="view-buttons w-button">Document Page</a></div>
+        </div>
+      </div>
+        {% endfor %}
+      </div>
+            
 
           {# ------- ARTICLES ------- #}
 
@@ -93,12 +113,12 @@
               </div>
 
               {%for result in article_toggle_check_results %}
-              <div class="list-content-block">
-                <div class="list-content-subblock"><a href="{{result.get_absolute_url}}" class="heading">{{result.name}}</a></div>
-                <div class="list-content-subblock">
-                  <p class="paragraph">{{result.bluff}}</p>
+              <div class="list-content-block-2">
+                <div class="list-content-subblock-2"><a href="{{result.get_absolute_url}}" class="heading-136">{{result.name}}</a></div>
+                <div class="list-content-subblock-2">
+                  <p class="paragraph-33">{{result.bluff}}</p>
                 </div>
-                <div class="list-content-subblock">
+                <div class="list-content-subblock-2">
                   <div class="document-function-div"><a href="{{result.get_absolute_url}}" class="view-buttons w-button">Article Page</a></div></div>
               </div>
               {%endfor%}
@@ -117,11 +137,9 @@
               <div class="biography-search-grid">
               {%for result in individual_toggle_check_results %}
     
-              <div class="list-content-block">
-                <div class="list-content-subblock"><a href="{{result.0.get_absolute_url}}" class="heading">{{result.0.name}}</a></div>
-                <div class="list-content-subblock">
-                  <div class="div-block-105"></div>
-                </div>
+              <div class="list-content-block-2">
+                <div class="list-content-subblock-2"><a href="{{result.0.get_absolute_url}}" class="heading-136">{{result.0.name}}</a></div>
+
                 <div class="bio-block">
                   <div class="image-block"><img src="{{result.0.get_image_icon}}" alt="" class="search-bio-image"></div>
                   <div class="info-block">
@@ -157,28 +175,28 @@
                 </div>
               </a>
               <div class="div-block-135">
-                <h1 class="meeting-info">{{result.event_date}}</h1>
+                <h1 class="meeting-info-2">{{result.event_date}}</h1>
 
               </div>
-              <div class="category-box">
+              <div class="category-box-2">
                 {# tags haven't been implemented yet #}
-                {#<div class="event-category category-inlay">Tag</div> #}
-                {#<div class="event-category category-inlay">Tag</div> #}
-                {#<div class="event-category category-inlay">Tag</div> #}
+                {#<div class="event-category-2 category-inlay">Tag</div> #}
+                {#<div class="event-category-2 category-inlay">Tag</div> #}
+                {#<div class="event-category-2 category-inlay">Tag</div> #}
               </div>
               <p class="tracker-description">{{result.MOU_description | truncatechars:500}}</p>
             </div>
             <div class="div-block-318">
               <div class="div-block-315-copy">
                 <div id="ROK" class="div-block-318">
-                  <div class="text-block-111 bold">ROK Delegation Head</div>
+                  <div class="text-block-150 bold">ROK Delegation Head</div>
                   <div class="div-block-317 rok" style="background-image: url('{{result.ROK_head.get_image_icon}}');"></div>
-                  <div class="text-block-111">{{result.ROK_head.name}}</div>
+                  <div class="text-block-150">{{result.ROK_head.name}}</div>
                 </div>
                 <div id="DPRK" class="div-block-318">
-                  <div class="text-block-111 bold">DPRK Delegation Head</div>
+                  <div class="text-block-150 bold">DPRK Delegation Head</div>
                   <div class="div-block-317" style="background-image: url('{{result.DPRK_head.get_image_full}}');"></div>
-                  <div class="text-block-111">{{result.DPRK_head.name}}</div>
+                  <div class="text-block-150">{{result.DPRK_head.name}}</div>
                 </div>
               </div>
             </div>
@@ -206,23 +224,23 @@
                 </div>
               </a>
               <div class="div-block-135">
-                <h1 class="meeting-info">{{result.event_date}}</h1>
+                <h1 class="meeting-info-2">{{result.event_date}}</h1>
 
               </div>
-              <div class="category-box">
+              <div class="category-box-2">
                 {# tags haven't been implemented yet #}
-                {#<div class="event-category category-inlay">Tag</div> #}
-                {#<div class="event-category category-inlay">Tag</div> #}
-                {#<div class="event-category category-inlay">Tag</div> #}
+                {#<div class="event-category-2 category-inlay">Tag</div> #}
+                {#<div class="event-category-2 category-inlay">Tag</div> #}
+                {#<div class="event-category-2 category-inlay">Tag</div> #}
               </div>
-              <p class="tracker-description">{{result.event_description | truncatechars:500}}</p>
+              <p class="tracker-description">{{result.event_description | truncatechars:500 | striptags}}</p>
             </div>
             <div class="div-block-318">
               <div class="div-block-315-copy">
                 <div id="DPRK" class="div-block-318">
-                  <div class="text-block-111 bold">Delegation Head</div>
+                  <div class="text-block-150 bold">Delegation Head</div>
                   <div class="div-block-317" style="background-image: url('{{result.DPRK_head.get_image_full}}');"></div>
-                  <div class="text-block-111">{{result.DPRK_head.name}}</div>
+                  <div class="text-block-150">{{result.DPRK_head.name}}</div>
                 </div>
               </div>
             </div>
@@ -242,12 +260,12 @@
               </div>
 
           {% for result in institution_toggle_check_results %}
-          <div class="list-content-block">
-            <div class="list-content-subblock"><a href="{{result.get_absolute_url}}" class="heading">{{result.name}}</a></div>
-            <div class="list-content-subblock">
-              <p id="institution-bluff" class="paragraph">{{result.function | truncatechars:500 | striptags}}</p>
+          <div class="list-content-block-2">
+            <div class="list-content-subblock-2"><a href="{{result.get_absolute_url}}" class="heading-136">{{result.name}}</a></div>
+            <div class="list-content-subblock-2">
+              <p id="institution-bluff" class="paragraph-33">{{result.function | truncatechars:500 | striptags}}</p>
             </div>
-            <div class="list-content-subblock"></div>
+            <div class="list-content-subblock-2"></div>
           </div>
           {%endfor%}
         </div>
@@ -263,19 +281,19 @@
               </div>
 
           {% for result in glossary_item_toggle_check_results %}
-          <div class="list-content-block">
-            <div class="list-content-subblock"><a href="{{result.get_absolute_url}}" class="heading">{{result.name}}</a></div>
-            <div class="list-content-subblock">
-              <p id="institution-bluff" class="paragraph">{{result.bluff_content | truncatechars:500}} </p>
+          <div class="list-content-block-2">
+            <div class="list-content-subblock-2"><a href="{{result.get_absolute_url}}" class="heading-136">{{result.name}}</a></div>
+            <div class="list-content-subblock-2">
+              <p id="institution-bluff" class="paragraph-33">{{result.bluff_content | truncatechars:500}} </p>
             </div>
-            <div class="list-content-subblock"></div>
+            <div class="list-content-subblock-2"></div>
           </div>
           {%endfor%}
         </div>
 
 
-  
-  </div></div>
+  <div class="search-page-spacer-bottom"></div>
+  </div>
   <div class="search-columns-right">   
     <div class="search-columns-right-slide">
         <h1 class="quicknav-header">Quick-Navigation</h1>
@@ -284,10 +302,10 @@
         <a href="#Biographies" class="search-navigation-button">Biographies</a>
         <a href="#Institution" class="search-navigation-button">Institutions</a>
         <a href="#Inter-Tracker" class="search-navigation-button">Inter-Korean Tracker</a>
-        <a href="#Overseas-Tracker" class="search-navigation-button">Foreign Tracker</a></div>
         <a href="#Glossary" class="search-navigation-button">Glossary</a>
+        <a href="#Overseas-Tracker" class="search-navigation-button">Foreign Tracker</a></div>
     </div>
   </div>
-</div>
+
 {% endblock %}
    

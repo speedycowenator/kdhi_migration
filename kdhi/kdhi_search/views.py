@@ -17,11 +17,15 @@ from documents.models import document
 from main_site.models import glossary_item, institution, individual, rok_institution, rok_individual, article, position
 from trackers.models import overseas_tracker, inter_korean_tracker
 
-url = 'https://kdhi-archive-code-builder.webflow.io/event'
-
+url = 'https://kdhi.webflow.io/'
+#url = 'https://kdhi-archive-code-builder.webflow.io/institution-page'
 webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
 link = soup.find('link')
+webflow_page_data = '5eb9f7c0c3ca3dae2a5b7301'
+
+
+
 link_text = (link.get('href'))
 
 checked 	= 'checked'

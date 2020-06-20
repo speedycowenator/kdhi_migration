@@ -3,15 +3,13 @@
 
 {% block content %}
   <div class="collection-body">
-
-
     <h1 class="collection-source-title">{{collection.name}} Primary Sources</h1>
       	{%for document_itteration in collection_set %}
     <div id="documents" class="document-section page">
       <div class="document-hold-div">
 
         <div class="document-detail-div">
-          <h1 class="document-title">{{document_itteration.name}}</h1>
+          <h1 class="document-title-search">{{document_itteration.name}}</h1>
           <div class="documenta-detail-sub">
             <div class="document-detail-sub-left">
               <div class="document-detail">Creator:</div>

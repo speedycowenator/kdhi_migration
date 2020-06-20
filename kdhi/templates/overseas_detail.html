@@ -9,6 +9,7 @@
     <div class="center-section">
         <h1 class="meeting-title header">{{tracker_item.name}}</h1>
         <div class="text-block-89">{{tracker_item.event_date}}</div>
+        <a href="{{archive_link}}" class="archive-link{{archive_toggle}}">DPRK State Media Source</a>
         <p class="tracker-richtext-content">{{tracker_item.event_description | safe}}</p>
         <a href="{{tracker_item.event_document}}" class="meeting-document-link{{document_test}}">Official Meeting Document</a>
         <div class="institution-function-div">
