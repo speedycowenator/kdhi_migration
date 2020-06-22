@@ -257,7 +257,7 @@
     </div>
     <div class="search-form-wrapper">
       <form action="/search/" class="search-form w-form" autocomplete="off" method="post">{% csrf_token %}
-        <input type="search" class="search-input-12 w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" required="">
+        <input type="search" class="search-input-12 w-input" maxlength="256" name="search" data-name="search" placeholder="Search..." id="text-search" required="">
 
         <input type="hidden" name="document_toggle" data-name="document_toggle" value="True">
         <input type="hidden" name="article_toggle" data-name="article_toggle" value="True">
@@ -273,7 +273,7 @@
     <nav role="navigation" class="nav-menu-3 w-nav-menu">
       <div class="nav-menu-pane">
         <form action="/search/" class="menu-search w-form" autocomplete="off" method="post">{% csrf_token %}
-          <input type="search" class="search-input-13 w-input" maxlength="256" name="search" data-name="search" placeholder="Enter search terms here" id="text-search" required="">
+          <input type="search" class="search-input-13 w-input" maxlength="256" name="search" data-name="search" placeholder="Search..." id="text-search" required="">
         <input type="hidden" name="document_toggle" data-name="document_toggle" value="True">
         <input type="hidden" name="article_toggle" data-name="article_toggle" value="True">
         <input type="hidden" name="overseas_tracker_toggle" data-name="overseas_tracker_toggle" value="True">

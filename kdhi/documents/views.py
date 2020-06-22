@@ -336,10 +336,16 @@ def timelines_landing(request):
 		if card_counter == 0:
 			featured_card = collection_card
 		elif card_counter <=4:
-			collection_card_set.append(collection_card)
+			if document.objects.filter(collection=collection_card).count() != 0:
+				card_planned_check = ""
+			else: 
+				card_planned_check = "Collection Coming Soon"	
+			collection_card_set.append([collection_card, card_planned_check])
 		else:
 			pass
 		card_counter += 1
+
+
 
 	context = {
 	    'style_sheet'           : link_text,
@@ -479,11 +485,15 @@ def critical_oral_history_landing(request):
 		if card_counter == 0:
 			featured_card = collection_card
 		elif card_counter <=4:
-			collection_card_set.append(collection_card)
+			if document.objects.filter(collection=collection_card).count() != 0:
+				card_planned_check = ""
+			else: 
+				card_planned_check = "Collection Coming Soon"	
+			collection_card_set.append([collection_card, card_planned_check])
 		else:
 			pass
 		card_counter += 1
-
+		
 	context = {
 	    'style_sheet'           : link_text,
 	    'featured_card' 		: featured_card,

@@ -19,6 +19,8 @@
 
 <div class="collection-selection-div-archive">
   {# featured item #}
+  <div class="featured-container">
+
   <a href="{% url 'document_list' name=featured_card.name %}" class="collection-card-featured-archive">
     <div class="collection-card-band-image" style="background-image: url('{{featured_card.hero}}');">
       <div class="collection-card-band-archive">
@@ -38,7 +40,7 @@
     </a>
   {%endfor%}
   </div>
-</div>
+</div></div>
 <div class="document-search-container">
   <div class="w-container">
     <h1 class="document-search-results-header">Document Search</h1> 

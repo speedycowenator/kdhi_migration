@@ -18,32 +18,31 @@
   </div>
 </header>
 
-    <div class="collection-selection-div">
-{# featured item #}
-      <a href="{% url 'collection_timeline' name=featured_card.name %}" class="collection-card-featured w-inline-block" style="background-image: url('{{featured_card.hero}}');">
 
-        <div class="collection-card-band">
-
+<div class="collection-selection-div-archive">
+  {# featured item #}
+  <div class="featured-container">
+    <a href="{% url 'document_list' name=featured_card.name %}" class="collection-card-featured-archive">
+      <div class="collection-card-band-image" style="background-image: url('{{featured_card.hero}}');">
+        <div class="collection-card-band-archive">
           <h1 class="collection-card-band-header">{{featured_card.name}}</h1>
-
         </div>
-
-      </a>
-
-      <div class="collection-selection-grid">
-
-{% for card in collection_card_set %}
-
-        <a href="{% url 'collection_timeline' name=card.name %}" class="collection-card w-inline-block" style="background-image: url('{{card.hero}}');">
-          <div class="collection-card-band">
-            <h1 class="glossary-card-header">{{card.name}}</h1>
+      </div> 
+    </a>
+    <div class="collection-selection-grid">
+      {% for card in collection_card_set %}
+      <a href="{% url 'document_list' name=card.0.name %}" class="collection-card w-inline-block" style="background-image: url('{{card.0.hero}}');">
+        <div class="collection-card-band-image">
+          <div class="collection-card-band-archive">
+          <h1 class="glossary-card-header">{{card.0.name}}</h1>
+          <h1 class="glossary-card-header-2 subheader">{{card.1}}</h1>
           </div>
-        </a>
-{%endfor%}
-      </div>
+        </div>
+      </a>
+    {%endfor%}
     </div>
   </div>
-
+</div>
 
 {% endblock %}
 

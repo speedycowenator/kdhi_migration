@@ -3,28 +3,157 @@
 
 {% block content %}
 
-<header id="hero" class="hero-2">
-	<div class="flex-container w-container">
-		<div class="div-block-359">
-			<h1 class="heading-104">DPRK Leadership Profiles</h1>
-			<p class="paragraph-29">KDHI's profiles on North Korean leadership provide biographical information on the country's decision makers.<br>‍<br>
-			Use the search bar above to find specific individuals or scroll below to browse leaders alphabetically. Search by government affiliation in our <a href="{% url 'dprk_institution_landing' %}" class="link-17">DPRK Institution Map &amp; Codex
-			</a>.</p>
+
+<header id="hero" class="leadership-hero-container">
+	<div class="leadership-hero-flex-container w-container">
+		<div class="leadership-hero-flex-container-div">
+			<h1 class="leadership-hero-flex-container-header">DPRK Leadership Profiles</h1>
+			<p class="leadership-hero-flex-container-paragraph">KDHI&#x27;s profiles on North Korean leadership provide biographical information on the country&#x27;s decision makers.<br>‍<br>Use the search box below to find specific individuals or scroll below to browse leaders alphabetically. Learn more about the institutions they lead in our <a href="{% url 'dprk_institution_landing' %}" class="dprk-leadership-hero-link">DPRK Institution Map &amp; Codex</a>.</p>
+		</div>
+		<div class="hero-image-mask">
+		    <div class="w-dyn-list">
+		      	<div role="list" class="w-dyn-items">
+		        	<div role="listitem" class="w-dyn-item">
+		         		<div data-animation="slide" data-duration="500" data-infinite="1" class="slider-6 w-slider">
+		            		<div class="w-slider-mask">
+					            <div class="slide-6 w-slide"></div>
+					            <div class="w-slide"></div>
+		            		</div>
+				            <div class="w-slider-arrow-left">
+				            	<div class="w-icon-slider-left"></div>
+				            </div>
+				            <div class="w-slider-arrow-right">
+				            	<div class="w-icon-slider-right"></div>
+				            </div>
+				            <div class="w-slider-nav w-round"></div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
 		</div>
 	</div>
 </header>
 
-<div class="member-holder">
-	<h1 class="institution-members-header"> DPRK Leadership </h1>
-<div class="bio-holding-div">
-{% for individual in individual_list %}
-    <div class="individual-holder"> 
-	<img src="{{individual.get_image_icon}}" alt class="figure-image">
-	<a href="{{individual.get_absolute_url}}" class="figure-link-text"> {{individual.name}}</a>
-	</div>
-{% endfor %}
-</div>
-</div>
+{# Featured Leaders #}
+   <div class="leadership-featured-section">
+    <div class="home-header-parent">
+      <div class="home-header-container">
+        <h1 class="home-header">Featured Profiles</h1>
+      </div>
+    </div>
+    <div class="w-container">
+      <div data-animation="slide" data-duration="500" data-infinite="1" class="homepage-featured-subslider dprkfeaturedprof w-slider">
+        <div class="leadership-featured-section-mask w-slider-mask">
+          
+        {% for card in featured_cards %}
+
+          <div class="dprkbioslide w-slide">
+            <div class="collection-list-wrapper-37 w-dyn-list">
+              <div role="list" class="w-dyn-items">
+                <div role="listitem" class="w-dyn-item">
+                  <div class="leadership-featured-subdiv">
+                    <h1 class="leadership-featured-subdiv-header">{{card.0.name}}</h1>
+                    <div class="leadership-featured-subsubdiv">
+                      <div class="leadership-featured-subdiv-image-block"><img src="{{card.0.get_image_icon}}" alt=""><a href="{{card.0.get_absolute_url}}" class="featured-content-button leadbuttondprk w-button">Read the Biography</a></div>
+                      <div class="leadership-featured-subdiv-right">
+
+                      	{% for position in card.1 %}
+                      	<div class="bposition-div bpol featuredprofs">
+                          <div class="tdepartment featuredprofs">{{position.0}}</div>
+                          <div class="tpos featuredprofs">{{position.1}}</div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+        <div class="w-slider-arrow-left">
+          <div class="w-icon-slider-left"></div>
+        </div>
+        <div class="w-slider-arrow-right">
+          <div class="w-icon-slider-right"></div>
+        </div>
+        <div class="slide-nav-3 w-slider-nav"></div>
+      </div>
+    </div>
+  </div>
+
+    {# Leaders Search Block #}
+  <div class="leadership-block-container">
+    <div class="home-header-parent">
+      <div class="home-header-container">
+        <h1 class="home-header">Search North Korean Leaders</h1>
+      </div>
+    </div>
+    <div>
+      <div class="leadership-search-div leadprofiles">
+        <div class="tracker-filter-subdiv-two leadprofiles">
+          <form action="{% url 'dprk_individual_list' %}" class="leadership-search w-form" method="post">{% csrf_token %}
+          	<input type="search" class="w-input" maxlength="256" name="search_text" placeholder="&#x27;Kim Yo Jong&#x27;" id="search_text" required="">
+          	<input type="submit" value="Search" class="leadership-search-button w-button"></form>
+        </div>
+      </div>
+    </div>
+
+    {# Leaders List Block #}
+    <div class="leadership-list-container w-dyn-list">
+    	<div role="list" class="leadership-list-grid w-dyn-items">
+
+    	{% for card in page_obj %}
+        <div id="w-node-ea6fedd61f54-d55b7494" role="listitem" class="bio-card w-dyn-item">
+          <a href="{{card.0.get_absolute_url}}" class="bio-container w-inline-block">
+            <div class="bio-container">
+              <div class="bio-container-header-div">
+                <h2 class="bio-container-header">{{card.0.name}}</h2>
+              </div>
+              <div class="photo-title-container">
+                <div class="bio-container-photo-div"><img src="{{card.0.get_image_icon}}" alt="" class="bio-photo"></div>
+                <div class="position-container">
+                  <div class="positions-header-container">
+                    <h3 class="positions-header">Positions</h3>
+                  </div>
+
+                	{% for position_card in card.1 %}
+                  	<div class="bposition-div bpol">
+                    	<div class="tdepartment">{{position_card.0}}</div>
+                    	<div class="tpos">{{position_card.1}}</div>
+                  	</div>
+    				{% endfor %}
+
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+    	{% endfor %}
+    </div>
+
+ 	<div class="w-pagination-wrapper pagination-10">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="w-pagination-previous" >
+            	<svg class="w-pagination-previous-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 12 12" transform="translate(0, 1)">
+            		<path fill="none" stroke="currentColor" fill-rule="evenodd" d="M8 10L4 6l4-4"></path>
+          		</svg>
+            <div class="w-inline-block">Previous</div>
+            </a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+	        <a href="?page={{ page_obj.next_page_number }}" class="w-pagination-next">
+	          <div class="w-inline-block">Next</div>
+	          <svg class="w-pagination-next-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 12 12" transform="translate(0, 1)">
+	            <path fill="none" stroke="currentColor" fill-rule="evenodd" d="M4 2l4 4-4 4"></path>
+	          </svg>
+	        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 

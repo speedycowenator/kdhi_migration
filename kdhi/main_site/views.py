@@ -16,6 +16,7 @@ from datetime import date, timedelta
 now = date.today()
 import re
 from django.utils.html import strip_tags
+from django.core.paginator import Paginator
 
 import bs4
 import urllib.request
@@ -418,14 +419,66 @@ def article_list(request):
 
 def individual_list(request):
     individual_list = []
-    for e in individual.objects.order_by('name'):
-        individual_list.append(e)
 
+    individual_positions_one = []
+    individual_positions_two = []
+    individual_positions_three = []
+    if request.method == 'GET':
+        for individual_lookup in individual.objects.order_by('name'):
+            individual_institution_list = []
+            for individual_position in position.objects.filter(person=individual_lookup):
+                individual_position_pair = [individual_position.institution, individual_position.title]
+                individual_institution_list.append(individual_position_pair)
+            individual_list.append([individual_lookup, individual_institution_list])
+    if request.method == 'POST':
+        search_text = request.POST.get("search_text")
+        for individual_lookup in individual.objects.filter(name__icontains=search_text).order_by('name'):
+            individual_institution_list = []
+            for individual_position in position.objects.filter(person=individual_lookup):
+                individual_position_pair = [individual_position.institution, individual_position.title]
+                individual_institution_list.append(individual_position_pair)
+            individual_list.append([individual_lookup, individual_institution_list])   
+    featured_one    = individual.objects.get(name="Choe Ryong Hae")
+    for individual_position in position.objects.filter(person=featured_one):
+        institution_tag = individual_position.institution
+        inst_url = institution_tag.get_absolute_url
+        individual_position_pair = [individual_position.institution, individual_position.title, inst_url, individual_position.position_status]
+        individual_positions_one.append(individual_position_pair)
+
+    featured_two    = individual.objects.get(name="An Jong Su")
+    for individual_position in position.objects.filter(person=featured_two):
+        institution_tag = individual_position.institution
+        inst_url = institution_tag.get_absolute_url
+        individual_position_pair = [individual_position.institution, individual_position.title, inst_url, individual_position.position_status]
+        individual_positions_two.append(individual_position_pair)
+
+    featured_three  = individual.objects.get(name="Kim Yo Jong")
+    for individual_position in position.objects.filter(person=featured_three):
+        institution_tag = individual_position.institution
+        inst_url = institution_tag.get_absolute_url
+        individual_position_pair = [individual_position.institution, individual_position.title, inst_url, individual_position.position_status]
+        individual_positions_three.append(individual_position_pair)
+    
+    featured_card_one   = [featured_one, individual_positions_one]
+    featured_card_two   = [featured_two, individual_positions_two]
+    featured_card_three = [featured_three, individual_positions_three]
+
+    featured_cards = [featured_card_one, featured_card_two, featured_card_three] 
+
+
+    paginator = Paginator(individual_list, 50) # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
+    webflow_page_data = '5eb9f7c0c3ca3de5d55b7494'
     context = {
-
+        'featured_cards'        : featured_cards,
+        'page_obj'              : page_obj,
         'individual_list'       : individual_list, 
         'style_sheet'           : link_text,
-        'webflow_page_data' : webflow_page_data,
+        'webflow_page_data'     : webflow_page_data,
     }
     
     return render(request, 'individual_list.html', context)
