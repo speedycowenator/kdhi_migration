@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-from main_site.models import glossary_item, individual, glossary_item, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
+from main_site.models import dprk_institution_tag, glossary_item, individual, glossary_item, institution, position, rok_individual, rok_institution, rok_individual, rok_position, article
 from documents.models import document_collection
 from datetime import date
 import datetime
@@ -22,6 +22,7 @@ import bs4
 import urllib.request
 
 url = 'https://kdhi.webflow.io/'
+#url = 'https://kdhi-archive-code-builder.webflow.io/'
 
 webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
@@ -485,41 +486,60 @@ def individual_list(request):
 
 def dprk_institution_landing(request):
     if request.method == 'GET':
-        qs_complex_list = []
-        quicksearch_toggle = 'off'
+        qs_complex_list = institution.objects.all()
+        quicksearch_toggle = 'on'
         search_text = "e.g. 'Ministry of Foreign Affairs' or 'foreign'"
     elif request.method == 'POST':
         search = request.POST.get("search")
-        if search == '':
-            qs_complex_list = []
-            quicksearch_toggle = 'off'
-            search_text = "No results. Try another keyword or navigate for an institution in the section above."
+        function_tag_refine = request.POST.get("function_tags")
+        if search == '' and function_tag_refine == '':
+            qs_complex_list = institution.objects.all()
+            quicksearch_toggle = 'on'
+            search_text = "e.g. 'Ministry of Foreign Affairs' or 'foreign'"
         else:
-            quicksearch_inst_list   = institution.objects.filter(name__icontains=search)
-            qs_complex_list         = []
-            if len(quicksearch_inst_list) == 0:
-                quicksearch_toggle = 'off'
-                search_text = "No results. Try another keyword or navigate for an institution in the section above."
+            if function_tag_refine == 'All':
+                quicksearch_inst_list   = institution.objects.filter(name__icontains=search)
+                qs_complex_list         = []
 
-                pass
+                if len(quicksearch_inst_list) == 0:
+                    quicksearch_toggle = 'off'
+                    search_text = "No results. Try another keyword or navigate for an institution in the section above."
+                else:
+                    quicksearch_toggle = 'on'
+                    search_text = search
+                    qs_complex_list = quicksearch_inst_list
             else:
-                quicksearch_toggle = 'on'
-                search_text = search
-                for quicksearch_inst in quicksearch_inst_list:
-                    chief_position      = position.objects.filter(institution=quicksearch_inst, position_rank=0).first()
-                    try: 
-                        chief_official      = chief_position.person
-                        qs_complex_list.append([quicksearch_inst,chief_official])
-                    except:
-                        qs_complex_list.append([quicksearch_inst])      
+                quicksearch_inst_list   = institution.objects.filter(name__icontains=search, function_tags__name=function_tag_refine)
+                qs_complex_list         = []
+                if len(quicksearch_inst_list) == 0:
+                    quicksearch_toggle = 'off'
+                    search_text = "No results. Try another keyword or navigate for an institution in the section above."
+                else:
+                    quicksearch_toggle = 'on'
+                    search_text = search
+                    qs_complex_list = quicksearch_inst_list
+                #for quicksearch_inst in quicksearch_inst_list:
+                    #chief_position      = position.objects.filter(institution=quicksearch_inst, position_rank=0).first()
+                    #try: 
+                    #    chief_official      = chief_position.person
+                    #    qs_complex_list.append([quicksearch_inst,chief_official])
+                    #except:
+                    #    qs_complex_list.append([quicksearch_inst])      
 
+    tag_options = dprk_institution_tag.objects.all()
 
+    paginator = Paginator(qs_complex_list, 50) # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    webflow_page_data = '5eb9f7c0c3ca3d06cb5b7499'
     context = {
         'search_text'           : search_text,
         'quicksearch_toggle'    : quicksearch_toggle,
         'style_sheet'           : link_text,
-        'quicksearch_inst_list' : qs_complex_list,
-        'webflow_page_data' : webflow_page_data,
+        'page_obj'              : page_obj,
+        'webflow_page_data'     : webflow_page_data,
     }
     
     return render(request, 'dprk_institution_landing.html', context)
@@ -569,15 +589,68 @@ def rok_institution_landing(request):
 '''
 
 def rok_individual_list(request):
-    individual_list = []
-    for e in rok_individual.objects.order_by('name'):
-        individual_list.append(e)
+    rok_individual_list = []
 
+    rok_individual_rok_positions_one = []
+    rok_individual_rok_positions_two = []
+    rok_individual_rok_positions_three = []
+    if request.method == 'GET':
+        for rok_individual_lookup in rok_individual.objects.order_by('name'):
+            rok_individual_institution_list = []
+            for rok_individual_rok_position in rok_position.objects.filter(person=rok_individual_lookup):
+                rok_individual_rok_position_pair = [rok_individual_rok_position.institution, rok_individual_rok_position.title]
+                rok_individual_institution_list.append(rok_individual_rok_position_pair)
+            rok_individual_list.append([rok_individual_lookup, rok_individual_institution_list])
+    if request.method == 'POST':
+        search_text = request.POST.get("search_text")
+        for rok_individual_lookup in rok_individual.objects.filter(name__icontains=search_text).order_by('name'):
+            rok_individual_institution_list = []
+            for rok_individual_rok_position in rok_position.objects.filter(person=rok_individual_lookup):
+                rok_individual_rok_position_pair = [rok_individual_rok_position.institution, rok_individual_rok_position.title]
+                rok_individual_institution_list.append(rok_individual_rok_position_pair)
+            rok_individual_list.append([rok_individual_lookup, rok_individual_institution_list])   
+   
+    featured_one    = rok_individual.objects.get(name="Choo Mi-ae")
+    for rok_individual_rok_position in rok_position.objects.filter(person=featured_one):
+        institution_tag = rok_individual_rok_position.institution
+        inst_url = institution_tag.get_absolute_url
+        rok_individual_rok_position_pair = [rok_individual_rok_position.institution, rok_individual_rok_position.title]
+        rok_individual_rok_positions_one.append(rok_individual_rok_position_pair)
+
+    featured_two    = rok_individual.objects.get(name="Baek Seung-geun")
+    for rok_individual_rok_position in rok_position.objects.filter(person=featured_two):
+        institution_tag = rok_individual_rok_position.institution
+        inst_url = institution_tag.get_absolute_url
+        rok_individual_rok_position_pair = [rok_individual_rok_position.institution, rok_individual_rok_position.title]
+        rok_individual_rok_positions_two.append(rok_individual_rok_position_pair)
+
+    featured_three  = rok_individual.objects.get(name="Chin Yong")
+    for rok_individual_rok_position in rok_position.objects.filter(person=featured_three):
+        institution_tag = rok_individual_rok_position.institution
+        inst_url = institution_tag.get_absolute_url
+        rok_individual_rok_position_pair = [rok_individual_rok_position.institution, rok_individual_rok_position.title]
+        rok_individual_rok_positions_three.append(rok_individual_rok_position_pair)
+    
+    featured_card_one   = [featured_one, rok_individual_rok_positions_one]
+    featured_card_two   = [featured_two, rok_individual_rok_positions_two]
+    featured_card_three = [featured_three, rok_individual_rok_positions_three]
+
+    featured_cards = [featured_card_one, featured_card_two, featured_card_three] 
+
+
+    paginator = Paginator(rok_individual_list, 50) # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
+    webflow_page_data = '5eb9f7c0c3ca3de5d55b7494'
     context = {
-
-        'individual_list'       : individual_list, 
+        'featured_cards'        : featured_cards,
+        'page_obj'              : page_obj,
+        'ndividual_list'        : rok_individual_list, 
         'style_sheet'           : link_text,
-        'webflow_page_data' : webflow_page_data,
+        'webflow_page_data'     : webflow_page_data,
     }
-
-    return render(request, 'individual_list.html', context)
+    
+    return render(request, 'rok_individual_list.html', context)

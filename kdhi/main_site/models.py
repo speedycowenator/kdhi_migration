@@ -11,6 +11,15 @@ now = date.today()
 import bs4
 import urllib.request
 
+class dprk_institution_tag(models.Model):
+    name    = models.CharField(max_length=200)
+    weight  = models.IntegerField()
+   
+    class Meta:
+        ordering = ('-weight', 'name') 
+        
+    def __str__(self):
+        return self.name
 
 
 class glossary_item(models.Model):
@@ -35,9 +44,7 @@ class institution(models.Model):
     name                        =  models.CharField(max_length=200)
     name_korean                 =  models.CharField(max_length=200)
     tripartite_tag              =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    sphere_tag                  =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    sector_tag_1                =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    sector_tag_2                =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
+    function_tags               =  models.ManyToManyField(dprk_institution_tag, blank=True, null=True)
     function                    =  RichTextField(null=True, blank=True)
     additional_figures          =  RichTextField(null=True, blank=True)
     organization_structure      =  RichTextField(null=True, blank=True)
@@ -209,7 +216,7 @@ class rok_individual(models.Model):
   
 
     def __str__(self):
-        return self.name
+        return self.name_slug
     def get_image_icon(self):
         icon_base   = 'https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/ROK+Government+Assets/icon/'
         icon_suffix = '.jpg'

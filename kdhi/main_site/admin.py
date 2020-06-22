@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 
-from .models import individual, institution, position, rok_position, rok_institution, rok_individual, article, glossary_item
+from .models import dprk_institution_tag, individual, institution, position, rok_position, rok_institution, rok_individual, article, glossary_item
 
 
 class positionAdmin(admin.ModelAdmin):
@@ -20,4 +20,5 @@ admin.site.register(rok_institution)
 admin.site.register(rok_position, ROKpositionAdmin)
 admin.site.register(article)
 admin.site.register(glossary_item)
+admin.site.register(dprk_institution_tag)
 
