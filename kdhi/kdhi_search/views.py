@@ -23,10 +23,17 @@ webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
 link = soup.find('link')
 webflow_page_data = '5eb9f7c0c3ca3dae2a5b7301'
-
-
-
 link_text = (link.get('href'))
+
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find_all('script')
+link_count = len(link)
+java_loc = link_count - 2
+java_location = link[java_loc]
+java_location = java_location.get('src')
+
+
 
 checked 	= 'checked'
 unchecked 	= ''
@@ -206,6 +213,7 @@ def search_console(request):
 	        'bio_no_result_toggle' 					: bio_no_result_toggle, 
 	        'articles_no_result_toggle' 			: articles_no_result_toggle, 
 	        'glossary_no_result_toggle' 			: glossary_no_result_toggle, 
+	        'java_location'     : java_location,
 
 
 	        }

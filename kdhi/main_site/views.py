@@ -31,8 +31,18 @@ webflow_page_data = "5eb9f7c0c3ca3dae2a5b7301"
 
 link_text = (link.get('href'))
 
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find_all('script')
+link_count = len(link)
+java_loc = link_count - 2
+java_location = link[java_loc]
+java_location = java_location.get('src')
+
+
 def inter_korean_spending_2018(request):
     context = {
+        'java_location'     : java_location,
         'style_sheet'       : link_text,
         'webflow_page_data' : webflow_page_data,
         'page_title'        : 'Inter-Korean Spending: 2018',
@@ -50,6 +60,7 @@ def research_page(request):
     context = {
         'webflow_page_data'         : webflow_page_data,
         'base_site'                 : url,
+        'java_location'             : java_location,
         'style_sheet'               : link_text,
         'research_cards'            : research_cards,
         'featured_research_card'    : featured_research_card,
@@ -62,6 +73,7 @@ def research_page(request):
 def about_page(request):
     context = {
         'webflow_page_data' : webflow_page_data,
+        'java_location'     : java_location,
         'style_sheet'       : link_text,
         'page_title'        : 'About',
 
@@ -74,6 +86,7 @@ def glossary_detail(request, slug):
 
     context = {
         'glossary_item'     : glossary,
+        'java_location'     : java_location,
         'style_sheet'       : link_text,
         'webflow_page_data' : webflow_page_data,
 
@@ -99,6 +112,7 @@ def glossary_list(request):
 
     context = {
         'glossary_list'     : glossary,
+        'java_location'     : java_location,
         'style_sheet'       : link_text,
         'webflow_page_data' : webflow_page_data,
 
@@ -122,6 +136,7 @@ def homepage_view(request):
 
     context = {
         'style_sheet'               : link_text,
+        'java_location'             : java_location,
         'latest_article'            : latest_article,
         'secondary_article_list'    : secondary_article_list,
         'glossary_list'             : glossary_list,
@@ -176,7 +191,9 @@ def individual_detail(request, name):
             'individual_sources'    : individual_detail.sources,
             'individual_hometown'   : individual_detail.hometown,
             'individual_positions'  : individual_positions,
-            'style_sheet'           : link_text,
+            'java_location'     : java_location,
+            'java_location'     : java_location,
+            'style_sheet'       : link_text,
             'page_title'            : page_title,
             'bio_toggle'            : bio_toggle,
             'source_toggle'         : source_toggle,
@@ -220,38 +237,6 @@ def institution_detail(request, name):
         grouped_members = [title, grouped_members_temp]
         inst_member_dic.append(grouped_members)
 
-    #----------------------- Related / Tag selection
-    tripartite_tag_inst = institution_detail.tripartite_tag
-    sphere_tag_inst     = institution_detail.sphere_tag
-    sector_tag_insts    = [institution_detail.sector_tag_1, institution_detail.sector_tag_2]
-    related_inst_list   = []
-    related_party       = []
-    related_state       = []
-    related_military    = []
-
-    for tag in sector_tag_insts:
-        if len(tag) > 1:
-            for i in institution.objects.filter(sector_tag_1=tag):
-                if i != institution_detail:
-                    related_inst_list.append(i)
-            for i in institution.objects.filter(sector_tag_2=tag):
-                if i != institution_detail:
-                    related_inst_list.append(i)
-    for inst in related_inst_list:
-        if inst.tripartite_tag == 'State':
-            related_state.append(inst)
-        if inst.tripartite_tag == "Party":
-            related_party.append(inst)
-        if inst.tripartite_tag == "Military":
-            related_military.append(inst)
-
-    if len(related_party) == 0:
-        related_party       = "No related institutions"
-    if len(related_state) == 0:
-        related_state       = "No related institutions"
-    if len(related_military) == 0:
-        related_military       = "No related institutions"
-
     try: 
         if len(institution_detail.additional_figures) > 0:
             add_fig_toggle = ''
@@ -285,8 +270,12 @@ def institution_detail(request, name):
         source_toggle = 'toggle'
 
     page_title = institution_detail.name
+    ministry_institution_list = []
+    for inst in institution.objects.filter(Q(name__icontains="Ministry") | Q(name__icontains="Committee") | Q(name__icontains="Central")).all(): 
+        ministry_institution_list.append(inst)
     context = {
             
+            'ministry_institution_list' : ministry_institution_list,
             'institution_name'      : institution_detail.name,
             'institution_figs'      : institution_detail.additional_figures,
             'institution_src'       : institution_detail.sources_add,
@@ -295,14 +284,8 @@ def institution_detail(request, name):
             'institution_function'  : institution_detail.function,
             'institution_add'       : institution_detail.additional_information,
             'inst_member_dic'       : inst_member_dic,
-            'style_sheet'           : link_text,
-            'tripartite_tag_inst'   : tripartite_tag_inst,
-            'sphere_tag_inst'       : sphere_tag_inst,
-            'sector_tag_insts'      : sector_tag_insts,
-            'related_inst'          : related_inst_list,
-            'related_party'         : related_party,
-            'related_state'         : related_state,
-            'related_military'      : related_military,
+            'java_location'     : java_location,
+            'style_sheet'       : link_text,
             'page_title'            : page_title,
             'source_toggle'         : source_toggle,
             'add_in_toggle'         : add_in_toggle,
@@ -344,7 +327,8 @@ def rok_individual_detail(request, name_slug):
             'individual_photo'      : individual_detail.get_image_icon,
             'individual_positions'  : individual_positions,
             'individual_detail'     : individual_detail,
-            'style_sheet'           : link_text,
+            'java_location'     : java_location,
+            'style_sheet'       : link_text,
             'toggle_education'      : toggle_education,
             'toggle_awards'         : toggle_awards, 
             'toggle_career'         : toggle_career,  
@@ -394,7 +378,8 @@ def rok_institution_detail(request, slug):
             'institution_history'   : institution_detail.history,
             'institution_url'       : institution_detail.official_webpage,
             'institution_src'       : institution_detail.sources_add,
-            'style_sheet'           : link_text,
+            'java_location'     : java_location,
+            'style_sheet'       : link_text,
             'webflow_page_data' : webflow_page_data,
             }
     
@@ -411,8 +396,9 @@ def article_list(request):
 
     context = {
 
-        'article_list'              : article_list, 
-        'style_sheet'             : link_text,
+        'article_list'      : article_list, 
+        'java_location'     : java_location,
+        'style_sheet'       : link_text,
         'webflow_page_data' : webflow_page_data,
                 }
     
@@ -473,11 +459,12 @@ def individual_list(request):
     page_obj = paginator.get_page(page_number)
 
 
-    webflow_page_data = '5eb9f7c0c3ca3de5d55b7494'
+    webflow_page_data = '5eb9f7c0c3ca3d06cb5b7499'
     context = {
         'featured_cards'        : featured_cards,
         'page_obj'              : page_obj,
         'individual_list'       : individual_list, 
+        'java_location'     : java_location,
         'style_sheet'           : link_text,
         'webflow_page_data'     : webflow_page_data,
     }
@@ -533,10 +520,23 @@ def dprk_institution_landing(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    ministry_institution_list = []
+    for inst in institution.objects.filter(Q(name__icontains="Ministry") | Q(name__icontains="Central")): 
+        try: 
+            chief_position = position.objects.filter(institution=inst, position_rank=0).first()
+            chief_official = chief_position.person
+        except:
+            chief_official = ''
+        ministry_institution_list.append([inst, chief_official])
+
+
     webflow_page_data = '5eb9f7c0c3ca3d06cb5b7499'
     context = {
+        'ministry_institution_list' : ministry_institution_list,
         'search_text'           : search_text,
+        'tag_options'           : tag_options,
         'quicksearch_toggle'    : quicksearch_toggle,
+        'java_location'     : java_location,
         'style_sheet'           : link_text,
         'page_obj'              : page_obj,
         'webflow_page_data'     : webflow_page_data,
@@ -546,35 +546,53 @@ def dprk_institution_landing(request):
 
 def rok_institution_landing(request): 
     if request.method == 'GET':
-        qs_complex_list = []
-        quicksearch_toggle = 'off'
-
+            qs_complex_list = rok_institution.objects.all()
+            quicksearch_toggle = 'on'
+            search_text = "e.g. 'Ministry of Foreign Affairs' or 'foreign'"
     elif request.method == 'POST':
         search = request.POST.get("search")
+        function_tag_refine = request.POST.get("function_tags")
         if search == '':
-            qs_complex_list = []
-            quicksearch_toggle = 'off'
+            qs_complex_list = rok_institution.objects.all()
+            quicksearch_toggle = 'on'
+            search_text = "e.g. 'Ministry of Foreign Affairs' or 'foreign'"
         else:
-            quicksearch_inst_list   = rok_institution.objects.filter(name__icontains=search)
-            qs_complex_list         = []
-            if len(quicksearch_inst_list) == 0:
-                quicksearch_toggle = 'off'
-                pass
-            else:
-                quicksearch_toggle = 'on'
-                for quicksearch_inst in quicksearch_inst_list:
-                    chief_position      = rok_position.objects.get(institution=quicksearch_inst, position_rank=0)
-                    try: 
-                        chief_official      = chief_position.person
-                        qs_complex_list.append([quicksearch_inst,chief_official])
-                    except:
-                        qs_complex_list.append([quicksearch_inst]) 
+            if function_tag_refine == 'All':
+                quicksearch_inst_list   = rok_institution.objects.filter(name__icontains=search)
+                qs_complex_list         = []
 
+                if len(quicksearch_inst_list) == 0:
+                    quicksearch_toggle = 'off'
+                    search_text = "No results. Try another keyword or navigate for an rok_institution in the section above."
+                else:
+                    quicksearch_toggle = 'on'
+                    search_text = search
+                    qs_complex_list = quicksearch_inst_list
+            else:
+                quicksearch_inst_list   = rok_institution.objects.filter(name__icontains=search)
+                qs_complex_list         = []
+                if len(quicksearch_inst_list) == 0:
+                    quicksearch_toggle = 'off'
+                    search_text = "No results. Try another keyword or navigate for an rok_institution in the section above."
+                else:
+                    quicksearch_toggle = 'on'
+                    search_text = search
+                    qs_complex_list = quicksearch_inst_list
+
+
+    paginator = Paginator(qs_complex_list, 50) 
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    webflow_page_data = '5eb9f7c0c3ca3d06cb5b7499'
     context = {
+        'search_text'           : search_text,
         'quicksearch_toggle'    : quicksearch_toggle,
+        'java_location'         : java_location,
         'style_sheet'           : link_text,
-        'quicksearch_inst_list' : qs_complex_list,
-        'webflow_page_data' : webflow_page_data,
+        'page_obj'              : page_obj,
+        'webflow_page_data'     : webflow_page_data,
     }
     
     return render(request, 'rok_institution_landing.html', context)
@@ -647,6 +665,7 @@ def rok_individual_list(request):
     webflow_page_data = '5eb9f7c0c3ca3de5d55b7494'
     context = {
         'featured_cards'        : featured_cards,
+        'java_location'         : java_location,
         'page_obj'              : page_obj,
         'ndividual_list'        : rok_individual_list, 
         'style_sheet'           : link_text,

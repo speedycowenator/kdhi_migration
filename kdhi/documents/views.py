@@ -29,6 +29,14 @@ link_text = (link.get('href'))
 checked 	= 'checked'
 unchecked 	= ''
 
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find_all('script')
+link_count = len(link)
+java_loc = link_count - 2
+java_location = link[java_loc]
+java_location = java_location.get('src')
+
 
 def document_detail(request, slug):
 	document_detail = document.objects.get(slug=slug)
@@ -44,6 +52,7 @@ def document_detail(request, slug):
 			'url' 					: url,
 	        'document_detail'       : document_detail,
 	        'style_sheet'           : link_text,
+	        'java_location'     	: java_location,
 	        }
 	return render(request, 'document_detail.html', context)
 
@@ -62,6 +71,7 @@ def collection_page(request, name):
 			'collection'  		: request_collection,	
 			'collection_set'	: collection_set, 
 			'style_sheet'		: link_text,
+			'java_location'     : java_location,
 	}
 	return render(request, 'collection_page.html', context)
 
@@ -172,6 +182,7 @@ def timeline_chrono(request, init_year, end_year):
 			'timeline_items_cleaned'	: timeline_items_cleaned,
 			'day_content' 				: day_content,
 			'style_sheet'				: link_text,
+			'java_location'     : java_location,
 	}
 	return render(request, 'timeline_test.html', context)
 
@@ -193,6 +204,7 @@ def document_list(request, name):
 			'collection'  		: request_collection,	
 			'collection_set'	: collection_set, 
 			'style_sheet'		: link_text,
+			'java_location'     : java_location,
 	}
 	return render(request, 'document_list.html', context)
 
@@ -204,6 +216,7 @@ def korean_democratization_project_landing(request):
 
 	context = {
 	    'style_sheet'           : link_text,
+	    'java_location'     : java_location,
 
 	}
 
@@ -322,7 +335,8 @@ def documents_landing(request):
 			'start_date' 			: start_date,
 			'end_date' 				: end_date,
 			'featured_card' 		: featured_card,
-			'collection_card_set' 	: collection_card_set
+			'collection_card_set' 	: collection_card_set,
+			'java_location'     : java_location,
 			}
 
 	return render(request, 'document_collection_landing.html', context)
@@ -350,7 +364,8 @@ def timelines_landing(request):
 	context = {
 	    'style_sheet'           : link_text,
 	    'featured_card' 		: featured_card,
-	    'collection_card_set' 	: collection_card_set
+	    'collection_card_set' 	: collection_card_set,
+	    'java_location'     : java_location,
 
 	}
 
@@ -461,6 +476,7 @@ def collection_timeline(request, name):
 			'timeline_items_cleaned'	: timeline_items_cleaned,
 			'style_sheet'				: link_text,
 			'collection_header' 		: collection_header,
+			'java_location'     : java_location,
 	}
 	return render(request, 'timeline_test.html', context)
 
@@ -472,6 +488,7 @@ def critical_oral_history_detail(request, session):
 	context = {
 			'coh_item'		: coh_item,
 			'style_sheet'	: link_text,
+			'java_location'     : java_location,
 	}
 	return render(request, 'critical_oral_history_detail.html', context)
 
@@ -497,6 +514,7 @@ def critical_oral_history_landing(request):
 	context = {
 	    'style_sheet'           : link_text,
 	    'featured_card' 		: featured_card,
+	    'java_location'     : java_location,
 	    'collection_card_set' 	: collection_card_set
 
 	}
@@ -600,6 +618,7 @@ def document_search(request):
 			'end_date' 				: end_date,
 			'keyword_list'			: keyword_list,
 			'start_date' 			: start_date,
+			'java_location'     : java_location,
 			'end_date' 				: end_date,
 			}
 	return render(request, 'document_search.html', context)

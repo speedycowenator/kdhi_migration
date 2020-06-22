@@ -22,12 +22,19 @@ url = 'https://kdhi.webflow.io/'
 webpage=str(urllib.request.urlopen(url).read())
 soup = bs4.BeautifulSoup(webpage, features = "lxml")
 link = soup.find('link')
+link_text = (link.get('href'))
 webflow_page_data = '5eb9f7c0c3ca3dae2a5b7301'
 
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find_all('script')
+link_count = len(link)
+java_loc = link_count - 2
+java_location = link[java_loc]
+java_location = java_location.get('src')
 
 
 
-link_text = (link.get('href'))
 
 
 
@@ -35,6 +42,7 @@ link_text = (link.get('href'))
 def heatmap_static(request):
     context = {
             'style_sheet'           : link_text,
+            'java_location'     : java_location,
             }
     return render(request, 'heatmap_static.html', context)
 
@@ -87,6 +95,7 @@ def overseas_tracker_detail(request, slug):
             'image_test'        : image_test,
             'archive_toggle'    : archive_toggle,
             'archive_link'      : archive_link,
+            'java_location'     : java_location,
             }
     return render(request, 'overseas_detail.html', context)
 
@@ -119,6 +128,7 @@ def inter_korean_tracker_detail(request, slug):
             'style_sheet'           : link_text,
             'event_DPRK_head'       : event_DPRK_head,
             'event_ROK_head'        : event_ROK_head,
+            'java_location'     : java_location,
 
             
             }
@@ -148,7 +158,7 @@ def inter_korean_tracker_list(request):
         'events_list'       : events_list, 
         'event_DPRK_head'   : event_DPRK_head,
         'event_ROK_head'    : event_ROK_head,
-
+        'java_location'     : java_location,
     }
     return render(request, 'inter_korean.html', context)
 
@@ -168,6 +178,7 @@ def overseas_tracker_list(request):
         'recent_event'  :   recent_event,
         'style_sheet'   :   link_text,
         'events_list'   :   events_list, 
+        'java_location'     : java_location,
 
     }
     return render(request, 'overseas.html', context)

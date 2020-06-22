@@ -12,7 +12,7 @@ import bs4
 import urllib.request
 
 class dprk_institution_tag(models.Model):
-    name    = models.CharField(max_length=200)
+    name    = models.CharField(max_length=21)
     weight  = models.IntegerField()
    
     class Meta:

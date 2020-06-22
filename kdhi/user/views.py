@@ -24,11 +24,20 @@ link = soup.find('link')
 
 link_text = (link.get('href'))
 
+webpage=str(urllib.request.urlopen(url).read())
+soup = bs4.BeautifulSoup(webpage, features = "lxml")
+link = soup.find_all('script')
+link_count = len(link)
+java_loc = link_count - 2
+java_location = link[java_loc]
+java_location = java_location.get('src')
+
 def form_test(request):
 
 
 	context = {
 		'style_sheet'           : link_text,
+		'java_location'     : java_location,
 		}
 	return render(request, 'form_test.html', context)
 
@@ -46,5 +55,6 @@ def email_signup(request):
 
 	context = {
 		'style_sheet'           : link_text,
+		'java_location'     : java_location,
 		}
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
