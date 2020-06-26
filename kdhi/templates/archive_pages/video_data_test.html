@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+ <div class="body-div">
+    <div class="left-section">
+        <form><input type="button" class="back-button w-button" value="&lt; Back" onclick="history.back()"></form>
+    </div>
+    <div class="center-section">
+        <h1 class="meeting-title header">{{video_detail.title}}</h1>
+        <h1 class="meeting-title header">{{video_detail.title_translated}}</h1>
+        <h2 class="meeting-title header">{{video_detail.category}}</h2>
+        <h2 class="meeting-title header">{{video_detail.category_translated}}</h2>
+
+        <p class="tracker-richtext-content">{{video_detail.description}}</p>
+        <p class="tracker-richtext-content">{{video_detail.description_translated}}</p>        
+        <p class="tracker-richtext-content">{{video_detail.korean_keyword}}</p>
+        <p class="tracker-richtext-content">{{video_detail.english_keyword}}</p>
+        <video width="320" height="240" controls><source src="{{video_detail.get_video_location}}" type="video/mp4"></video>
+        <div>{{video_detail.source}}</div>
+        <div class="institution-function-div">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

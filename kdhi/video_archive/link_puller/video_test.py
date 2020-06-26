@@ -17,8 +17,8 @@ import time
 #45500
 #46500
 #47000
-current = 47000
-end = current + 500
+current = 35200
+end = current + 100
 #end - 43000
 links_range = range(current, end)
 source_list = []

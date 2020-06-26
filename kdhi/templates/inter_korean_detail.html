@@ -13,7 +13,7 @@
 
         <div class="institution-function-block">
             <h1 class="event-details-header">Ministry of Unification Description</h1>
-            <p class="event-details-paragraph">{{tracker_item.MOU_description}}</p></div>
+            <p class="event-details-paragraph">{{tracker_item.MOU_description | safe}}</p></div>
             <a href="{{tracker_item.document_link}}" class="document-link">Official Meeting Document</a>
 
 
@@ -23,7 +23,7 @@
                 <div class="grid-delegate-block-main"> 
                     <div class="institution-position-title">Delegation Head</div>
                     <div class="delegate-photo-block">
-                        <img src="{{event_DPRK_head.icon}}"  alt class="delegate-head-image" >
+                        <img src="{{event_DPRK_head.get_image_icon}}"  alt class="delegate-head-image" >
                     </div>
                     <a href="{{event_DPRK_head.get_absolute_url}}" class="institution-position-name">{{event_DPRK_head.name}}</a>
                 </div>
@@ -43,14 +43,14 @@
                 <div class="grid-delegate-block-main"> 
                     <div class="institution-position-title">Delegation Head</div>
                     <div class="delegate-photo-block">
-                        <img src="{{event_ROK_head.icon}}"  alt class="delegate-head-image" >
+                        <img src="{{event_ROK_head.get_image_icon}}"  alt class="delegate-head-image" >
                     </div>
                     <a href="{{event_ROK_head.get_absolute_url}}" class="institution-position-name">{{event_ROK_head.name}}</a>
                 </div>
                 <div class="grid-container">
                     {% for individual in participant_list_rok %}
                     <div class="grid-item">
-                        <img src="{{individual.2}}" alt="" class="institution-member-photo">           
+                        <img src="{{individual.2}}" alt="" class="delegate-photo-block">           
                         <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
                     </div>
                     {% endfor %}

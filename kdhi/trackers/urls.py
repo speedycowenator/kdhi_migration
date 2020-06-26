@@ -11,7 +11,7 @@ urlpatterns = [
 	path('overseas_tracker', views.overseas_tracker_list, name='overseas_tracker_list'),
 	path('overseas_tracker/<str:slug>', views.overseas_tracker_detail, name='overseas_tracker_detail'),
 	path('inter_korean_tracker', views.inter_korean_tracker_list, name='inter_korean_tracker_list'),
-	path('inter_korean_tracker/<str:slug>', views.inter_korean_tracker_detail, name='inter_korean_tracker_detail'),
+	path('inter_korean_tracker/<str:slug>-<int:itteration>', views.inter_korean_tracker_detail, name='inter_korean_tracker_detail'),
 	path('heatmap_static', views.heatmap_static, name='heatmap_static'),
 
 

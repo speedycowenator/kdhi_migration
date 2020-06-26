@@ -536,7 +536,7 @@ def dprk_institution_landing(request):
         'search_text'           : search_text,
         'tag_options'           : tag_options,
         'quicksearch_toggle'    : quicksearch_toggle,
-        'java_location'     : java_location,
+        'java_location'         : java_location,
         'style_sheet'           : link_text,
         'page_obj'              : page_obj,
         'webflow_page_data'     : webflow_page_data,

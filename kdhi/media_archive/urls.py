@@ -7,4 +7,5 @@ from media_archive import views as core_views
 
 urlpatterns = [
 	path('article/<int:pk>', views.article_detail, name='article-detail'),
+	path('state-media-video-archive/<int:pk>', views.video_archive_detail, name='video_archive_detail'),
     ]

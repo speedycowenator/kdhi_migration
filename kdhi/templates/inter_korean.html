@@ -18,14 +18,15 @@
 	</div>
 </div>
 
-{{event_item.4.0}}
+
 <div class="ik-events-holder">
-	{% for event_item in events_list %}      
+
+    {% for event_item in page_obj %} 
 	<div class="tracker-item-block">
 		<div class="tracker-item-block-left">
 			<a href="{{event_item.3}}" class="meeting-title">{{event_item.0}}</a>
-			<h1 class="meeting-info">{{event_item.1}}}</h1>
-			<p class="event-paragraph">{{event_item.2|truncatechars:500}}</p> 
+			<h1 class="meeting-info">{{event_item.1}}</h1>
+			<p class="event-paragraph">{{event_item.2|truncatechars:500 | striptags }}</p> 
 			<div class="event-tag-grid"> 
 
 				{% for choice in event_item.4 %}
@@ -38,20 +39,41 @@
 			<div class="delegates-block">
 				<div class="delegate-holder" >
 					<div class="delgate-title">ROK Representative</div>
-					<img class="delegate-photo" src="{{event_DPRK_head.get_image_icon}}" style="height:85%; width:auto">
-					<div class="tracker-item-participant-text">{{event_DPRK_head.name}}</div>
+					<img class="delegate-photo" src="{{event_item.5.get_image_icon}}" style="height:85%; width:auto">
+					<div class="tracker-item-participant-text">{{event_item.5.name}}</div>
 				</div>
 				<div class="delegate-holder">
 					<div class="delgate-title">DPRK Representative</div>
-					<img class="delegate-photo" src="{{event_ROK_head.get_image_icon}}" style="height:85%; width:auto">
-					<div class="tracker-item-participant-text">{{event_ROK_head.name}}</div>
+					<img class="delegate-photo" src="{{event_item.6.get_image_icon}}" style="height:85%; width:auto">
+					<div class="tracker-item-participant-text">{{event_item.6.name}}</div>
 				</div>
 
 			</div>
 		</div>
-	</div>
+    </div>
 	{% endfor %}
-</div>
+
+	<div class="w-pagination-wrapper pagination-10">
+		{% if page_obj.has_previous %}
+		    <a href="?page={{ page_obj.previous_page_number }}" class="w-pagination-previous" >
+		    	<svg class="w-pagination-previous-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 12 12" transform="translate(0, 1)">
+		    		<path fill="none" stroke="currentColor" fill-rule="evenodd" d="M8 10L4 6l4-4"></path>
+		  		</svg>
+		    <div class="w-inline-block">Previous</div>
+		    </a>
+		{% endif %}
+
+		{% if page_obj.has_next %}
+		    <a href="?page={{ page_obj.next_page_number }}" class="w-pagination-next">
+		      <div class="w-inline-block">Next</div>
+		      <svg class="w-pagination-next-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 12 12" transform="translate(0, 1)">
+		        <path fill="none" stroke="currentColor" fill-rule="evenodd" d="M4 2l4 4-4 4"></path>
+		      </svg>
+		    </a>
+		{% endif %}
+	</div>
+</div>	
+
 
 
 

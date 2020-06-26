@@ -12,10 +12,18 @@ class positionAdmin(admin.ModelAdmin):
 class ROKpositionAdmin(admin.ModelAdmin):
 	list_display = ('person', 'institution', 'title')
 
-admin.site.register(individual) 
+class personAdmin(admin.ModelAdmin):
+	list_display = ('name', 'update_date')
+
+class rokpersonAdmin(admin.ModelAdmin):
+	list_display = ('name', 'update_date')
+
+
+
+admin.site.register(individual, personAdmin) 
 admin.site.register(institution)
 admin.site.register(position, positionAdmin)
-admin.site.register(rok_individual)
+admin.site.register(rok_individual, rokpersonAdmin)
 admin.site.register(rok_institution)
 admin.site.register(rok_position, ROKpositionAdmin)
 admin.site.register(article)

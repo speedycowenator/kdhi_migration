@@ -44,7 +44,7 @@ class institution(models.Model):
     name                        =  models.CharField(max_length=200)
     name_korean                 =  models.CharField(max_length=200)
     tripartite_tag              =  models.CharField(max_length=200, blank=True) #replace iwth foreign key when able
-    function_tags               =  models.ManyToManyField(dprk_institution_tag, blank=True, null=True)
+    function_tags               =  models.ManyToManyField(dprk_institution_tag, blank=True)
     function                    =  RichTextField(null=True, blank=True)
     additional_figures          =  RichTextField(null=True, blank=True)
     organization_structure      =  RichTextField(null=True, blank=True)
@@ -120,6 +120,12 @@ class individual(models.Model):
         except:
             full_string = full_base + "1_Outline_Blank" + full_suffix
         return full_string
+    def get_name_slug(self):
+        name = self.name
+        lower_name = lower(name)
+        slugged_name = lower_name.replace(" ", "-")
+        return(slugged_name)
+
     
 class position(models.Model):
     person              = models.ForeignKey(individual, on_delete=models.CASCADE)
@@ -191,7 +197,6 @@ class rok_institution(models.Model):
 class rok_individual(models.Model):
     name                    = models.CharField(max_length=200)
     name_slug               = models.CharField(max_length=200)
-
     name_korean             = models.CharField(max_length=200, blank=True)
     icon                    = models.URLField(max_length=200, blank=True)
     full_resolution_photo   = models.URLField(max_length=200, blank=True)
@@ -213,10 +218,9 @@ class rok_individual(models.Model):
 
     class Meta:
         ordering = ('name',)
-  
-
     def __str__(self):
-        return self.name_slug
+        return self.name
+
     def get_image_icon(self):
         icon_base   = 'https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/ROK+Government+Assets/icon/'
         icon_suffix = '.jpg'
