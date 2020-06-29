@@ -16,7 +16,8 @@ import os
 
 now = date.today()
 
-
+#---------- Similarity (through model - or just run a search every time? Is there a usecase for needing to get a static
+#page that lists similar photos? No, these would be returning a search so no reason to build. 
 
 #---------- FACE (unique face ID associated with each input photo)
 class face_instance(models.Model):
@@ -36,11 +37,12 @@ class face_instance(models.Model):
 
 #---------- INDIVIDUAL (person a face is linked to. Every face has an individual, but an individual can have multiple faces)
 class individual_instance(models.Model):
-	name 		= models.CharField(max_length=100, blank=True)
-	assc_face 	= models.ManyToManyField('face_instance', related_name="individual_face")
+	name 			= models.CharField(max_length=100, blank=True)
+	benchmark_pic 	= models.CharField(max_length=100, blank=True)
+	assc_face 		= models.ManyToManyField('face_instance', related_name="individual_face")
 
 	def __str__(self):
-		return str(self.pk)
+		return str(self.	pk)
 
 
 #class example_model(models.Model):
