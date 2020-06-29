@@ -221,7 +221,7 @@ def korean_democratization_project_landing(request):
 	}
 
 	return render(request, 'korean_democratization_page.html', context)
-
+ 
 
 def documents_landing(request):
 	collection_cards 	= document_collection.objects.all()

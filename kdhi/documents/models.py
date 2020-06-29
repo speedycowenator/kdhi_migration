@@ -41,7 +41,7 @@ class document(models.Model):
     #need to change function and additional information to TextField
     name                = models.CharField(max_length=200)
     slug                = models.CharField(max_length=200)
-    url_substring       = models.CharField(max_length=200, blank=True, default='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Documents/')
+    url_substring       = models.CharField(max_length=200, blank=True, default='https://kdhi-resources.s3.amazonaws.com/kdhi.org/Assets/Documents/1980+Gwangju+Massacre/')
     collection          = models.ForeignKey(document_collection, on_delete=models.SET_NULL, null=True, blank=True)
     keywords            = models.ManyToManyField(document_keyword, blank=True)
     date                = models.DateField(blank=True)
@@ -55,8 +55,7 @@ class document(models.Model):
 
     class Meta:
         ordering = ('name',)
-    
-        
+         
     def __str__(self):
         return self.slug
 

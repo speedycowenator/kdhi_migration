@@ -107,6 +107,10 @@ def inter_korean_tracker_detail(request, slug, itteration):
     participant_list_rok = []
     event_DPRK_head = tracker_item.DPRK_head
     event_ROK_head  = tracker_item.ROK_head
+    event_photo_toggle          = ''
+    event_photo_add_1_toggle    = ''
+    event_photo_add_2_toggle    = ''
+    event_photo_add_3_toggle    = ''
 
     for participant in tracker_item.participant_DPRK.all():
         if participant != event_DPRK_head:
@@ -122,10 +126,38 @@ def inter_korean_tracker_detail(request, slug, itteration):
             participant_photo   = participant.get_image_icon
             participant_list_temp = [participant_name, participant_link, participant_photo]
             participant_list_rok.append(participant_list_temp)
-       
-    
+
+
+    try:
+        photo_test          = tracker_item.event_photo
+        photo_length        = len(photo_test)
+        event_photo_toggle  = "checked"
+    except:
+        pass
+    try:
+        photo_test          = tracker_item.event_photo_add_1
+        photo_length        = len(photo_test)
+        event_photo_add_1_toggle  = "checked"
+    except:
+        pass
+    try:
+        photo_test          = tracker_item.event_photo_add_2 
+        photo_length        = len(photo_test)
+        event_photo_add_2_toggle   = "checked"
+    except:
+        pass
+    try:
+        photo_test          = tracker_item.event_photo_add_3
+        photo_length        = len(photo_test)
+        event_photo_add_3_toggle  = "checked"
+    except:
+        pass 
+
     context = {
-        
+            'event_photo_toggle'    : event_photo_toggle,
+            'event_photo_add_1_toggle' : event_photo_add_1_toggle,
+            'event_photo_add_2_toggle' : event_photo_add_2_toggle,
+            'event_photo_add_3_toggle' : event_photo_add_3_toggle,
             'tracker_item'          : tracker_item,
             'participant_list_dprk' : participant_list_dprk,
             'participant_list_rok'  : participant_list_rok,

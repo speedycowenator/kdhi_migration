@@ -38,9 +38,9 @@ import bs4
 import urllib.request
 import csv
 import time
-from googletrans import Translator
 
-translator = Translator()
+
+
 
 
 def article_detail(request, pk):

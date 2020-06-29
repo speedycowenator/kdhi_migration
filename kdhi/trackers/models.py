@@ -89,7 +89,6 @@ class inter_korean_tracker(models.Model):
     participant_DPRK    = models.ManyToManyField(individual, related_name = 'dprk_delegation', blank=True)
     meeting_topics      = models.ManyToManyField(overseas_topic, blank=True)
     MOU_description     = models.TextField(max_length=20000)
-    event_location      = models.CharField(max_length=200)
     event_venue         = models.CharField(max_length=200)
     event_date          = models.DateField(null=True, blank=True)
     event_end_date      = models.DateField(null=True, blank=True)

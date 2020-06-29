@@ -2,74 +2,72 @@
 
 
 {% block content %}
- <div class="body-div">
-    <div class="left-section"></div>
-    <div class="center-section">
-      <div class="biographic-block">
-        <h1 class="event-title">{{tracker_item.name}}</h1>
-        <h1 class="event-date">{{tracker_item.event_date}}</h1>
-        <h1 class="event-date">{{tracker_item.event_location}}</h1>
-        <h1 class="event-date">{{tracker_item.event_venue}}</h1>
+ <div class="ik_detail_content">
+    <div class="w-container">
+        <h1 class="ik_detail_header">{{tracker_item.name}}</h1>
+        <div class="ik_detail_info_header">{{tracker_item.event_date}}</div>
+        <div class="ik_detail_info_header">{{tracker_item.event_host}}</div>
+        <div class="ik_detail_info_header">{{tracker_item.event_venue}}</div>
 
-        <div class="institution-function-block">
-            <h1 class="event-details-header">Ministry of Unification Description</h1>
-            <p class="event-details-paragraph">{{tracker_item.MOU_description | safe}}</p></div>
-            <a href="{{tracker_item.document_link}}" class="document-link">Official Meeting Document</a>
+        <h1 class="ik_detail_subheader">Ministry of Unification Description</h1>
+        <p class="ik_detail_info_paragraph w-richtext">{{tracker_item.MOU_description | safe}}</p>
 
+        <h1 class="ik_detail_subheader">Documents Produced</h1>
+        <a href="{{tracker_item.document_link}}" class="ik_detail_info_link">Official Meeting Document</a>
 
-
-            <h1 class="institution-members-header">DPRK Participants</h1>        
-            <div class="delegation-full-block">
-                <div class="grid-delegate-block-main"> 
-                    <div class="institution-position-title">Delegation Head</div>
-                    <div class="delegate-photo-block">
-                        <img src="{{event_DPRK_head.get_image_icon}}"  alt class="delegate-head-image" >
-                    </div>
-                    <a href="{{event_DPRK_head.get_absolute_url}}" class="institution-position-name">{{event_DPRK_head.name}}</a>
+        <h1 class="ik_detail_subheader">DPRK Participants</h1>     
+        <div class="ik_detail_delegate_title">Chief Delegate</div>
+        <div class="collection-list-wrapper-21 w-dyn-list">
+          <div role="list" class="collection-list-22 w-dyn-items">
+            <div role="listitem" class="w-dyn-item">
+                <div class="ik_detail_delegate_block">
+                    <img src="{{event_DPRK_head.get_image_icon}}" class="ik_detail_delegate_image">
+                    <a href="{{event_DPRK_head.get_absolute_url}}" class="ik_detail_delegate_name">{{event_DPRK_head.name}}</a>
                 </div>
-                <div class="delegate-grid-block">
-                    {% for individual in participant_list_dprk %}
-                    <div class="grid-delegate-block">
-                        <img src="{{individual.2}}" alt="" class="delegate-photo-block">           
-                        <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
-                    </div>
-                    {% endfor %}
+            </div>            
+
+            {% for individual in participant_list_dprk %}
+            <div role="listitem" class="w-dyn-item">
+                <div class="ik_detail_delegate_block">
+                    <img src="{{individual.2}}" class="ik_detail_delegate_image">
+                    <a href="{{individual.1}}" class="ik_detail_delegate_name">{{individual.0}}</a>
                 </div>
             </div>
+            {% endfor %}
 
+          </div>
+        </div>   
 
-            <h1 class="institution-members-header">ROK Participants</h1>        
-            <div class="delegation-full-block">
-                <div class="grid-delegate-block-main"> 
-                    <div class="institution-position-title">Delegation Head</div>
-                    <div class="delegate-photo-block">
-                        <img src="{{event_ROK_head.get_image_icon}}"  alt class="delegate-head-image" >
-                    </div>
-                    <a href="{{event_ROK_head.get_absolute_url}}" class="institution-position-name">{{event_ROK_head.name}}</a>
+        <h1 class="ik_detail_subheader">ROK Participants</h1>     
+        <div class="ik_detail_delegate_title">Chief Delegate</div>
+        <div class="collection-list-wrapper-21 w-dyn-list">
+          <div role="list" class="collection-list-22 w-dyn-items">
+            <div role="listitem" class="w-dyn-item">
+                <div class="ik_detail_delegate_block">
+                    <img src="{{event_ROK_head.get_image_icon}}" class="ik_detail_delegate_image">
+                    <a href="{{event_ROK_head.get_absolute_url}}" class="ik_detail_delegate_name">{{event_ROK_head.name}}</a>
                 </div>
-                <div class="grid-container">
-                    {% for individual in participant_list_rok %}
-                    <div class="grid-item">
-                        <img src="{{individual.2}}" alt="" class="delegate-photo-block">           
-                        <a href="{{individual.1}}" class="institution-position-name">{{individual.0}}</a>
-                    </div>
-                    {% endfor %}
+            </div>            
+
+            {% for individual in participant_list_rok %}
+            <div role="listitem" class="w-dyn-item">
+                <div class="ik_detail_delegate_block">
+                    <img src="{{individual.2}}" class="ik_detail_delegate_image">
+                    <a href="{{individual.1}}" class="ik_detail_delegate_name">{{individual.0}}</a>
                 </div>
             </div>
+            {% endfor %}
 
+          </div>
+        </div>   
 
-
-    <h1 class="institution-members-header">Photos</h1><br>        
-    <img src="{{tracker_item.event_photo}}" alt class="event-photo"><br>        
-    <img src="{{tracker_item.event_photo_add_1}}" alt class="event-photo"><br>
-    <img src="{{tracker_item.event_photo_add_2}}" alt class="event-photo"><br>
-    <img src="{{tracker_item.event_photo_add_3}}" alt class="event-photo"><br>
-    
-    
+    <h1 class="ik_detail_subheader {{event_photo_toggle}}">Photos</h1><br>
+    <img src="{{tracker_item.event_photo}}" alt="{{tracker_item.event_photo_credit}}" class="event_photo {{event_photo_toggle}}"><br>        
+    <img src="{{tracker_item.event_photo_add_1}}" alt="{{tracker_item.event_photo_credit}}" class="event_photo {{event_photo_add_1_toggle}}"><br>        
+    <img src="{{tracker_item.event_photo_add_2}}" alt="{{tracker_item.event_photo_credit}}" class="event_photo {{event_photo_add_2_toggle}}"><br>        
+    <img src="{{tracker_item.event_photo_add_3}}" alt="{{tracker_item.event_photo_credit}}" class="event_photo {{event_photo_add_3_toggle}}"><br>        
     
     <br>
-    </div> 
-    </div>
-    <div class="right-section"></div>
-  </div>
+</div> </div> 
+
 {% endblock %}
