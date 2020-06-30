@@ -59,13 +59,20 @@ def article_detail(request, pk):
 
 def video_archive_detail(request, pk):
 	video_detail = uritv_video.objects.get(pk=pk)
+	link_sourcetype = video_detail.get_sourcetype()
+	link_sourcetype = link_sourcetype[0]
+	if link_sourcetype == "centertv":
+		link_sourcetype = "ccentv"
+	uri_link = "http://www.uriminzokkiri.com/index.php?ptype={}&mtype=view&no={}#pos".format(link_sourcetype, video_detail.db_code)
+	webflow_page_data = "5ef37ce11288cb0144e73820"
 
 	context = {
 		'video_detail' 		: video_detail,
+		'uri_link' 			: uri_link,
 		'java_location' 	: java_location,
 		'style_sheet'       : link_text,
 		'webflow_page_data' : webflow_page_data,
 	}
-	return render(request, 'archive_pages/video_data_test.html', context)
+	return render(request, 'archive_pages/uritv_video.html', context)
 
 

@@ -59,6 +59,21 @@ class uritv_video(models.Model):
     class Meta:
         ordering = ('-date', 'title_translated') 
 
+    def get_sourcetype(self):
+        full_name = self.file_name
+        file_name_split = full_name.split("_")
+        sourcetype = file_name_split[0:2]
+        return (sourcetype) 
+
+    def keyword_list_korean(self):
+        keyword_list = self.korean_keyword
+        keyword_list = keyword_list.replace("'", "")
+        keyword_list = keyword_list.replace("[", "")
+        keyword_list = keyword_list.replace("]", "")
+        keyword_list = keyword_list.split(",")
+        return (keyword_list)
+
+
     def get_video_location(self):
         full_base   = "https://kdhivideostream.s3.amazonaws.com/uri_tv/"
         file_name   = self.file_name

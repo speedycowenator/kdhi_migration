@@ -75,18 +75,18 @@ for code in links_range:
 		for keyword in keywords:
 			language = translator.detect_language(keyword)
 			print(language['input'])
-			if language['languagsdfe'] == 'ko':
+			if language['language'] == 'ko':
 				korean_keyword.append(keyword)
 
 	
 	title = soup.find('title').text
-	if translator.detect(title).lang == 'ko':
+	if translator.detect_language(title) == 'ko':
 		title_translated = translator.translate(title)
 	description  = soup.find('meta', {'http-equiv':'description'})
 	description = str(description)
 	description_split = description.split('"')
 	description_split = description_split[1]
-	if translator.detect(description_split).lang == 'ko':
+	if translator.detect_language(description_split) == 'ko':
 		description_translated = translator.translate(description_split)
 
 #------ Category ---------	

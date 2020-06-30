@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<div class="video_broadcast_mainblock w-container">
+    <div class="broadcast_centerblock">
+        <h1 class="broadcast_titleblock">{{video_detail.title}}</h1>
+        <h1 class="broadcast_sourceblock"></h1>
+        <h1 class="broadcast_dateblock_spacer"> -- </h1>
+        <h1 class="broadcast_dateblock">{{video_detail.date}}</h1>
+        <p class="broadcast_disclaimer_block">All media presented in this broadcast is produced by the Democratic People's Republic of Korea (i.e. DPRK or North Korea). KDHI's presentation of North Korean propaganda is intended solely for research purposes and not the consumption of objective news.</p>
+
+        <div id="broadcast_video" class="broadcast_video_block w-video w-embed">
+              <video width="100%" height="100%" controls>
+              <source src="{{video_detail.get_video_location}}" type="video/mp4"></video>
+        </div>
+        <p class="broadcast_disclaimer_block">This KCTV broadcast is sourced from Uriminzokkiri, a propaganda newspaper and website run by the North Korean government. You can view the original source here at your own risk. KDHI strongly advises against visiting insecure North Korean websites, especially if navigating on an under-protected network. North Korean websites contain malware that can expose your computer and personal information to malicious activity by the North Korean government.</p>
+
+        <div class="warning_action_block">
+            <div class="disclaimer_text">I&nbsp;understand that by following this link I am leaving KDHI's secure environment and visiting an external North Korean site: </div>
+            <a data-w-id="0e0d15a8-6e03-3050-9c19-87e5062e8bbd" href="#" class="liability_link w-button">Accept</a>
+            <a href="{{uri_link}}" class="uritiv_external_link">Uriminzokkiri Source</a>
+        </div>
+    </div>
+
+    <div class="center-section">
+        <h1 class="broadcast_metadata">Metadata</h1>
+        <h1 class="broadcast_metadata_subtag">Media-Type</h1>
+        <div class="broadcast_metadata_block">
+            <div class="broadcast_tag_text_clear">{{video_detail.category}}</div>
+        </div>
+        <h1 class="broadcast_metadata_subtag">Source</h1>
+        <div class="broadcast_metadata_block">
+            <div class="broadcast_tag_text_clear">{{video_detail.get_sourcetype.0}},</div>
+            <div class="broadcast_tag_text_clear">{{video_detail.get_sourcetype.1}}</div>
+        </div>
+        <h1 class="broadcast_metadata_subtag">Tags</h1>
+        <div class="broadcast_metadata_block">
+
+            {% for tag in video_detail.keyword_list_korean %}
+            <div class="broadcast_tag_text">{{tag}}</div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
