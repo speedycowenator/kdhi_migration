@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<div class="video_broadcast_mainblock w-container">
+    <div class="broadcast_centerblock">
+        <h1 class="broadcast_headerblock">DPRK Visual Media Archive </h1> 
+		<div class="list-container">
+
+		{% for video in video_list %}
+		
+		<div class="list-content-block">
+			<div class="list-content-subblock">
+				<a class="heading-134" href="{{video.get_absolute_url}}">{{video.title}}<br></a>
+			</div>
+			<div class="list-content-subblock">
+				<h1 class="author"><em class="italic-text-4">{{video.category}}</em><br></h1>
+				<div class="div-block-397"></div>
+				<h1 class="author"><em class="italic-text-4">{{video.date}}</em><br></h1>
+			</div>
+			<div class="list-content-subblock"></div>
+		</div>
+		{% endfor %}
+
+		</div>
+	</div>
+</div>
+{% endblock %}
+ 
+

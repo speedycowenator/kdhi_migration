@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'kdhi_search',
     'user',
     'media_archive',
+    'kuroko',
 ]
 
 MIDDLEWARE = [
@@ -99,7 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
 }
 
 

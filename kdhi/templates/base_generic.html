@@ -125,7 +125,7 @@
                     <div class="item-title">DPRK Leadership profiles</div>
                   </div>
                 </a>
-                <a href="https://kdhi.pythonanywhere.com/search-results/" class="dropdown-mega-item w-inline-block">
+                <a href="{% url 'article_list' %}" class="dropdown-mega-item w-inline-block">
                   <div class="menu-item-wrapper">
                     <div class="item-title">dprk state media archive</div>
                   </div>
@@ -209,6 +209,11 @@
             </div>
             <nav class="dropdown-list-3 w-dropdown-list">
               <div class="dropdown-mega-wrapper">
+                <a href="#" class="dropdown-mega-item w-inline-block">
+                  <div class="menu-item-wrapper ">
+                    <div class="item-title hidden-title">inter-Korean Statistics</div>
+                  </div>
+                </a>
                 <a href="{% url 'inter_korean_tracker_list' %}" class="dropdown-mega-item w-inline-block">
                   <div class="menu-item-wrapper">
                     <div class="item-title">Inter-Korean Cooperation Tracker</div>
@@ -217,11 +222,6 @@
                 <a href="{% url 'inter_korean_spending_2018' %}" class="dropdown-mega-item w-inline-block">
                   <div class="menu-item-wrapper">
                     <div class="item-title">Inter-Korean Spending Report</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-mega-item w-inline-block">
-                  <div class="menu-item-wrapper">
-                    <div class="item-title">inter-Korean Statistics</div>
                   </div>
                 </a>
               </div>
@@ -234,6 +234,12 @@
             </div>
             <nav class="dropdown-list-3 w-dropdown-list">
               <div class="dropdown-mega-wrapper">
+                <a href="#" class="dropdown-mega-item w-inline-block">
+                  <div class="menu-item-wrapper">
+                    <div class="item-title hidden-title"></div>
+                    <div class="item-desc"></div>
+                  </div>
+                </a>
                 <a href="#" class="dropdown-mega-item w-inline-block">
                   <div class="menu-item-wrapper">
                     <div class="item-title">KDHI Podcasts</div>
@@ -309,7 +315,7 @@
           <nav class="menu-dropdown-list w-dropdown-list">
             <a href="{% url 'dprk_institution_landing' %}" class="menu-dropdown-link w-dropdown-link">DPRK Government map &amp; institution codex</a>
             <a href="{% url 'dprk_individual_list' %}" class="menu-dropdown-link w-dropdown-link">DPRK leadership profiles</a>
-            <a href="https://kdhi.pythonanywhere.com/search-results/" class="menu-dropdown-link w-dropdown-link">DPRK state media archive</a>
+            <a href="{% url 'article_list' %}" class="menu-dropdown-link w-dropdown-link">DPRK state media archive</a>
             <a href="{% url 'overseas_tracker_list' %}" class="menu-dropdown-link w-dropdown-link">NK Foreign Relations tracker</a>
             <a href="#" class="menu-dropdown-link w-dropdown-link">nk escalation tracker</a>
             <a href="#" class="menu-dropdown-link w-dropdown-link">North korean statistics </a>

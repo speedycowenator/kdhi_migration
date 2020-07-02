@@ -27,7 +27,7 @@ class state_media_author(models.Model):
 
 class state_media_article(models.Model):
     name                = models.CharField(max_length=200)
-    author              = models.ForeignKey(state_media_author, on_delete=models.SET_NULL, null=True, blank=True)
+    author              = models.CharField(max_length=200, null=True, blank=True)
     publication         = models.ForeignKey(state_media_publication, on_delete=models.SET_NULL, null=True, blank=True)
     text                = models.TextField(max_length=50000, help_text='Enter a brief description of the Article')
     date                = models.DateField(default=datetime.date.today)
@@ -37,7 +37,7 @@ class state_media_article(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('article-detail', args=[str(self.id)])
+        return reverse('article_detail', args=[str(self.id)])
 
 class uritv_video(models.Model):
     file_name                   = models.CharField(max_length=500, null=True, blank=True)
@@ -53,11 +53,12 @@ class uritv_video(models.Model):
     english_keyword             = models.CharField(max_length=2000, null=True, blank=True)
     uri_source                  = models.URLField(max_length=500, null=True, blank=True)
     db_code                     = models.CharField(max_length=2000, null=True, blank=True)
+    s3_verified                 = models.BooleanField(default=False)
 
     def __str__(self):
         return self.db_code
     class Meta:
-        ordering = ('-date', 'title_translated') 
+        ordering = ('db_code', '-date', 'title_translated') 
 
     def get_sourcetype(self):
         full_name = self.file_name
@@ -75,7 +76,7 @@ class uritv_video(models.Model):
 
 
     def get_video_location(self):
-        full_base   = "https://kdhivideostream.s3.amazonaws.com/uri_tv/"
+        full_base   = "https://uritv-bucket.s3.amazonaws.com/"
         file_name   = self.file_name
         s3_location = full_base + file_name
         return(s3_location)

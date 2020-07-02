@@ -1,0 +1,152 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+
+
+<div class="visual-media-search-holder">
+      <div class="visual-media-sidebar">
+        <div class="visualmedia-sidebar-heading">
+          <h5 class="visualmediaheadingtext">DPRK State Media Article Archive</h5>
+        </div>
+        <div class="visualmedia-sidebar-menu">
+          <div class="refine-block">
+
+              <form id="email-form" name="email-form" data-name="Email Form" method="post">{% csrf_token %}
+                <label for="Sort-Type" class="refine-header">Sort Order</label>
+                <select id="Sort-Type" name="sort_method" data-name="sort_method" class="select-field statearticlesort w-select">
+                    <option value="date">Publish Date</option>
+                    <option value="title">Title</option>
+                </select>
+                <select id="Sort-Order" name="sort_direction" data-name="sort_direction" class="select-field w-select">
+                    <option value="-">Ascending</option>
+                    <option value="">Descending</option>
+                </select>
+                <div class="refine-header">
+                    <label for="Sort-Type-2" class="refine-header-2">Source</label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="publication" id="KCNA" name="publication" value="KCNA" class="w-form-formradioinput radio-button w-radio-input">
+                        <span for="KCNA" class="radio-button-label w-form-label">KCNA</span>
+                    </label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="publication" id="Rodong Sinmun" name="publication" value="RS" class="w-form-formradioinput w-radio-input">
+                        <span for="Rodong Sinmun" class="radio-button-label w-form-label">Rodong Sinmun</span>
+                    </label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="publication" id="Rodong Sinmun" name="publication" value="All" class="w-form-formradioinput w-radio-input" checked="">
+                        <span for="Rodong Sinmun" class="radio-button-label w-form-label">All</span>
+                    </label>
+                </div>
+                <div class="refine-header">
+                    <label for="Sort-Type-2" class="refine-header-2">Time Period</label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="time_frame" name="time_frame" value="week" class="w-form-formradioinput w-radio-input" {{time_checked_week}}>
+                        <span for="{{TIME}}" class="radio-button-label w-form-label">Past week</span></label>
+                    <label class="radio-button-field-3 w-radio">
+                        <input type="radio" data-name="time_frame" name="time_frame" value="month" {{time_checked_month}} class="w-form-formradioinput w-radio-input">
+                        <span for="{{TIME}}" class="radio-button-label w-form-label">Past month</span></label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="time_frame" name="time_frame" value="year" {{time_checked_year}} class="w-form-formradioinput w-radio-input">
+                        <span for="{{TIME}}" class="radio-button-label w-form-label">Past year</span></label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="time_frame" name="time_frame" value="twelve_years" {{time_checked_twelve}} class="w-form-formradioinput w-radio-input">
+                        <span for="{{TIME}}" class="radio-button-label w-form-label">Past 12 years</span></label>
+                    <label class="radio-button-field-2 w-radio">
+                        <input type="radio" data-name="time_frame" name="time_frame" value="all" {{time_checked_all}} class="w-form-formradioinput w-radio-input">
+                        <span for="{{TIME}}" class="radio-button-label w-form-label">Since 1997</span></label>
+                </div>
+
+                <input type="hidden" id="custId" name="search_type_selection_field" value="{{search_type}}">
+                <input type="hidden" id="custId" name="search_text" value="{{search_text}}">
+                <input type="submit" value="Refine Search" data-wait="Please wait..." class="submit-button-3 w-button">
+            </form>
+
+            <div>
+              <div class="user-block">
+                <div class="user-header">Save Your Research</div>
+                <div class="user-operation-block"><a href="http://'/profile'" class="link-22">Profile</a><a href="http://'/profile'" class="link-22">Saved Articles</a><a href="http://'/profile'" class="link-22">Saved Searches</a><a href="http://'/profile'" class="link-22">Logout</a></div>
+              </div>
+              <div class="login-block">
+                <a href="#" class="login-button w-inline-block">
+                  <div class="text-block-108">Login</div>
+                </a>
+                <a href="#" class="login-button w-inline-block">
+                  <div class="text-block-108">Create an account</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div><a href="#" class="topofpage w-inline-block w-clearfix"><img src="https://global-uploads.webflow.com/5e93130936c30b1dade30e19/5e93130adbf3bc852f32d140_arrow-left-icon-white.svg" alt="" class="button-icon"><div>Top of Page</div></a><a href="#" class="statearticlesbutton w-inline-block w-clearfix"><img src="https://global-uploads.webflow.com/5e93130936c30b1dade30e19/5e93130adbf3bc852f32d140_arrow-left-icon-white.svg" alt="" class="button-icon"><div class="text-block-149">DPRK State Media Article Archive</div></a></div>
+      <div class="visual-media-wrapper dprkvisualmedia">
+        <div id="SG-Buttons" class="visualmediadisplay visualmediabordetop">
+          <div class="center-column">
+            <div class="div-block-398">
+
+               
+                {# Central Search Bar#}
+                <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="post">{% csrf_token %}
+                <div class="div-block-395">
+                    <div class="div-block-396">
+                        <input type="text" class="text-field-3 w-input" maxlength="256" name="search_text" data-name="search_text" placeholder="Search an exact phrase." value="{{search_text}}"     id="name-2">
+                      <div class="search-type-selection">
+                        <label class="field_selectio_div w-radio">
+                            <input type="radio" data-name="search_type_selection_field" id="title" name="search_type_selection_field" value="title" {{search_type_checked_title}} class="w-form-formradioinput w-radio-input">
+                            <span for="title" class="list-content-action w-form-label">Title</span>
+                        </label>
+                        <label class="field_selectio_div w-radio">
+                            <input type="radio" data-name="search_type_selection_field" id="text" name="search_type_selection_field" value="text" {{search_type_checked_text}} class="w-form-formradioinput w-radio-input">
+                            <span for="text" class="list-content-action w-form-label">Text</span>
+                        </label>
+                        <label class="field_selectio_div w-radio">
+                            <input type="radio" data-name="search_type_selection_field" id="both-2" name="search_type_selection_field" value="both" required="" {{search_type_checked_both}} class="w-form-formradioinput w-radio-input">
+                            <span for="both-2" class="list-content-action w-form-label">Both</span>
+                        </label>
+                        </div>
+                    </div>
+                    <input type="hidden" id="custId" name="sort_method" value="date">
+                    <input type="hidden" id="custId" name="sort_direction" value="">
+                    <input type="hidden" id="custId" name="publication" value="{{publication}}">
+                    <input type="hidden" id="custId" name="time_frame" value="{{time_frame}}">
+
+
+                    <input type="submit" value="Search" data-wait="Please wait..." class="submit-button-2 w-button">
+                </div>
+                </form>
+
+              <div class="text-block-148"><em class="italic-text-5">All media presented is produced by the Democratic People's Republic of Korea (i.e. DPRK or North Korea). KDHI's DPRK State Media Archive is intended solely for research purposes and not the consumption of objective news.</em><br></div>
+            </div>
+            <div class="list-container">
+
+            {% for article in article_list %}
+              <div class="list-content-block">
+                <div class="list-content-subblock">
+                <a class="heading-134"href="{{article.get_absolute_url}}">{{article.name}}<br></a>
+                </div>
+                <div class="list-content-subblock">
+                  <p class="paragraph-31">{{article.text | truncatechars:500 }}</p>
+                </div>
+                <div class="list-content-subblock">
+                  <h1 class="author"><em class="italic-text-4">{{article.publication}}</em><br></h1>
+                  <div class="div-block-397"></div>
+                  <h1 class="author"><em class="italic-text-4">{{article.date}}</em><br></h1>
+                </div>
+                <div class="list-content-subblock"></div>
+                <div class="list-content-subblock">
+                  <div data-w-id="df9839e5-3a23-0bb3-266c-ae236bb46553" class="list-content-action">
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
